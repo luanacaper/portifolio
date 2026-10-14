@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luana Caper | UGC Creative Strategist & Performance Media</title>
+<meta name="description" content="Luana Caper: UGC, estrategista de conteúdo e gestora de tráfego. Vídeos, roteiros e campanhas que convertem para marcas de todos os nichos.">
+<meta name="theme-color" content="#55613b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%2355613b'/%3E%3Ctext x='32' y='43' font-family='Arial' font-weight='800' font-size='34' text-anchor='middle' fill='%23ffbf85'%3EL%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --verde:#55613b;
+  --verde-esc:#3f4a2b;
+  --verde-noite:#2b331d;
+  --laranja:#d4691f;
+  --laranja-claro:#ffbf85;
+  --gelo:#f7f6f1;
+  --branco:#ffffff;
+  --tinta:#1d2216;
+  --suave:#55594a;
+  --linha:#e6e6da;
+  --raio:24px;
+  --raio-g:32px;
+  --sombra:0 10px 30px rgba(20,32,28,.08);
+  --sombra-g:0 22px 50px rgba(20,32,28,.14);
+  --pad:clamp(16px,4vw,32px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-size:1rem;line-height:1.6;color:var(--tinta);background:var(--branco);overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+h1,h2,h3,p,ul,ol,figure,blockquote{margin:0}
+ul,ol{padding:0;list-style:none}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.serif{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;letter-spacing:0}
+.container{width:100%;max-width:1160px;margin-inline:auto;padding-inline:var(--pad)}
+:focus-visible{outline:3px solid var(--tinta);outline-offset:3px;border-radius:8px}
+.escuro :focus-visible,footer :focus-visible,.faixa-topo :focus-visible{outline-color:var(--laranja-claro)}
+.pular{position:absolute;left:12px;top:-60px;background:var(--tinta);color:#fff;padding:10px 16px;border-radius:999px;z-index:200;text-decoration:none;font-weight:700}
+.pular:focus{top:12px}
+
+/* Faixa do topo: contagem regressiva pra Black Friday, rolando */
+.faixa-topo{background:var(--verde);color:#fff;overflow:hidden;padding:9px 0}
+.ft-trilho{display:flex;width:max-content;animation:rolar 26s linear infinite}
+.ft-trilho span{display:flex;align-items:center;white-space:nowrap;font-weight:700;font-size:.85rem;letter-spacing:.01em;padding:0 22px}
+.ft-trilho span::after{content:"◆";margin-left:22px;color:var(--laranja-claro);font-size:.6rem}
+@keyframes rolar{to{transform:translateX(-50%)}}
+
+/* Menu */
+.topo{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--linha)}
+.topo .container{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
+.marca{font-weight:800;font-size:1.15rem;text-decoration:none;letter-spacing:-.02em;display:inline-flex;align-items:center;gap:10px}
+.marca b{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--verde);color:var(--laranja-claro);font-size:.95rem}
+.nav{display:flex;align-items:center;gap:4px}
+.nav a{text-decoration:none;font-weight:600;font-size:.92rem;padding:8px 11px;border-radius:999px;color:var(--suave);transition:background .2s,color .2s}
+.nav a:hover{background:var(--gelo);color:var(--tinta)}
+.nav a.cta{background:var(--verde);color:#fff;margin-left:6px}
+.nav a.cta:hover{background:var(--verde-esc);color:#fff}
+.btn-menu{display:none;width:44px;height:44px;border:1px solid var(--linha);background:#fff;border-radius:14px;cursor:pointer;align-items:center;justify-content:center;padding:0}
+.btn-menu span{display:block;width:20px;height:2px;background:var(--tinta);position:relative;border-radius:2px;transition:background .2s}
+.btn-menu span::before,.btn-menu span::after{content:"";position:absolute;left:0;width:20px;height:2px;background:var(--tinta);border-radius:2px;transition:transform .25s}
+.btn-menu span::before{top:-6px}
+.btn-menu span::after{top:6px}
+.btn-menu[aria-expanded="true"] span{background:transparent}
+.btn-menu[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
+.btn-menu[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
+
+/* Botões */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 24px;border-radius:999px;font:inherit;font-weight:700;font-size:1rem;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:var(--sombra)}
+.btn-primario{background:var(--verde);color:#fff}
+.btn-primario:hover{background:var(--verde-esc)}
+.btn-contorno{background:#fff;color:var(--verde-esc);border-color:var(--verde)}
+.btn-bloco{width:100%}
+.link-sutil{display:inline-block;margin-top:14px;font-weight:700;color:var(--verde-esc);text-decoration:underline;text-underline-offset:3px;font-size:.95rem}
+
+/* Seções */
+section{scroll-margin-top:92px}
+.secao{padding:clamp(56px,9vw,104px) 0}
+.secao.gelo{background:var(--gelo)}
+.secao.escuro{background:var(--verde-esc);color:#fff}
+.etiqueta{display:inline-block;font-size:.8rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--verde-esc);background:#ecefe0;padding:6px 14px;border-radius:999px;margin-bottom:16px}
+.escuro .etiqueta{background:rgba(255,255,255,.16);color:#fff}
+.titulo{font-size:clamp(2rem,5vw,3.2rem);line-height:1.08;letter-spacing:-.03em;font-weight:800;text-wrap:balance}
+.titulo .serif{color:var(--verde);font-size:1.12em}
+.escuro .titulo .serif{color:var(--laranja-claro)}
+.cab{max-width:680px;margin-bottom:clamp(32px,5vw,52px)}
+.cab p{margin-top:14px;color:var(--suave);font-size:1.05rem}
+.escuro .cab p{color:rgba(255,255,255,.88)}
+
+/* Capa */
+.capa{padding:clamp(40px,7vw,80px) 0 0;background:linear-gradient(180deg,#fff 0%,var(--gelo) 100%)}
+.capa-grade{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,5vw,64px);align-items:center}
+.capa-texto{min-width:0}
+.capa h1{font-size:clamp(2.6rem,8vw,5rem);line-height:.98;letter-spacing:-.04em;font-weight:800;text-wrap:balance;overflow-wrap:anywhere}
+.lead{margin-top:20px;font-size:clamp(1.1rem,2.6vw,1.4rem);line-height:1.45;color:var(--suave);max-width:42ch}
+.lead .serif{color:var(--verde);font-size:1.18em}
+.acoes{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:28px}
+.capa-foto{position:relative;min-width:0;max-width:440px;width:100%;justify-self:center}
+.foto{position:relative;border-radius:var(--raio-g);overflow:hidden;background:linear-gradient(160deg,#55613b 0%,#8a9a63 55%,#d4691f 130%);box-shadow:var(--sombra-g)}
+.foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.foto.r45{aspect-ratio:4/5}
+.selo{position:absolute;top:16px;right:16px;z-index:2;background:var(--laranja-claro);color:var(--tinta);font-weight:800;font-size:.85rem;text-transform:uppercase;letter-spacing:.06em;padding:8px 16px;border-radius:999px;transform:rotate(6deg);box-shadow:0 6px 16px rgba(20,32,28,.2)}
+
+/* Faixa de ticker genérica (serviços, marcas) */
+.ticker{margin-top:clamp(32px,5vw,56px);border-top:1px solid var(--linha);border-bottom:1px solid var(--linha);background:#fff;overflow:hidden;padding:14px 0}
+.ticker-rot{display:block;text-align:center;font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--suave);margin-bottom:8px}
+.trilho{display:flex;width:max-content;animation:rolar2 30s linear infinite}
+.trilho ul{display:flex;align-items:center;flex-shrink:0}
+.trilho li{display:flex;align-items:center;white-space:nowrap;font-weight:700;color:var(--tinta);font-size:1rem}
+.trilho li::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--laranja);margin:0 28px;box-shadow:0 0 0 2px #fff,0 0 0 3px var(--laranja)}
+@keyframes rolar2{to{transform:translateX(-50%)}}
+
+/* Faixa de destaques (3 cards curtos logo após as marcas) */
+.destaques-rapidos{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:clamp(28px,5vw,44px) 0}
+.dr-card{background:var(--gelo);border:1px solid var(--linha);border-left:5px solid var(--laranja);border-radius:var(--raio);padding:20px 22px;min-width:0}
+.dr-card strong{display:block;font-size:clamp(1.5rem,3vw,2rem);font-weight:800;letter-spacing:-.03em;color:var(--verde)}
+.dr-card span{display:block;margin-top:6px;color:var(--suave);font-size:.92rem;line-height:1.4}
+
+/* Sobre */
+.sobre-grade{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(28px,5vw,72px);align-items:center}
+.sobre-grade .foto{max-width:440px;width:100%;justify-self:center}
+.sobre-texto p{margin-top:16px;color:var(--suave);font-size:1.05rem}
+.sobre-texto p.forte{color:var(--tinta);font-weight:600}
+.promessas{margin-top:24px;display:grid;gap:12px}
+.promessas li{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--linha);border-radius:18px;padding:14px 18px;font-weight:700;box-shadow:var(--sombra)}
+.promessas li::before{content:"✓";flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--verde);color:#fff;font-size:.9rem}
+.video-pendente{position:relative}
+.video-pendente::after{content:"";position:absolute;inset:0;background:rgba(20,25,16,.42)}
+.vp-selo{position:absolute;z-index:2;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:#fff;text-align:center}
+.vp-play{width:62px;height:62px;border-radius:50%;background:rgba(255,255,255,.22);border:2px solid rgba(255,255,255,.7);display:grid;place-items:center}
+.vp-play::before{content:"";margin-left:5px;border-style:solid;border-width:11px 0 11px 18px;border-color:transparent transparent transparent #fff}
+.vp-selo b{font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+
+/* Melhores resultados */
+.resultados-grade{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(28px,5vw,56px);align-items:start}
+.stats-coluna{display:grid;gap:14px}
+.stat-chip{background:var(--verde-esc);color:#fff;border-radius:var(--raio);padding:22px 24px}
+.stat-chip strong{display:block;font-size:clamp(2rem,4vw,2.6rem);font-weight:800;letter-spacing:-.03em;color:var(--laranja-claro);line-height:1}
+.stat-chip span{display:block;margin-top:6px;font-size:.92rem;color:rgba(255,255,255,.88)}
+.ranking{display:grid;gap:10px;counter-reset:rk}
+.rk-item{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--linha);border-radius:18px;padding:16px 18px;box-shadow:var(--sombra)}
+.rk-num{flex:none;counter-increment:rk;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--gelo);color:var(--verde-esc);font-weight:800;font-size:.95rem}
+.rk-num::before{content:counter(rk)}
+.rk-txt b{display:block;font-size:1rem;line-height:1.3}
+.rk-txt span{display:block;margin-top:4px;color:var(--verde-esc);font-weight:700;font-size:.9rem}
+
+/* Miniaturas de vídeo (nichos) */
+.mini{position:relative;display:block;width:100%;aspect-ratio:9/16;padding:0;border:0;border-radius:18px;overflow:hidden;cursor:pointer;background:#000;flex:none}
+.mini img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.mini::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.3))}
+.mini:hover img{transform:scale(1.04)}
+.play{position:absolute;left:50%;top:50%;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 10px 28px rgba(0,0,0,.28);transition:transform .25s;z-index:2}
+.play::before{content:"";margin-left:4px;border-style:solid;border-width:10px 0 10px 16px;border-color:transparent transparent transparent var(--verde)}
+.mini:hover .play{transform:scale(1.1)}
+
+/* Fileiras de nicho: scroll horizontal, como a referência */
+.filtro-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:clamp(28px,4vw,44px)}
+.filtro-pills a{text-decoration:none;font-weight:700;font-size:.88rem;color:var(--verde-esc);background:#fff;border:1.5px solid var(--linha);border-radius:999px;padding:8px 16px;transition:background .2s,border-color .2s}
+.filtro-pills a:hover{background:var(--gelo);border-color:var(--verde)}
+.nicho-linha{margin-bottom:clamp(32px,4vw,48px);scroll-margin-top:92px}
+.nicho-cab{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
+.nicho-cab h3{font-size:1.3rem;letter-spacing:-.01em}
+.nicho-cab span{font-size:.8rem;font-weight:800;color:var(--suave);background:var(--gelo);border-radius:999px;padding:2px 10px}
+.nicho-desc{color:var(--suave);font-size:.9rem;margin-bottom:14px}
+.nicho-trilho{display:flex;gap:12px;overflow-x:auto;padding-bottom:10px;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+.nicho-trilho::-webkit-scrollbar{height:6px}
+.nicho-trilho::-webkit-scrollbar-thumb{background:var(--linha);border-radius:99px}
+.nc{flex:none;width:150px;scroll-snap-align:start}
+.nc-corpo{margin-top:8px}
+.nc-corpo b{display:block;font-size:.82rem;line-height:1.25}
+.nc-corpo span{display:block;margin-top:2px;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--suave)}
+.nc.pendente .mini{cursor:default;background:linear-gradient(160deg,#55613b 0%,#8a9a63 100%)}
+.nc.pendente .play{background:rgba(255,255,255,.3);border:2px solid rgba(255,255,255,.7)}
+.nc.pendente .play::before{border-color:transparent transparent transparent #fff}
+.nc-em-breve{position:absolute;left:8px;bottom:8px;z-index:2;background:rgba(255,255,255,.92);color:var(--tinta);font-size:.62rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:999px}
+
+/* Player ampliado */
+.vm{position:fixed;inset:0;z-index:260;display:grid;place-items:center;padding:14px;background:rgba(15,18,10,.92);overflow-y:auto}
+.vm-caixa{display:flex;flex-direction:column;align-items:center;gap:12px;max-width:100%}
+.vm-player{width:min(88vw,calc(68vh * .5625));aspect-ratio:9/16;background:#000;border-radius:18px;overflow:hidden}
+.vm-player iframe{display:block;width:100%;height:100%;border:0}
+.vm-info{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 14px;color:#fff;text-align:center}
+.vm-info b{display:block;font-size:1.05rem;line-height:1.2}
+.vm-info span{display:block;font-size:.9rem;opacity:.85}
+.vm .btn{min-height:44px;padding:10px 20px;font-size:.95rem}
+.vm :focus-visible{outline-color:#fff}
+
+/* Serviços */
+.serv-grade{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.serv{background:var(--gelo);border:1px solid var(--linha);border-radius:var(--raio);padding:28px 24px;transition:transform .25s,box-shadow .25s,background .25s;min-width:0}
+.serv:hover{transform:translateY(-4px);box-shadow:var(--sombra);background:#fff}
+.serv-n{display:inline-grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--laranja-claro);font-weight:800;font-size:1rem}
+.serv h3{margin-top:18px;font-size:1.2rem;letter-spacing:-.01em}
+.serv p{margin-top:8px;color:var(--suave);font-size:.98rem}
+
+/* Depoimentos (em breve) */
+.dep-vazio{background:rgba(255,255,255,.08);border:1px dashed rgba(255,255,255,.35);border-radius:var(--raio-g);padding:clamp(28px,5vw,44px);text-align:center;color:rgba(255,255,255,.85)}
+.dep-vazio b{display:block;font-size:1.1rem;color:#fff;margin-bottom:6px}
+
+/* Contato */
+.contato-grade{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,56px);align-items:start}
+.form{background:#fff;border:1px solid var(--linha);border-radius:var(--raio-g);padding:clamp(20px,3vw,32px);box-shadow:var(--sombra)}
+.campo{display:grid;gap:6px;margin-bottom:16px}
+.campo label{font-weight:700;font-size:.95rem}
+.campo input,.campo textarea{font:inherit;font-size:1rem;width:100%;padding:13px 16px;border-radius:16px;border:2px solid var(--linha);background:var(--gelo);color:var(--tinta);transition:border-color .2s,background .2s}
+.campo textarea{min-height:130px;resize:vertical}
+.campo input:focus,.campo textarea:focus{border-color:var(--verde);background:#fff;outline:none;box-shadow:0 0 0 4px rgba(85,97,59,.22)}
+.conf{background:#ecefe0;border:2px solid var(--verde);border-radius:var(--raio);padding:24px;text-align:left}
+.conf:focus{outline:none}
+.conf h3{font-size:1.4rem;letter-spacing:-.02em}
+.conf p{margin-top:8px;color:var(--suave)}
+.conf .acoes{margin-top:18px}
+.canais{display:grid;gap:14px}
+.canais p{color:var(--suave)}
+.canal{display:flex;align-items:center;gap:14px;text-decoration:none;background:#fff;border:1px solid var(--linha);border-radius:20px;padding:16px 18px;box-shadow:var(--sombra);transition:transform .2s,border-color .2s}
+.canal:hover{transform:translateY(-3px);border-color:var(--verde)}
+.canal i{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:var(--verde);color:#fff;font-style:normal;font-weight:800}
+.canal span{display:block;min-width:0}
+.canal b{display:block;line-height:1.2}
+.canal small{color:var(--suave);font-size:.9rem;overflow-wrap:anywhere}
+
+/* Rodapé */
+.rodape{background:var(--tinta);color:#fff;padding:40px 0}
+.rodape-grade{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px}
+.rodape strong{font-size:1.2rem;letter-spacing:-.02em}
+.rodape ul{display:flex;flex-wrap:wrap;gap:8px 20px}
+.rodape a{color:#fff;font-weight:600;text-decoration:none;border-bottom:2px solid var(--laranja);padding-bottom:2px}
+.rodape a:hover{background:rgba(255,255,255,.08)}
+.rodape small{display:block;width:100%;color:#c7d2cd;font-size:.85rem;border-top:1px solid rgba(255,255,255,.14);padding-top:18px}
+
+/* Entrada ao rolar */
+.js .revelar{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;transition-delay:var(--d,0s)}
+.js .revelar.in{opacity:1;transform:none}
+body.trava{overflow:hidden}
+
+@media (max-width:1020px){
+  .resultados-grade{grid-template-columns:1fr}
+  .destaques-rapidos{grid-template-columns:1fr}
+}
+@media (max-width:980px){
+  .btn-menu{display:inline-flex}
+  .nav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;gap:4px;background:#fff;padding:12px var(--pad) 18px;border-bottom:1px solid var(--linha);box-shadow:var(--sombra)}
+  .nav.aberto{display:flex}
+  .nav a{padding:14px 16px;font-size:1.05rem}
+  .nav a.cta{margin:6px 0 0;text-align:center}
+  .capa-grade{grid-template-columns:1fr}
+  .capa-foto{order:-1;max-width:320px}
+  .sobre-grade{grid-template-columns:1fr}
+  .sobre-grade .foto{max-width:340px}
+  .contato-grade{grid-template-columns:1fr}
+  .serv-grade{grid-template-columns:1fr}
+}
+@media (max-width:700px){
+  html{font-size:15px}
+  .secao{padding:34px 0}
+  .etiqueta{font-size:.64rem;padding:4px 10px;margin-bottom:8px}
+  .titulo{font-size:clamp(1.45rem,6.4vw,1.85rem)}
+  .cab{margin-bottom:16px}
+  .cab p{font-size:.85rem;margin-top:8px}
+  .capa{padding:12px 0 0}
+  .capa h1{font-size:clamp(2.1rem,10.5vw,2.8rem)}
+  .lead{font-size:.95rem}
+  .acoes{gap:8px}
+  .foto{border-radius:20px}
+  .destaques-rapidos{gap:10px}
+  .dr-card{padding:14px 16px}
+  .resultados-grade{gap:20px}
+  .stat-chip{padding:16px 18px}
+  .rk-item{padding:12px 14px;gap:10px}
+  .nc{width:122px}
+  .filtro-pills a{font-size:.78rem;padding:6px 12px}
+  .serv-grade{gap:8px}
+  .serv{padding:14px 14px 16px;border-radius:18px}
+}
+</style>
+</head>
+<body>
+<a class="pular" href="#sobre">Pular para o conteúdo</a>
+
+<div class="faixa-topo">
+  <div class="ft-trilho" id="ftTrilho"></div>
+</div>
+
+<header class="topo">
+  <div class="container">
+    <a class="marca" href="#inicio" aria-label="Voltar ao início"><b aria-hidden="true">L</b><span data-nome>Luana Caper</span></a>
+    <button class="btn-menu" id="btnMenu" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span></button>
+    <nav class="nav" id="menu" aria-label="Menu principal">
+      <a href="#sobre">Sobre</a>
+      <a href="#resultados">Resultados</a>
+      <a href="#conteudos">Conteúdos</a>
+      <a href="#criar-juntos">Criar juntos</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a class="cta" href="#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main id="conteudo">
+
+<!-- 1. CAPA -->
+<section class="capa" id="inicio" aria-label="Apresentação">
+  <div class="container capa-grade">
+    <div class="capa-texto">
+      <p class="etiqueta revelar">UGC · Creative Strategist · Performance Media</p>
+      <h1 class="revelar" style="--d:.05s">Seu conteúdo <span class="serif">vendendo mais!</span></h1>
+      <p class="lead revelar" style="--d:.1s">De hook a CTA, tudo pensado para converter.</p>
+      <div class="acoes revelar" style="--d:.15s">
+        <a class="btn btn-primario" href="#contato">Quero criar com a Luana</a>
+      </div>
+      <a class="link-sutil revelar" style="--d:.18s" href="#contato">Quero gerenciar minha campanha com a Luana →</a>
+    </div>
+
+    <div class="capa-foto revelar" style="--d:.1s">
+      <div class="foto r45">
+        <img src="foto-luana.jpg" alt="Luana Caper sorrindo, de gola alta verde-oliva" width="900" height="1125" fetchpriority="high">
+        <span class="selo">UGC</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ticker" aria-label="O que eu entrego">
+    <div class="trilho" id="trilhoEntrega"></div>
+  </div>
+
+  <div class="container">
+    <div class="destaques-rapidos" id="destaquesRapidos"></div>
+  </div>
+
+  <div class="ticker" aria-label="Marcas que confiaram no meu trabalho">
+    <span class="ticker-rot">Marcas que confiaram no meu trabalho</span>
+    <div class="trilho" id="trilhoMarcas"></div>
+  </div>
+</section>
+
+<!-- 2. SOBRE MIM -->
+<section class="secao gelo" id="sobre" aria-labelledby="t-sobre">
+  <div class="container sobre-grade">
+    <button class="foto r45 revelar video-pendente" id="btnVideoSobre" type="button" aria-label="Vídeo: Como eu gravo seu conteúdo UGC (em breve)">
+      <img src="foto-sobre.jpg" alt="Luana Caper com uma caixa de produto, sorrindo" width="1200" height="1600" loading="lazy">
+      <span class="vp-selo"><span class="vp-play" aria-hidden="true"></span><b>Como eu gravo seu conteúdo UGC · em breve</b></span>
+    </button>
+
+    <div class="sobre-texto">
+      <p class="etiqueta revelar">Sobre mim</p>
+      <h2 class="titulo revelar" id="t-sobre" style="--d:.05s">Oie, sou a <span class="serif">Luana Caper</span></h2>
+      <p class="forte revelar" style="--d:.1s">Tenho 35 anos, sou UGC, estrategista de conteúdo e gestora de tráfego. Atuo no mercado há mais de 10 anos e já trabalhei com mais de 280 marcas entre vídeos gravados e gestão de campanhas.</p>
+      <p class="sobre-p revelar" style="--d:.15s">Desenvolvo conteúdos para que cada etapa do funil gere o resultado desejado e converta.</p>
+      <ul class="promessas revelar" style="--d:.2s">
+        <li>Roteiro aprovado antes de gravar</li>
+        <li>Estratégia pensada por etapa do funil</li>
+        <li>+280 marcas atendidas</li>
+      </ul>
+      <p class="sobre-p revelar" style="--d:.2s">Goiânia · GO · Brasil</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3. OS MELHORES RESULTADOS -->
+<section class="secao" id="resultados" aria-labelledby="t-result">
+  <div class="container">
+    <div class="cab">
+      <p class="etiqueta revelar">Prova social</p>
+      <h2 class="titulo revelar" id="t-result" style="--d:.05s">Os melhores <span class="serif">resultados</span></h2>
+    </div>
+    <div class="resultados-grade">
+      <div class="stats-coluna" id="statsResultados"></div>
+      <ol class="ranking" id="rankingResultados"></ol>
+    </div>
+  </div>
+</section>
+
+<!-- 4. CATÁLOGO POR NICHO -->
+<section class="secao gelo" id="conteudos" aria-labelledby="t-cont">
+  <div class="container">
+    <div class="cab">
+      <p class="etiqueta revelar">Catálogo</p>
+      <h2 class="titulo revelar" id="t-cont" style="--d:.05s">Que tipo de conteúdo <span class="serif">você precisa?</span></h2>
+      <p class="revelar" style="--d:.1s">Navegue pelos nichos. Cada linha é uma especialidade. Deslize pro lado pra ver mais.</p>
+    </div>
+    <div class="filtro-pills" id="filtroPills"></div>
+    <div id="nichosGrades"></div>
+  </div>
+</section>
+
+<!-- 5. O QUE PODEMOS CRIAR JUNTOS -->
+<section class="secao" id="criar-juntos" aria-labelledby="t-criar">
+  <div class="container">
+    <div class="cab">
+      <p class="etiqueta revelar">Serviços</p>
+      <h2 class="titulo revelar" id="t-criar" style="--d:.05s">O que podemos <span class="serif">criar juntos?</span></h2>
+      <p class="revelar" style="--d:.1s">Cada formato tem um objetivo: vender, escalar ou construir marca. Me conta o seu que a gente monta o combo perfeito pra sua marca.</p>
+    </div>
+    <div class="serv-grade" id="servGrade"></div>
+  </div>
+</section>
+
+<!-- 6. DEPOIMENTOS -->
+<section class="secao escuro" id="depoimentos" aria-labelledby="t-dep">
+  <div class="container">
+    <div class="cab">
+      <p class="etiqueta revelar">Prova social</p>
+      <h2 class="titulo revelar" id="t-dep" style="--d:.05s">O que dizem sobre o <span class="serif">trabalho</span></h2>
+    </div>
+    <div class="dep-vazio revelar">
+      <b>Depoimentos a caminho</b>
+      <p>Essa vitrine vai trazer o feedback real das marcas assim que eu organizar os prints. Volte em breve.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7. CONTATO -->
+<section class="secao gelo" id="contato" aria-labelledby="t-contato">
+  <div class="container">
+    <div class="cab">
+      <p class="etiqueta revelar">Contato</p>
+      <h2 class="titulo revelar" id="t-contato" style="--d:.05s">Vamos criar <span class="serif">algo juntos?</span></h2>
+      <p class="revelar" style="--d:.1s">Conte rapidinho o que você tem em mente e eu te respondo com uma proposta.</p>
+    </div>
+    <div class="contato-grade">
+      <div class="revelar">
+        <form class="form" id="formContato">
+          <div class="campo">
+            <label for="c-nome">Nome</label>
+            <input id="c-nome" name="nome" type="text" autocomplete="name" required>
+          </div>
+          <div class="campo">
+            <label for="c-email">E-mail</label>
+            <input id="c-email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="campo">
+            <label for="c-msg">Mensagem</label>
+            <textarea id="c-msg" name="mensagem" required></textarea>
+          </div>
+          <button class="btn btn-primario btn-bloco" type="submit">Enviar mensagem</button>
+        </form>
+        <div class="conf" id="confContato" tabindex="-1" hidden></div>
+      </div>
+      <div class="canais revelar" style="--d:.1s" id="canais"></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- RODAPÉ -->
+<footer class="rodape">
+  <div class="container rodape-grade">
+    <strong data-nome>Luana Caper</strong>
+    <ul id="redes" aria-label="Redes"></ul>
+    <small>© <span id="ano">2026</span> <span data-nome>Luana Caper</span>. Todos os direitos reservados.</small>
+  </div>
+</footer>
+
+<!-- PLAYER AMPLIADO -->
+<div class="vm" id="vm" role="dialog" aria-modal="true" aria-label="Assistir ao vídeo" hidden>
+  <button class="lb-btn lb-fechar" id="vmFechar" type="button" aria-label="Fechar vídeo" style="position:absolute;top:14px;right:14px;width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:1.8rem;line-height:1;cursor:pointer">&times;</button>
+  <div class="vm-caixa">
+    <div class="vm-player" id="vmPlayer"></div>
+    <div class="vm-info">
+      <div><b id="vmTitulo"></b><span id="vmLocal"></span></div>
+      <a class="btn btn-primario" id="vmCta" href="#contato"></a>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =====================================================================
+   DADOS — edite aqui. Vídeos sem "id" aparecem como "em breve" no site;
+   assim que o link chegar, troque "id: null" pelo código do YouTube/TikTok.
+   ===================================================================== */
+const CONFIG = {
+  nome: "Luana Caper",
+  instagram: "luhcaper",
+  email: "caperluana@gmail.com",
+  whatsapp: "5562993896847",
+  whatsappExibir: "(62) 99389-6847",
+  supabase: {
+    url: "https://tzpjkbzkmaeyjiktmpie.supabase.co",
+    chave: "sb_publishable_SPp8r0D8hiWdcEVe8u_YRw_Ezb0I5tl"
+  },
+  blackFriday: "2026-11-27T00:00:00-03:00"
+};
+
+const ENTREGA = ["Roteiro estratégico", "Fotos UGC", "Conteúdo E-commerce", "Anúncios que convertem", "Estratégia com creators"];
+
+const MARCAS = [
+  "Aimê", "Magalu", "Shopee", "Casa da Gê", "Ambrô", "Tekoá", "Sums Club", "Nold Pet", "Fast Escova",
+  "Place Company", "Pressfit", "Lola Cosmetics", "Forever Liss", "Milkmoo", "Block Carbo", "Café",
+  "Stabille", "Pessoa Advogados", "HF Consultoria", "Facilita", "Ouze Loja", "Rocklin Store", "Buzzlead",
+  "Institut Dandhela", "Aldeia Multiétnica", "Fell Good Shop Online Portugal", "Las Pams", "Barba Men", "Eliefe", "Zoe"
+];
+
+const DESTAQUES_RAPIDOS = [
+  { valor: "+10 anos", texto: "de experiência com criadores, campanhas, estratégia e tráfego." },
+  { valor: "ROAS 7,54", texto: "em campanha de e-commerce por assinatura (Tekoá)." },
+  { valor: "Agenda lotada", texto: "de hospedagem para novembro." }
+];
+
+/* Vídeos de viagem (mesmos do portfólio de Viagens, já têm link) */
+const VIDEOS_VIAGEM = [
+  { titulo: "Chalé Lua", nicho: "viagem", prov: "yt", id: "ARMfs907Fbw" },
+  { titulo: "Flutuante Serra da Mesa", nicho: "viagem", prov: "yt", id: "nmZHI9Psc44" },
+  { titulo: "Lajinha", nicho: "viagem", prov: "yt", id: "OAcfpc5pOr4" },
+  { titulo: "Pousada Aimê", nicho: "viagem", prov: "yt", id: "CnLIGnGYo_s" },
+  { titulo: "Casa Cachoeira Sonho Meu", nicho: "viagem", prov: "yt", id: "b49WhEAw0Sc" },
+  { titulo: "Mirante do Ipê", nicho: "viagem", prov: "yt", id: "5bYZJZyPr2g" }
+];
+
+/* Vídeos novos (ainda sem link — ficam "em breve" até a Luana mandar o link de cada um) */
+const VIDEOS_NOVOS = [
+  { titulo: "Tekoá 01 – Anúncio", nota: "versão crua disponível", nicho: "ecommerce-assinatura", id: null },
+  { titulo: "Tekoá 02 – Anúncio", nota: "ROAS 6,90", nicho: "ecommerce-assinatura", id: null },
+  { titulo: "Tekoá 03 – Orgânico", nota: "", nicho: "ecommerce-assinatura", id: null },
+  { titulo: "Tekoá 03 – Anúncio", nota: "ROAS 7,54", nicho: "ecommerce-assinatura", id: null },
+  { titulo: "Tekoá 03 – Anúncio", nota: "ROAS 7,20", nicho: "ecommerce-assinatura", id: null },
+  { titulo: "App Place (versão original)", nota: "R$27.383 orgânico + R$6.082, ROAS 5,6", nicho: "tech", id: null },
+  { titulo: "Cinta Press Fitness", nota: "", nicho: "ecommerce", id: null },
+  { titulo: "Unboxing Ambro", nota: "", nicho: "ecommerce", id: null },
+  { titulo: "Casa da Gê – Orgânico", nota: "", nicho: "casa-decoracao", id: null },
+  { titulo: "Achadinho da Shopee", nota: "", nicho: "casa-decoracao", id: null },
+  { titulo: "Magalu 01", nota: "", nicho: "casa-decoracao", id: null },
+  { titulo: "Magalu 02", nota: "", nicho: "casa-decoracao", id: null },
+  { titulo: "Bendita Ghee Lola", nota: "", nicho: "beleza", id: null },
+  { titulo: "Forever Liss", nota: "", nicho: "beleza", id: null },
+  { titulo: "Infoproduto Ana Neves", nota: "", nicho: "infoproduto", id: null },
+  { titulo: "MilkMoo – Orgânico", nota: "até 50x mais alcance", nicho: "gastronomia", id: null },
+  { titulo: "MilkMoo – Anúncio", nota: "", nicho: "gastronomia", id: null },
+  { titulo: "Café", nota: "", nicho: "gastronomia", id: null },
+  { titulo: "Block Carbo", nota: "bem-estar e saúde", nicho: "saude-fitness", id: null },
+  { titulo: "Viagem: aniversário do meu pai", nota: "", nicho: "viagem", id: null }
+];
+
+const NICHOS = [
+  { slug: "ecommerce-assinatura", nome: "E-commerce por Assinatura", desc: "Conteúdo recorrente pra quem vende por assinatura" },
+  { slug: "tech", nome: "Tech & Apps", desc: "Apps e produtos tech em linguagem humana" },
+  { slug: "ecommerce", nome: "E-commerce", desc: "Produto em uso, do jeito que converte" },
+  { slug: "casa-decoracao", nome: "Casa & Decoração", desc: "Ambientes que inspiram quem assiste" },
+  { slug: "beleza", nome: "Beleza & Cosméticos", desc: "Produtos que viram ritual" },
+  { slug: "infoproduto", nome: "Infoproduto", desc: "Conteúdo que vende curso e mentoria" },
+  { slug: "gastronomia", nome: "Gastronomia", desc: "Comida que dá água na boca" },
+  { slug: "saude-fitness", nome: "Bem-estar & Saúde", desc: "Suplementos e rotina saudável" },
+  { slug: "viagem", nome: "Viagem", desc: "Experiências e destinos narrados" }
+];
+
+const RANKING_RESULTADOS = [
+  { titulo: "Viagem: aniversário do meu pai", nota: "Um dos conteúdos mais queridos do portfólio" },
+  { titulo: "Tekoá 03 – Anúncio – E-commerce por assinatura", nota: "ROAS 7,54" },
+  { titulo: "App Place – Tech", nota: "R$27.383 vendidos organicamente + R$6.082 e ROAS de 5,6 em 5 dias" },
+  { titulo: "Tekoá 02 – Anúncio – E-commerce por assinatura", nota: "ROAS 6,90" },
+  { titulo: "Tekoá 03 – Anúncio – E-commerce por assinatura", nota: "ROAS 7,20" },
+  { titulo: "Milkmoo – Orgânico", nota: "Até 50x mais alcance nos vídeos UGC, só no orgânico" }
+];
+
+const SERVICOS = [
+  { titulo: "Criativos para tráfego", texto: "Ads otimizados para Meta, TikTok e YouTube, pensados para gerar o melhor resultado ao menor custo." },
+  { titulo: "Gestão em escala", texto: "Campanhas com vários creators (UGC, nano, micro e influenciadores), do briefing à entrega, pra escalar seu conteúdo sem dor de cabeça — seja para orgânico ou tráfego pago." }
+];
+
+const TONS = [
+  "linear-gradient(160deg,#55613b 0%,#8a9a63 100%)",
+  "linear-gradient(160deg,#ffbf85 0%,#d4691f 100%)",
+  "linear-gradient(160deg,#e4e6d6 0%,#a7b283 100%)",
+  "linear-gradient(160deg,#3f4a2b 0%,#d4691f 140%)"
+];
+
+/* =====================================================================
+   FUNCIONAMENTO
+   ===================================================================== */
+document.documentElement.classList.add("js");
+const reduzido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $ = (s, r = document) => r.querySelector(s);
+function el(tag, attrs, filhos) {
+  const n = document.createElement(tag);
+  for (const k in (attrs || {})) {
+    const v = attrs[k];
+    if (v === false || v == null) continue;
+    if (k === "class") n.className = v;
+    else if (k === "text") n.textContent = v;
+    else if (k === "style") n.setAttribute("style", v);
+    else n.setAttribute(k, v === true ? "" : v);
+  }
+  (filhos || []).forEach(f => f != null && n.append(f));
+  return n;
+}
+const atraso = i => "--d:" + Math.min(i * 0.06, 0.4).toFixed(2) + "s";
+const wa = txt => "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(txt);
+const mail = (assunto, corpo) => "mailto:" + CONFIG.email + "?subject=" + encodeURIComponent(assunto) + "&body=" + encodeURIComponent(corpo);
+document.querySelectorAll("[data-nome]").forEach(n => { n.textContent = CONFIG.nome; });
+$("#ano").textContent = new Date().getFullYear();
+
+/* Menu de celular */
+const btnMenu = $("#btnMenu"), menu = $("#menu");
+function menuAbrir(abrir) {
+  menu.classList.toggle("aberto", abrir);
+  btnMenu.setAttribute("aria-expanded", String(abrir));
+  btnMenu.setAttribute("aria-label", abrir ? "Fechar menu" : "Abrir menu");
+}
+btnMenu.addEventListener("click", () => menuAbrir(!menu.classList.contains("aberto")));
+menu.addEventListener("click", e => { if (e.target.closest("a")) menuAbrir(false); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && menu.classList.contains("aberto")) { menuAbrir(false); btnMenu.focus(); } });
+window.matchMedia("(min-width:981px)").addEventListener("change", e => { if (e.matches) menuAbrir(false); });
+
+/* Faixa do topo: contagem regressiva pra Black Friday */
+(function () {
+  const dias = Math.max(0, Math.ceil((new Date(CONFIG.blackFriday) - new Date()) / 86400000));
+  const texto = dias > 0
+    ? "Faltam " + dias + " dias para a Black Friday"
+    : "É Black Friday!";
+  const frases = [texto, "Reserve sua vaga com antecedência", "Poucas vagas para novembro", "Criativos com alta conversão", "Reservar agenda"];
+  const trilho = $("#ftTrilho");
+  for (let r = 0; r < 2; r++) frases.forEach(f => trilho.append(el("span", { text: f })));
+})();
+
+/* Tickers (entrega + marcas) */
+function montarTicker(sel, itens) {
+  const trilho = $(sel);
+  const lista = ocultar => {
+    const ul = el("ul", ocultar ? { "aria-hidden": "true" } : {});
+    for (let r = 0; r < 2; r++) itens.forEach(nm => ul.append(el("li", { text: nm })));
+    return ul;
+  };
+  trilho.append(lista(false), lista(true));
+}
+montarTicker("#trilhoEntrega", ENTREGA);
+montarTicker("#trilhoMarcas", MARCAS);
+
+/* Destaques rápidos */
+DESTAQUES_RAPIDOS.forEach((d, i) => {
+  $("#destaquesRapidos").append(el("div", { class: "dr-card revelar", style: atraso(i) }, [el("strong", { text: d.valor }), el("span", { text: d.texto })]));
+});
+
+/* Player: miniatura abre o vídeo ampliado dentro do site */
+function urlPlayer(v) {
+  if (v.prov === "tt") return "https://www.tiktok.com/player/v1/" + v.id + "?autoplay=1&music_info=0&description=0&rel=0";
+  return "https://www.youtube-nocookie.com/embed/" + v.id + "?autoplay=1&rel=0&playsinline=1&modestbranding=1";
+}
+const vm = $("#vm"), vmPlayer = $("#vmPlayer"), vmCta = $("#vmCta");
+let vmFoco = null;
+function abrirVideo(v, cta) {
+  if (window.registrarMetrica) registrarMetrica("video", v.titulo);
+  vmFoco = document.activeElement;
+  vmPlayer.replaceChildren(el("iframe", { src: urlPlayer(v), title: "Vídeo: " + v.titulo, allow: "autoplay; encrypted-media; picture-in-picture; fullscreen", allowfullscreen: true, referrerpolicy: "strict-origin-when-cross-origin" }));
+  $("#vmTitulo").textContent = v.titulo;
+  $("#vmLocal").textContent = v.local || "";
+  vmCta.textContent = cta.texto;
+  vmCta.href = cta.href;
+  vm.hidden = false;
+  document.body.classList.add("trava");
+  $("#vmFechar").focus();
+}
+function vmFechar() {
+  vm.hidden = true;
+  vmPlayer.replaceChildren();
+  document.body.classList.remove("trava");
+  if (vmFoco && vmFoco.focus) vmFoco.focus();
+}
+$("#vmFechar").addEventListener("click", vmFechar);
+vm.addEventListener("click", e => { if (e.target === vm) vmFechar(); });
+document.addEventListener("keydown", e => { if (!vm.hidden && e.key === "Escape") vmFechar(); });
+
+/* Cartão de vídeo: se tiver id, toca no site; sem id, mostra "em breve" */
+function cartaoVideo(v, i) {
+  const temVideo = !!v.id;
+  const thumb = v.thumb || (v.prov === "yt" ? "https://i.ytimg.com/vi/" + v.id + "/hqdefault.jpg" : "");
+  const corpo = el("div", { class: "nc-corpo" }, [el("b", { text: v.titulo }), v.nota ? el("span", { text: v.nota }) : null]);
+  let miolo;
+  if (temVideo) {
+    const b = el("button", { class: "mini", type: "button", "aria-label": "Assistir: " + v.titulo, style: thumb ? null : "background:" + TONS[i % TONS.length] }, [
+      thumb ? el("img", { src: thumb, alt: "", loading: "lazy", width: 300, height: 533 }) : null,
+      el("span", { class: "play", "aria-hidden": "true" })
+    ]);
+    b.addEventListener("click", () => abrirVideo(v, { texto: "Quero um vídeo assim →", href: "#contato" }));
+    miolo = b;
+  } else {
+    miolo = el("div", { class: "mini", style: "background:" + TONS[i % TONS.length] }, [
+      el("span", { class: "nc-em-breve", text: "Em breve" }),
+      el("span", { class: "play", "aria-hidden": "true" })
+    ]);
+  }
+  return el("article", { class: "nc revelar" + (temVideo ? "" : " pendente"), style: atraso(i % 6) }, [miolo, corpo]);
+}
+
+/* Catálogo por nicho */
+const TODOS_VIDEOS = VIDEOS_VIAGEM.concat(VIDEOS_NOVOS);
+const grades = $("#nichosGrades");
+NICHOS.forEach(n => {
+  const itens = TODOS_VIDEOS.filter(v => v.nicho === n.slug);
+  if (!itens.length) return;
+  $("#filtroPills").append(el("a", { href: "#nicho-" + n.slug, text: n.nome }));
+  const trilho = el("div", { class: "nicho-trilho" });
+  itens.forEach((v, i) => trilho.append(cartaoVideo(v, i)));
+  grades.append(el("div", { class: "nicho-linha", id: "nicho-" + n.slug }, [
+    el("div", { class: "nicho-cab" }, [el("h3", { text: n.nome }), el("span", { text: String(itens.length).padStart(2, "0") })]),
+    el("p", { class: "nicho-desc", text: n.desc }),
+    trilho
+  ]));
+});
+
+/* Os melhores resultados */
+const STATS = [
+  { valor: "ROAS 7,54", texto: "Tekoá · e-commerce por assinatura, melhor campanha" },
+  { valor: "R$33,4 mil", texto: "App Place · vendas em 5 dias (orgânico + ROAS 5,6)" },
+  { valor: "+50x", texto: "Milkmoo · alcance a mais só no orgânico" }
+];
+STATS.forEach(s => $("#statsResultados").append(el("div", { class: "stat-chip revelar" }, [el("strong", { text: s.valor }), el("span", { text: s.texto })])));
+RANKING_RESULTADOS.forEach((r, i) => {
+  $("#rankingResultados").append(el("li", { class: "rk-item revelar", style: atraso(i) }, [
+    el("span", { class: "rk-num", "aria-hidden": "true" }),
+    el("div", { class: "rk-txt" }, [el("b", { text: r.titulo }), r.nota ? el("span", { text: r.nota }) : null])
+  ]));
+});
+
+/* Vídeo "Sobre mim" (ainda sem link — avisa que está em breve, sem travar a página) */
+$("#btnVideoSobre").addEventListener("click", () => {
+  alert("Esse vídeo ainda não foi publicado. Assim que estiver pronto, ele toca aqui mesmo.");
+});
+
+/* Serviços */
+SERVICOS.forEach((s, i) => {
+  $("#servGrade").append(el("article", { class: "serv revelar", style: atraso(i) }, [
+    el("span", { class: "serv-n", "aria-hidden": "true", text: String(i + 1).padStart(2, "0") }),
+    el("h3", { text: s.titulo }),
+    el("p", { text: s.texto })
+  ]));
+});
+
+/* Canais de contato e rodapé */
+const canais = [
+  { sigla: "W", nome: "WhatsApp", info: CONFIG.whatsappExibir, href: wa("Oi Luana, vim pelo seu portfólio e quero conversar."), externo: true },
+  { sigla: "@", nome: "E-mail", info: CONFIG.email, href: mail("Contato pelo portfólio", "Oi Luana, "), externo: false },
+  { sigla: "I", nome: "Instagram", info: "@" + CONFIG.instagram, href: "https://instagram.com/" + CONFIG.instagram, externo: true }
+];
+canais.forEach(c => {
+  $("#canais").append(el("a", { class: "canal", href: c.href, target: c.externo ? "_blank" : false, rel: c.externo ? "noopener noreferrer" : false }, [
+    el("i", { "aria-hidden": "true", text: c.sigla }),
+    el("span", {}, [el("b", { text: c.nome }), el("small", { text: c.info })])
+  ]));
+});
+$("#canais").prepend(el("p", { text: "Prefere falar direto? Escolha o canal que for mais fácil pra você." }));
+canais.forEach(c => {
+  $("#redes").append(el("li", {}, [el("a", { href: c.href, target: c.externo ? "_blank" : false, rel: c.externo ? "noopener noreferrer" : false, text: c.nome })]));
+});
+
+/* Envio do formulário de contato (mesma tabela "marcas" do painel admin, situação "Lead") */
+async function enviar(dados) {
+  const sb = CONFIG.supabase;
+  if (!sb || !sb.url) return false;
+  try {
+    const r = await fetch(sb.url + "/rest/v1/marcas", {
+      method: "POST",
+      headers: { apikey: sb.chave, "Content-Type": "application/json", Prefer: "return=minimal" },
+      body: JSON.stringify({ nome: dados.nome, email: dados.email || null, mensagem: dados.mensagem || null, origem: "geral-contato", status: "novo" })
+    });
+    return r.ok;
+  } catch (e) { return false; }
+}
+function mostrarConfirmacao(caixa, enviado, nome, assunto, texto) {
+  caixa.replaceChildren();
+  if (enviado) {
+    caixa.append(el("h3", { text: "Recebi, " + nome + "!" }), el("p", { text: "Obrigada pelo contato. Eu te respondo em breve." }));
+  } else {
+    caixa.append(
+      el("h3", { text: "Quase lá, " + nome + "!" }),
+      el("p", { text: "Escolha por onde quer enviar. A mensagem já vai pronta." }),
+      el("div", { class: "acoes" }, [
+        el("a", { class: "btn btn-primario", href: wa(texto), target: "_blank", rel: "noopener noreferrer", text: "Enviar por WhatsApp" }),
+        el("a", { class: "btn btn-contorno", href: mail(assunto, texto), text: "Enviar por e-mail" })
+      ])
+    );
+  }
+  caixa.hidden = false;
+  caixa.focus();
+}
+const formContato = $("#formContato");
+formContato.addEventListener("submit", async e => {
+  e.preventDefault();
+  const f = new FormData(formContato);
+  const nome = String(f.get("nome")).trim(), email = String(f.get("email")).trim(), msg = String(f.get("mensagem")).trim();
+  const btn = formContato.querySelector("button[type=submit]");
+  btn.disabled = true; btn.textContent = "Enviando...";
+  const ok = await enviar({ nome, email, mensagem: msg });
+  formContato.hidden = true;
+  mostrarConfirmacao($("#confContato"), ok, nome, "Contato pelo portfólio geral",
+    "Oi Luana, aqui é " + nome + " (" + email + "). " + msg);
+});
+
+/* Métricas simples: 1 evento por visita e 1 por vídeo aberto (mesma tabela "metricas" do painel admin) */
+(function () {
+  const sb = CONFIG.supabase;
+  if (!sb || !sb.url) return;
+  let sessao;
+  try {
+    sessao = sessionStorage.getItem("metricaSessao");
+    if (!sessao) { sessao = crypto.randomUUID(); sessionStorage.setItem("metricaSessao", sessao); }
+  } catch (e) { sessao = String(Math.random()).slice(2); }
+
+  function origemAtual() {
+    const p = new URLSearchParams(location.search);
+    if (p.get("utm_source")) return p.get("utm_source").trim().replace(/^\w/, c => c.toUpperCase());
+    const ref = document.referrer;
+    if (!ref) return "Direto";
+    let host = "";
+    try { host = new URL(ref).hostname.replace(/^www\./, ""); } catch (e) { return "Direto"; }
+    if (/instagram\.com/.test(host)) return "Instagram";
+    if (/tiktok\.com/.test(host)) return "TikTok";
+    if (/facebook\.com|fb\.com/.test(host)) return "Facebook";
+    if (/wa\.me|whatsapp\.com/.test(host)) return "WhatsApp";
+    if (/youtube\.com|youtu\.be/.test(host)) return "YouTube";
+    if (/google\./.test(host)) return "Google";
+    if (/linkedin\.com/.test(host)) return "LinkedIn";
+    if (/^(x\.com|t\.co|twitter\.com)$/.test(host)) return "X (Twitter)";
+    return host;
+  }
+  const origem = origemAtual();
+
+  window.registrarMetrica = function (tipo, detalhe) {
+    try {
+      fetch(sb.url + "/rest/v1/metricas", {
+        method: "POST",
+        headers: { apikey: sb.chave, "Content-Type": "application/json", Prefer: "return=minimal" },
+        body: JSON.stringify({ tipo, origem, referrer: document.referrer || null, detalhe: detalhe || null, sessao })
+      });
+    } catch (e) {}
+  };
+  registrarMetrica("visita");
+})();
+
+/* Entrada ao rolar */
+if ("IntersectionObserver" in window && !reduzido) {
+  const io = new IntersectionObserver(entradas => {
+    entradas.forEach(en => {
+      if (!en.isIntersecting) return;
+      en.target.classList.add("in");
+      io.unobserve(en.target);
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+  document.querySelectorAll(".revelar").forEach(n => io.observe(n));
+} else {
+  document.querySelectorAll(".revelar").forEach(n => n.classList.add("in"));
+}
+</script>
+</body>
+</html>
