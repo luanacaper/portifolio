@@ -97,11 +97,14 @@ section{scroll-margin-top:92px}
 /* Capa: a foto é o fundo inteiro, o texto fica por cima, do lado direito */
 .capa{background:linear-gradient(180deg,#fff 0%,var(--gelo) 100%)}
 .capa-hero{position:relative;overflow:hidden;min-height:clamp(480px,76vh,740px);background:var(--gelo)}
-.capa-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 78%}
-.capa-hero-texto{position:relative;z-index:2;margin-left:auto;max-width:480px;min-height:inherit;display:flex;flex-direction:column;justify-content:center;padding:clamp(28px,6vw,64px);background:var(--gelo);box-shadow:-40px 0 60px -20px rgba(20,32,28,.18)}
-.capa-hero-texto h1{font-size:clamp(2.2rem,4.2vw,3.2rem);line-height:1.04;letter-spacing:-.03em;font-weight:800;text-wrap:balance}
-.lead{margin-top:20px;font-size:clamp(1.05rem,1.8vw,1.25rem);line-height:1.45;color:var(--suave);max-width:42ch}
+.capa-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 64%}
+.capa-hero-texto{position:relative;z-index:2;margin-left:auto;max-width:480px;min-height:inherit;display:flex;flex-direction:column;justify-content:center;padding:clamp(28px,6vw,64px)}
+.capa-hero-texto .etiqueta{background:rgba(255,255,255,.85);color:var(--verde-esc);text-shadow:none}
+.capa-hero-texto h1{color:#fff;font-size:clamp(2.2rem,4.2vw,3.2rem);line-height:1.04;letter-spacing:-.03em;font-weight:800;text-wrap:balance;text-shadow:0 2px 28px rgba(20,25,16,.55),0 1px 4px rgba(20,25,16,.5)}
+.capa-hero-texto h1 .serif{color:var(--laranja-claro)}
+.lead{margin-top:20px;font-size:clamp(1.05rem,1.8vw,1.25rem);line-height:1.45;color:#fff;max-width:42ch;text-shadow:0 2px 20px rgba(20,25,16,.55),0 1px 3px rgba(20,25,16,.5)}
 .acoes{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:28px}
+.capa-hero-texto .link-sutil{color:#fff;text-shadow:0 1px 12px rgba(20,25,16,.5)}
 .foto{position:relative;border-radius:var(--raio-g);overflow:hidden;background:linear-gradient(160deg,#55613b 0%,#8a9a63 55%,#d4691f 130%);box-shadow:var(--sombra-g)}
 .foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
 .foto.r45{aspect-ratio:4/5}
@@ -275,7 +278,7 @@ body.trava{overflow:hidden}
   .nav a.cta{margin:6px 0 0;text-align:center}
   .capa-hero{min-height:clamp(560px,135vw,660px)}
   .capa-hero-img{object-position:50% 50%;transform-origin:43% 58%;transform:scale(1.9) translateY(-18%)}
-  .capa-hero-texto{position:absolute;left:0;right:0;bottom:0;max-width:none;min-height:0;margin-left:0;justify-content:flex-start;box-shadow:0 -30px 50px -10px rgba(20,32,28,.14)}
+  .capa-hero-texto{position:absolute;left:0;right:0;bottom:0;max-width:none;min-height:0;margin-left:0;justify-content:flex-start}
   .sobre-grade{grid-template-columns:1fr}
   .sobre-grade .foto{max-width:340px}
   .contato-grade{grid-template-columns:1fr}
