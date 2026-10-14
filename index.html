@@ -94,19 +94,19 @@ section{scroll-margin-top:92px}
 .cab p{margin-top:14px;color:var(--suave);font-size:1.05rem}
 .escuro .cab p{color:rgba(255,255,255,.88)}
 
-/* Capa */
-.capa{padding:clamp(40px,7vw,80px) 0 0;background:linear-gradient(180deg,#fff 0%,var(--gelo) 100%)}
-.capa-grade{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,5vw,64px);align-items:center}
-.capa-texto{min-width:0}
-.capa h1{font-size:clamp(2.6rem,8vw,5rem);line-height:.98;letter-spacing:-.04em;font-weight:800;text-wrap:balance;overflow-wrap:anywhere}
-.lead{margin-top:20px;font-size:clamp(1.1rem,2.6vw,1.4rem);line-height:1.45;color:var(--suave);max-width:42ch}
-.lead .serif{color:var(--verde);font-size:1.18em}
+/* Capa: a foto é o fundo inteiro, o texto fica por cima, do lado direito */
+.capa{padding:clamp(20px,4vw,40px) 0 0;background:linear-gradient(180deg,#fff 0%,var(--gelo) 100%)}
+.capa-hero{position:relative;border-radius:var(--raio-g);overflow:hidden;min-height:clamp(480px,76vh,740px);box-shadow:var(--sombra-g);background:var(--verde-esc)}
+.capa-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 55%}
+.capa-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(18,22,14,.05) 0%,rgba(18,22,14,.12) 34%,rgba(18,22,14,.74) 58%,rgba(18,22,14,.88) 100%)}
+.capa-hero-texto{position:relative;z-index:2;margin-left:auto;max-width:540px;min-height:inherit;display:flex;flex-direction:column;justify-content:center;padding:clamp(28px,6vw,72px);color:#fff}
+.capa-hero-texto .etiqueta{background:rgba(255,255,255,.16);color:#fff}
+.capa-hero-texto h1{color:#fff;font-size:clamp(2.4rem,4.6vw,3.6rem);line-height:1.02;letter-spacing:-.03em;font-weight:800;text-wrap:balance}
+.capa-hero-texto h1 .serif{color:var(--laranja-claro)}
+.lead{margin-top:20px;font-size:clamp(1.05rem,1.8vw,1.25rem);line-height:1.45;color:rgba(255,255,255,.88);max-width:42ch}
+.lead .serif{color:var(--laranja-claro);font-size:1.18em}
 .acoes{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:28px}
-.capa-foto{grid-column:1/-1;position:relative;width:100%;aspect-ratio:20/9;border-radius:var(--raio-g);overflow:hidden;box-shadow:var(--sombra-g);background:var(--gelo)}
-.capa-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:28% 18%}
-.capa-foto::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,25,16,0) 48%,rgba(20,25,16,.5) 100%)}
-.capa-nome{position:absolute;z-index:2;right:clamp(20px,5vw,56px);top:50%;transform:translateY(-50%);text-align:right}
-.capa-nome span{display:block;font-family:"DM Serif Display",Georgia,serif;font-weight:400;font-size:clamp(1.8rem,5.2vw,3.6rem);line-height:1.05;letter-spacing:.03em;color:var(--laranja-claro);text-transform:uppercase}
+.capa-hero-texto .link-sutil{color:var(--laranja-claro);text-decoration-color:rgba(255,191,133,.5)}
 .foto{position:relative;border-radius:var(--raio-g);overflow:hidden;background:linear-gradient(160deg,#55613b 0%,#8a9a63 55%,#d4691f 130%);box-shadow:var(--sombra-g)}
 .foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
 .foto.r45{aspect-ratio:4/5}
@@ -278,8 +278,9 @@ body.trava{overflow:hidden}
   .nav.aberto{display:flex}
   .nav a{padding:14px 16px;font-size:1.05rem}
   .nav a.cta{margin:6px 0 0;text-align:center}
-  .capa-grade{grid-template-columns:1fr}
-  .capa-foto{order:-1;aspect-ratio:4/5}
+  .capa-hero{min-height:clamp(440px,92vw,600px)}
+  .capa-hero::after{background:linear-gradient(180deg,rgba(18,22,14,.05) 0%,rgba(18,22,14,.1) 38%,rgba(18,22,14,.8) 76%,rgba(18,22,14,.92) 100%)}
+  .capa-hero-texto{max-width:none;margin-left:0;justify-content:flex-end}
   .sobre-grade{grid-template-columns:1fr}
   .sobre-grade .foto{max-width:340px}
   .contato-grade{grid-template-columns:1fr}
@@ -293,23 +294,14 @@ body.trava{overflow:hidden}
   .cab{margin-bottom:16px}
   .cab p{font-size:.85rem;margin-top:8px}
   .capa{padding:12px 0 0}
-  .capa h1{font-size:clamp(2.1rem,10.5vw,2.8rem)}
+  .capa-hero-texto h1{font-size:clamp(2rem,9.5vw,2.6rem)}
+  .capa-hero-texto{padding:18px}
   .lead{font-size:.95rem}
   .acoes{gap:8px}
   .foto{border-radius:20px}
-  .capa-foto{border-radius:20px}
-  .capa-nome span{font-size:clamp(1.5rem,7vw,2.2rem)}
+  .capa-hero{border-radius:20px;min-height:clamp(420px,100vw,520px)}
   .selo{top:8px;right:8px;font-size:.6rem;padding:4px 9px}
-  .flutuante{max-width:150px}
-  .flut-in{gap:6px;padding:6px 10px 6px 6px;border-radius:14px;box-shadow:0 8px 20px rgba(20,32,28,.18)}
-  .flut-ico{width:20px;height:20px}
-  .flut-ico svg{width:12px;height:12px}
-  .flut-txt b{font-size:.62rem;line-height:1.2}
-  .flut-txt small{font-size:.54rem;margin-top:1px;line-height:1.2}
-  .f1{top:10%;left:3%}
-  .f2{bottom:8%;left:3%}
-  .dcp-anel{left:-14px;top:-14px;width:28px;height:28px}
-  .dcp-nucleo{left:-7px;top:-7px;width:14px;height:14px;border-width:2px}
+  .flutuante{display:none}
   .destaques-rapidos{gap:10px}
   .dr-card{padding:14px 16px}
   .resultados-grade{gap:20px}
@@ -348,20 +340,9 @@ body.trava{overflow:hidden}
 
 <!-- 1. CAPA -->
 <section class="capa" id="inicio" aria-label="Apresentação">
-  <div class="container capa-grade">
-    <div class="capa-texto">
-      <p class="etiqueta revelar">UGC · Creative Strategist · Performance Media</p>
-      <h1 class="revelar" style="--d:.05s">Seu conteúdo <span class="serif">vendendo mais!</span></h1>
-      <p class="lead revelar" style="--d:.1s">De hook a CTA, tudo pensado para converter.</p>
-      <div class="acoes revelar" style="--d:.15s">
-        <a class="btn btn-primario" href="#contato">Quero criar com a Luana</a>
-      </div>
-      <a class="link-sutil revelar" style="--d:.18s" href="#contato">Quero gerenciar minha campanha com a Luana →</a>
-    </div>
-
-    <div class="capa-foto revelar" style="--d:.1s">
-      <img src="foto-luana.jpg" alt="Luana Caper sorrindo, de gola alta verde-oliva" width="900" height="1125" fetchpriority="high">
-      <div class="capa-nome" aria-hidden="true"><span>Luana</span><span>Caper</span></div>
+  <div class="container">
+    <div class="capa-hero revelar">
+      <img class="capa-hero-img" src="foto-luana.jpg" alt="Luana Caper sorrindo, de gola alta verde-oliva" width="900" height="1125" fetchpriority="high">
       <span class="selo">Novo</span>
 
       <!-- FLUTUANTES: destaques de resultado deste portfólio. Pra trocar, edite o <b> e o <small>. -->
@@ -377,6 +358,16 @@ body.trava{overflow:hidden}
           <span class="flut-txt"><b>+50x mais alcance</b><small>Resultado orgânico pra Milkmoo</small></span>
         </span>
       </a>
+
+      <div class="capa-hero-texto">
+        <p class="etiqueta revelar">UGC · Creative Strategist · Performance Media</p>
+        <h1 class="revelar" style="--d:.05s">Seu conteúdo <span class="serif">vendendo mais!</span></h1>
+        <p class="lead revelar" style="--d:.1s">De hook a CTA, tudo pensado para converter.</p>
+        <div class="acoes revelar" style="--d:.15s">
+          <a class="btn btn-primario" href="#contato">Quero criar com a Luana</a>
+        </div>
+        <a class="link-sutil revelar" style="--d:.18s" href="#contato">Quero gerenciar minha campanha com a Luana →</a>
+      </div>
     </div>
   </div>
 
@@ -704,8 +695,8 @@ montarTicker("#trilhoMarcas", MARCAS);
    É só visual: não dispara o clique de verdade, então a página não sai do lugar. Some com movimento reduzido. */
 (function () {
   if (reduzido) return;
-  const palco = $(".capa-foto"), cards = [...document.querySelectorAll(".flutuante")];
-  if (!palco || cards.length < 2) return;
+  const palco = $(".capa-hero"), cards = [...document.querySelectorAll(".flutuante")];
+  if (!palco || cards.length < 2 || getComputedStyle(cards[0]).display === "none") return;
   const cursor = el("div", { class: "demo-cursor", "aria-hidden": "true" }, [el("span", { class: "dcp-anel" }), el("span", { class: "dcp-nucleo" })]);
   palco.append(cursor);
 
