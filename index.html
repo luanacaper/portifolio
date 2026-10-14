@@ -95,18 +95,13 @@ section{scroll-margin-top:92px}
 .escuro .cab p{color:rgba(255,255,255,.88)}
 
 /* Capa: a foto é o fundo inteiro, o texto fica por cima, do lado direito */
-.capa{padding:clamp(20px,4vw,40px) 0 0;background:linear-gradient(180deg,#fff 0%,var(--gelo) 100%)}
-.capa-hero{position:relative;border-radius:var(--raio-g);overflow:hidden;min-height:clamp(480px,76vh,740px);box-shadow:var(--sombra-g);background:var(--verde-esc)}
-.capa-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 55%}
-.capa-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(18,22,14,.05) 0%,rgba(18,22,14,.12) 34%,rgba(18,22,14,.74) 58%,rgba(18,22,14,.88) 100%)}
-.capa-hero-texto{position:relative;z-index:2;margin-left:auto;max-width:540px;min-height:inherit;display:flex;flex-direction:column;justify-content:center;padding:clamp(28px,6vw,72px);color:#fff}
-.capa-hero-texto .etiqueta{background:rgba(255,255,255,.16);color:#fff}
-.capa-hero-texto h1{color:#fff;font-size:clamp(2.4rem,4.6vw,3.6rem);line-height:1.02;letter-spacing:-.03em;font-weight:800;text-wrap:balance}
-.capa-hero-texto h1 .serif{color:var(--laranja-claro)}
-.lead{margin-top:20px;font-size:clamp(1.05rem,1.8vw,1.25rem);line-height:1.45;color:rgba(255,255,255,.88);max-width:42ch}
-.lead .serif{color:var(--laranja-claro);font-size:1.18em}
+.capa{background:linear-gradient(180deg,#fff 0%,var(--gelo) 100%)}
+.capa-hero{position:relative;overflow:hidden;min-height:clamp(480px,76vh,740px);background:var(--gelo)}
+.capa-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 78%}
+.capa-hero-texto{position:relative;z-index:2;margin-left:auto;max-width:480px;min-height:inherit;display:flex;flex-direction:column;justify-content:center;padding:clamp(28px,6vw,64px);background:var(--gelo);box-shadow:-40px 0 60px -20px rgba(20,32,28,.18)}
+.capa-hero-texto h1{font-size:clamp(2.2rem,4.2vw,3.2rem);line-height:1.04;letter-spacing:-.03em;font-weight:800;text-wrap:balance}
+.lead{margin-top:20px;font-size:clamp(1.05rem,1.8vw,1.25rem);line-height:1.45;color:var(--suave);max-width:42ch}
 .acoes{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:28px}
-.capa-hero-texto .link-sutil{color:var(--laranja-claro);text-decoration-color:rgba(255,191,133,.5)}
 .foto{position:relative;border-radius:var(--raio-g);overflow:hidden;background:linear-gradient(160deg,#55613b 0%,#8a9a63 55%,#d4691f 130%);box-shadow:var(--sombra-g)}
 .foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
 .foto.r45{aspect-ratio:4/5}
@@ -278,9 +273,9 @@ body.trava{overflow:hidden}
   .nav.aberto{display:flex}
   .nav a{padding:14px 16px;font-size:1.05rem}
   .nav a.cta{margin:6px 0 0;text-align:center}
-  .capa-hero{min-height:clamp(440px,92vw,600px)}
-  .capa-hero::after{background:linear-gradient(180deg,rgba(18,22,14,.05) 0%,rgba(18,22,14,.1) 38%,rgba(18,22,14,.8) 76%,rgba(18,22,14,.92) 100%)}
-  .capa-hero-texto{max-width:none;margin-left:0;justify-content:flex-end}
+  .capa-hero{min-height:clamp(560px,135vw,660px)}
+  .capa-hero-img{object-position:50% 50%;transform-origin:43% 58%;transform:scale(1.9) translateY(-18%)}
+  .capa-hero-texto{position:absolute;left:0;right:0;bottom:0;max-width:none;min-height:0;margin-left:0;justify-content:flex-start;box-shadow:0 -30px 50px -10px rgba(20,32,28,.14)}
   .sobre-grade{grid-template-columns:1fr}
   .sobre-grade .foto{max-width:340px}
   .contato-grade{grid-template-columns:1fr}
@@ -293,13 +288,12 @@ body.trava{overflow:hidden}
   .titulo{font-size:clamp(1.45rem,6.4vw,1.85rem)}
   .cab{margin-bottom:16px}
   .cab p{font-size:.85rem;margin-top:8px}
-  .capa{padding:12px 0 0}
   .capa-hero-texto h1{font-size:clamp(2rem,9.5vw,2.6rem)}
   .capa-hero-texto{padding:18px}
   .lead{font-size:.95rem}
   .acoes{gap:8px}
   .foto{border-radius:20px}
-  .capa-hero{border-radius:20px;min-height:clamp(420px,100vw,520px)}
+  .capa-hero{min-height:clamp(560px,150vw,640px)}
   .selo{top:8px;right:8px;font-size:.6rem;padding:4px 9px}
   .flutuante{display:none}
   .destaques-rapidos{gap:10px}
@@ -340,8 +334,7 @@ body.trava{overflow:hidden}
 
 <!-- 1. CAPA -->
 <section class="capa" id="inicio" aria-label="Apresentação">
-  <div class="container">
-    <div class="capa-hero revelar">
+  <div class="capa-hero revelar">
       <img class="capa-hero-img" src="foto-luana.jpg" alt="Luana Caper sorrindo, de gola alta verde-oliva" width="900" height="1125" fetchpriority="high">
       <span class="selo">Novo</span>
 
@@ -368,7 +361,6 @@ body.trava{overflow:hidden}
         </div>
         <a class="link-sutil revelar" style="--d:.18s" href="#contato">Quero gerenciar minha campanha com a Luana →</a>
       </div>
-    </div>
   </div>
 
   <div class="ticker" aria-label="O que eu entrego">
