@@ -94,17 +94,14 @@ section{scroll-margin-top:92px}
 .cab p{margin-top:14px;color:var(--suave);font-size:1.05rem}
 .escuro .cab p{color:rgba(255,255,255,.88)}
 
-/* Capa: fundo claro com textura, texto à esquerda, foto recortada (sem fundo) à direita */
+/* Capa: a foto estende por toda a capa; o texto fica na parte clara da própria foto, do lado direito */
 .capa{background:linear-gradient(180deg,#fff 0%,var(--gelo) 100%)}
-.capa-hero{position:relative;overflow:hidden;min-height:clamp(460px,64vh,640px);background:var(--gelo)}
-.capa-hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--linha) 1px,transparent 1px),linear-gradient(90deg,var(--linha) 1px,transparent 1px);background-size:42px 42px;opacity:.6}
-.capa-hero-grade{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;align-items:end;min-height:inherit}
-.capa-hero-texto{align-self:center;padding:clamp(28px,5vw,64px)}
+.capa-hero{position:relative;overflow:hidden;min-height:clamp(440px,66vh,640px);background:var(--gelo)}
+.capa-hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:28% 38%}
+.capa-hero-texto{position:relative;z-index:2;margin-left:auto;max-width:480px;min-height:inherit;display:flex;flex-direction:column;justify-content:center;padding:clamp(28px,6vw,64px)}
 .capa-hero-texto h1{font-size:clamp(2.2rem,4.2vw,3.4rem);line-height:1.04;letter-spacing:-.03em;font-weight:800;text-wrap:balance}
 .lead{margin-top:20px;font-size:clamp(1.05rem,1.8vw,1.25rem);line-height:1.45;color:var(--suave);max-width:42ch}
 .acoes{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:28px}
-.capa-hero-foto{position:relative;justify-self:end;width:min(92%,420px);margin-right:clamp(0px,3vw,24px)}
-.capa-hero-foto img{display:block;width:100%;height:auto}
 .foto{position:relative;border-radius:var(--raio-g);overflow:hidden;background:linear-gradient(160deg,#55613b 0%,#8a9a63 55%,#d4691f 130%);box-shadow:var(--sombra-g)}
 .foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
 .foto.r45{aspect-ratio:4/5}
@@ -116,8 +113,8 @@ section{scroll-margin-top:92px}
 .flut-ico{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--verde);color:#fff}
 .flut-txt b{display:block;font-size:.95rem;line-height:1.25}
 .flut-txt small{display:block;font-size:.85rem;line-height:1.3;color:var(--suave);margin-top:2px}
-.f1{top:4%;left:-18%}
-.f2{bottom:14%;left:-22%}
+.f1{top:12%;left:4%}
+.f2{bottom:14%;left:8%}
 .f2 .flut-in{animation-duration:7.5s;animation-delay:-2.5s}
 .flutuante:hover,.flutuante:focus-visible,.flutuante.clicando{scale:1.06}
 .flutuante:hover .flut-in,.flutuante:focus-visible .flut-in,.flutuante.clicando .flut-in{animation-play-state:paused;box-shadow:0 20px 44px rgba(20,32,28,.26)}
@@ -277,10 +274,12 @@ body.trava{overflow:hidden}
   .nav a{padding:14px 16px;font-size:1.05rem}
   .nav a.cta{margin:6px 0 0;text-align:center}
   .capa-hero{min-height:0}
-  .capa-hero-grade{grid-template-columns:1fr;text-align:center;padding-top:16px}
+  .capa-hero-img{position:static;display:block;width:100%;height:auto;aspect-ratio:16/11;object-position:32% 15%}
+  .selo{top:16px;right:16px}
+  .flutuante{display:none}
+  .capa-hero-texto{position:static;max-width:none;margin-left:0;min-height:0;padding:clamp(24px,5vw,40px) 24px;text-align:center}
   .lead{margin-left:auto;margin-right:auto}
   .acoes{justify-content:center}
-  .capa-hero-foto{justify-self:center;width:min(78%,320px);margin:12px 0 0}
   .sobre-grade{grid-template-columns:1fr}
   .sobre-grade .foto{max-width:340px}
   .contato-grade{grid-template-columns:1fr}
@@ -299,7 +298,6 @@ body.trava{overflow:hidden}
   .acoes{gap:8px}
   .foto{border-radius:20px}
   .selo{top:8px;right:8px;font-size:.6rem;padding:4px 9px}
-  .flutuante{display:none}
   .destaques-rapidos{gap:10px}
   .dr-card{padding:14px 16px}
   .resultados-grade{gap:20px}
@@ -339,35 +337,31 @@ body.trava{overflow:hidden}
 <!-- 1. CAPA -->
 <section class="capa" id="inicio" aria-label="Apresentação">
   <div class="capa-hero revelar">
-    <div class="capa-hero-grade">
-      <div class="capa-hero-texto">
-        <p class="etiqueta revelar">UGC · Creative Strategist · Performance Media</p>
-        <h1 class="revelar" style="--d:.05s">Seu conteúdo <span class="serif">vendendo mais!</span></h1>
-        <p class="lead revelar" style="--d:.1s">De hook a CTA, tudo pensado para converter.</p>
-        <div class="acoes revelar" style="--d:.15s">
-          <a class="btn btn-primario" href="#contato">Quero criar com a Luana</a>
-        </div>
-        <a class="link-sutil revelar" style="--d:.18s" href="#contato">Quero gerenciar minha campanha com a Luana →</a>
-      </div>
+    <img class="capa-hero-img" src="foto-capa.jpg" alt="Luana Caper sorrindo, de gola alta verde-oliva" width="1673" height="940" fetchpriority="high">
+    <span class="selo">Novo</span>
 
-      <div class="capa-hero-foto">
-        <img src="foto-luana-recorte.png" alt="Luana Caper sorrindo, de gola alta verde-oliva" width="900" height="670" fetchpriority="high">
-        <span class="selo">Novo</span>
+    <!-- FLUTUANTES: destaques de resultado deste portfólio. Pra trocar, edite o <b> e o <small>. -->
+    <a class="flutuante f1" href="#resultados">
+      <span class="flut-in">
+        <span class="flut-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+        <span class="flut-txt"><b>ROAS de 7,54</b><small>Em campanha de e-commerce por assinatura</small></span>
+      </span>
+    </a>
+    <a class="flutuante f2" href="#resultados">
+      <span class="flut-in">
+        <span class="flut-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+        <span class="flut-txt"><b>+50x mais alcance</b><small>Resultado orgânico pra Milkmoo</small></span>
+      </span>
+    </a>
 
-        <!-- FLUTUANTES: destaques de resultado deste portfólio. Pra trocar, edite o <b> e o <small>. -->
-        <a class="flutuante f1" href="#resultados">
-          <span class="flut-in">
-            <span class="flut-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-            <span class="flut-txt"><b>ROAS de 7,54</b><small>Em campanha de e-commerce por assinatura</small></span>
-          </span>
-        </a>
-        <a class="flutuante f2" href="#resultados">
-          <span class="flut-in">
-            <span class="flut-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
-            <span class="flut-txt"><b>+50x mais alcance</b><small>Resultado orgânico pra Milkmoo</small></span>
-          </span>
-        </a>
+    <div class="capa-hero-texto">
+      <p class="etiqueta revelar">UGC · Creative Strategist · Performance Media</p>
+      <h1 class="revelar" style="--d:.05s">Seu conteúdo <span class="serif">vendendo mais!</span></h1>
+      <p class="lead revelar" style="--d:.1s">De hook a CTA, tudo pensado para converter.</p>
+      <div class="acoes revelar" style="--d:.15s">
+        <a class="btn btn-primario" href="#contato">Quero criar com a Luana</a>
       </div>
+      <a class="link-sutil revelar" style="--d:.18s" href="#contato">Quero gerenciar minha campanha com a Luana →</a>
     </div>
   </div>
 
