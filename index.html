@@ -116,11 +116,11 @@ section{scroll-margin-top:92px}
 /* Cartões flutuantes com os destaques de resultado, sobre a foto da capa */
 .flutuante{position:absolute;z-index:3;display:block;max-width:250px;text-decoration:none;color:var(--tinta);transform:translate(var(--px,0px),var(--py,0px));transition:transform .3s ease-out,scale .25s ease}
 .flut-in{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.78);backdrop-filter:blur(12px) saturate(1.4);-webkit-backdrop-filter:blur(12px) saturate(1.4);border:1px solid rgba(255,255,255,.6);border-radius:20px;padding:13px 18px 13px 14px;box-shadow:0 14px 34px rgba(20,32,28,.24);animation:flutuar 6s ease-in-out infinite;transition:box-shadow .25s}
-.flut-ico{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--verde);color:#fff}
+.flut-ico{flex:none;display:grid;place-items:center;width:32px;height:34px}
 .flut-txt b{display:block;font-size:.95rem;line-height:1.25}
 .flut-txt small{display:block;font-size:.85rem;line-height:1.3;color:var(--suave);margin-top:2px}
-.f1{top:21%;left:1%}
-.f2{bottom:7%;left:20%}
+.f1{top:33%;left:0%}
+.f2{bottom:4%;left:24%}
 .f2 .flut-in{animation-duration:7.5s;animation-delay:-2.5s}
 .flutuante:hover,.flutuante:focus-visible,.flutuante.clicando{scale:1.06}
 .flutuante:hover .flut-in,.flutuante:focus-visible .flut-in,.flutuante.clicando .flut-in{animation-play-state:paused;box-shadow:0 20px 44px rgba(20,32,28,.26)}
@@ -363,13 +363,13 @@ body.trava{overflow:hidden}
     <!-- FLUTUANTES: destaques de resultado deste portfólio. Pra trocar, edite o <b> e o <small>. -->
     <a class="flutuante f1" href="#resultados">
       <span class="flut-in">
-        <span class="flut-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 8h11l1 12.5h-13z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></span>
+        <span class="flut-ico" aria-hidden="true"><svg viewBox="0 0 24 26" width="30" height="30"><path d="M9 9V7a3 3 0 0 1 6 0v2" fill="none" stroke="#3f4a2b" stroke-width="1.6" stroke-linecap="round"/><path d="M5 9h14l1 13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" fill="#55613b"/><path d="M8.3 15.2l2.7 2.7L16 12.3" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <span class="flut-txt"><b>ROAS de 7,54</b><small>Em campanha de e-commerce por assinatura</small></span>
       </span>
     </a>
     <a class="flutuante f2" href="#resultados">
       <span class="flut-in">
-        <span class="flut-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 8h11l1 12.5h-13z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg></span>
+        <span class="flut-ico" aria-hidden="true"><svg viewBox="0 0 24 26" width="30" height="30"><path d="M9 9V7a3 3 0 0 1 6 0v2" fill="none" stroke="#3f4a2b" stroke-width="1.6" stroke-linecap="round"/><path d="M5 9h14l1 13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" fill="#55613b"/><path d="M8.3 15.2l2.7 2.7L16 12.3" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <span class="flut-txt"><b>+50x mais alcance</b><small>Resultado orgânico pra Milkmoo</small></span>
       </span>
     </a>
