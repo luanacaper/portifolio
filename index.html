@@ -41,15 +41,20 @@ ul,ol{padding:0;list-style:none}
 .serif{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;letter-spacing:0}
 .container{width:100%;max-width:1160px;margin-inline:auto;padding-inline:var(--pad)}
 :focus-visible{outline:3px solid var(--tinta);outline-offset:3px;border-radius:8px}
-.escuro :focus-visible,footer :focus-visible,.faixa-topo :focus-visible{outline-color:var(--laranja-claro)}
+.escuro :focus-visible,footer :focus-visible{outline-color:var(--laranja-claro)}
+.faixa-topo :focus-visible{outline-color:#14130f}
 .pular{position:absolute;left:12px;top:-60px;background:var(--tinta);color:#fff;padding:10px 16px;border-radius:999px;z-index:200;text-decoration:none;font-weight:700}
 .pular:focus{top:12px}
 
-/* Faixa do topo: contagem regressiva pra Black Friday, rolando */
-.faixa-topo{background:var(--verde);color:#fff;overflow:hidden;padding:9px 0}
-.ft-trilho{display:flex;width:max-content;animation:rolar 26s linear infinite}
-.ft-trilho span{display:flex;align-items:center;white-space:nowrap;font-weight:700;font-size:.85rem;letter-spacing:.01em;padding:0 22px}
-.ft-trilho span::after{content:"◆";margin-left:22px;color:var(--laranja-claro);font-size:.6rem}
+/* Faixa do topo: contagem regressiva pra Black Friday (fixa, só a frase do meio alterna) */
+.faixa-topo{background:#f46417;padding:10px var(--pad)}
+.faixa-bf{max-width:1160px;margin-inline:auto;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px 12px}
+.bf-selo{flex:none;background:#14130f;color:#fff;font-weight:800;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;padding:6px 14px;border-radius:999px}
+.bf-txt,.bf-rotativo,.bf-cta{color:#14130f;font-weight:700;font-size:.88rem}
+.bf-rotativo{transition:opacity .35s ease}
+.bf-sep{color:#14130f;opacity:.55;font-weight:700}
+.bf-cta{text-decoration:none;white-space:nowrap}
+.bf-cta:hover{text-decoration:underline}
 @keyframes rolar{to{transform:translateX(-50%)}}
 
 /* Menu */
@@ -315,7 +320,14 @@ body.trava{overflow:hidden}
 <a class="pular" href="#sobre">Pular para o conteúdo</a>
 
 <div class="faixa-topo">
-  <div class="ft-trilho" id="ftTrilho"></div>
+  <div class="faixa-bf">
+    <span class="bf-selo">Black Friday</span>
+    <span class="bf-txt" id="bfTxt"></span>
+    <span class="bf-sep" aria-hidden="true">·</span>
+    <span class="bf-rotativo" id="bfRotativo"></span>
+    <span class="bf-sep" aria-hidden="true">·</span>
+    <a class="bf-cta" href="#contato">reservar agenda →</a>
+  </div>
 </div>
 
 <header class="topo">
@@ -648,15 +660,24 @@ menu.addEventListener("click", e => { if (e.target.closest("a")) menuAbrir(false
 document.addEventListener("keydown", e => { if (e.key === "Escape" && menu.classList.contains("aberto")) { menuAbrir(false); btnMenu.focus(); } });
 window.matchMedia("(min-width:981px)").addEventListener("change", e => { if (e.matches) menuAbrir(false); });
 
-/* Faixa do topo: contagem regressiva pra Black Friday */
+/* Faixa do topo: contagem regressiva pra Black Friday (fixa, só a frase do meio alterna) */
 (function () {
   const dias = Math.max(0, Math.ceil((new Date(CONFIG.blackFriday) - new Date()) / 86400000));
-  const texto = dias > 0
-    ? "Faltam " + dias + " dias para a Black Friday"
-    : "É Black Friday!";
-  const frases = [texto, "Reserve sua vaga com antecedência", "Poucas vagas para novembro", "Criativos com alta conversão", "Reservar agenda"];
-  const trilho = $("#ftTrilho");
-  for (let r = 0; r < 2; r++) frases.forEach(f => trilho.append(el("span", { text: f })));
+  $("#bfTxt").textContent = dias > 0 ? "Faltam " + dias + " dias pra Black Friday" : "É Black Friday!";
+
+  const FRASES_BF = ["vídeo de e-commerce que vende no dia", "reserve a sua agenda de novembro"];
+  const rot = $("#bfRotativo");
+  let i = 0;
+  rot.textContent = FRASES_BF[0];
+  if (reduzido) return;
+  setInterval(() => {
+    rot.style.opacity = "0";
+    setTimeout(() => {
+      i = (i + 1) % FRASES_BF.length;
+      rot.textContent = FRASES_BF[i];
+      rot.style.opacity = "1";
+    }, 350);
+  }, 3200);
 })();
 
 /* Tickers (entrega + marcas) */
