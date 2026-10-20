@@ -215,7 +215,7 @@ section{scroll-margin-top:92px}
 .mini:hover .play{transform:scale(1.1)}
 
 /* Fileiras de nicho: scroll horizontal, como a referência */
-.filtro-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:clamp(28px,4vw,44px)}
+.filtro-pills{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:clamp(28px,4vw,44px)}
 .filtro-pills a{text-decoration:none;font-weight:700;font-size:.88rem;color:var(--verde-esc);background:#fff;border:1.5px solid var(--linha);border-radius:999px;padding:8px 16px;transition:background .2s,border-color .2s}
 .filtro-pills a:hover{background:var(--gelo);border-color:var(--verde)}
 .nicho-linha{margin-bottom:clamp(32px,4vw,48px);scroll-margin-top:92px}
@@ -635,20 +635,21 @@ const VIDEOS_VIAGEM = [
 /* Vídeos novos (ainda sem link — ficam "em breve" até a Luana mandar o link de cada um) */
 const VIDEOS_NOVOS = [
   { titulo: "Tekoá 01 – Anúncio", nota: "versão crua disponível", nicho: "gastronomia-assinaturas", id: null },
-  { titulo: "Tekoá 02 – Anúncio", nota: "ROAS 6,90", nicho: "gastronomia-assinaturas", id: null },
-  { titulo: "Tekoá 03 – Orgânico", nota: "", nicho: "gastronomia-assinaturas", id: null },
-  { titulo: "Tekoá 03 – Anúncio", nota: "ROAS 7,54", nicho: "gastronomia-assinaturas", id: null },
+  { titulo: "Tekoá 02 – Anúncio", nota: "ROAS 6,90", nicho: "gastronomia-assinaturas", prov: "yt", id: "-MRT1kAlS00" },
+  { titulo: "Tekoá 03 – Orgânico", nota: "", nicho: "gastronomia-assinaturas", prov: "yt", id: "H73cFN3u548" },
+  { titulo: "Tekoá 03 – Anúncio", nota: "ROAS 7,54", nicho: "gastronomia-assinaturas", prov: "yt", id: "DK6EsJaCXWo" },
   { titulo: "Tekoá 03 – Anúncio", nota: "ROAS 7,20", nicho: "gastronomia-assinaturas", id: null },
+  { titulo: "Tekoá 05 – Anúncio", nota: "", nicho: "gastronomia-assinaturas", prov: "yt", id: "_p9r453wBb4" },
   { titulo: "App Place (versão original)", nota: "R$27.383 orgânico + R$6.082, ROAS 5,6", nicho: "tech-infoprodutos", id: null },
-  { titulo: "Cinta Press Fitness", nota: "", nicho: "beleza-saude", id: null },
+  { titulo: "Cinta Press Fitness", nota: "", nicho: "beleza-saude", prov: "yt", id: "5oyfMuKEP-A" },
   { titulo: "Unboxing Ambro", nota: "", nicho: "beleza-saude", id: null },
-  { titulo: "Casa da Gê – Orgânico", nota: "", nicho: "casa-decoracao", id: null },
-  { titulo: "Achadinho da Shopee", nota: "", nicho: "casa-decoracao", id: null },
+  { titulo: "Casa da Gê – Orgânico", nota: "", nicho: "casa-decoracao", prov: "yt", id: "Zimf7dAbZcw" },
+  { titulo: "Achadinho da Shopee", nota: "", nicho: "casa-decoracao", prov: "yt", id: "75YRk5h9hQY" },
   { titulo: "Magalu 01", nota: "", nicho: "casa-decoracao", id: null },
   { titulo: "Magalu 02", nota: "", nicho: "casa-decoracao", id: null },
-  { titulo: "Bendita Ghee Lola", nota: "", nicho: "beleza-saude", id: null },
-  { titulo: "Forever Liss", nota: "", nicho: "beleza-saude", id: null },
-  { titulo: "Infoproduto Ana Neves", nota: "", nicho: "tech-infoprodutos", id: null },
+  { titulo: "Bendita Ghee Lola", nota: "", nicho: "beleza-saude", prov: "yt", id: "XSHE4IoIWj4" },
+  { titulo: "Forever Liss", nota: "", nicho: "beleza-saude", prov: "yt", id: "S1Z4bVlxLhE" },
+  { titulo: "Infoproduto Ana Neves", nota: "", nicho: "tech-infoprodutos", prov: "yt", id: "VLDEq3BO1lg" },
   { titulo: "MilkMoo – Orgânico", nota: "até 50x mais alcance", nicho: "gastronomia-assinaturas", id: null },
   { titulo: "MilkMoo – Anúncio", nota: "", nicho: "gastronomia-assinaturas", id: null },
   { titulo: "Café", nota: "", nicho: "gastronomia-assinaturas", id: null },
