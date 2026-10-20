@@ -188,6 +188,10 @@ section{scroll-margin-top:92px}
 .resultados-grade2>*{min-width:0}
 .resultados-info p{margin-top:16px;color:var(--suave);font-size:1.05rem;line-height:1.6}
 .resultados-info strong{color:var(--tinta)}
+.escuro .resultados-info p{color:rgba(255,255,255,.88)}
+.escuro .resultados-info strong{color:#fff}
+.escuro .rc-seta{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.3);color:#fff}
+.escuro .rc-seta:hover{background:rgba(255,255,255,.22)}
 .resultados-carrossel{position:relative}
 .rc-trilho{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 4px 10px;scrollbar-width:none;-ms-overflow-style:none}
 .rc-trilho::-webkit-scrollbar{display:none}
@@ -450,7 +454,7 @@ body.trava{overflow:hidden}
 </section>
 
 <!-- 3. OS MELHORES RESULTADOS -->
-<section class="secao" id="resultados" aria-labelledby="t-result">
+<section class="secao escuro" id="resultados" aria-labelledby="t-result">
   <div class="container">
     <div class="resultados-grade2">
       <div class="resultados-info">
@@ -772,15 +776,17 @@ function bolhaMarca(m) {
   }
   return el("span", { class: "marca-bolha" }, [img]);
 }
-(function () {
+function montarMarcas(lista) {
   const trilho = $("#trilhoMarcas");
-  const lista = ocultar => {
-    const ul = el("ul", ocultar ? { "aria-hidden": "true" } : {});
-    for (let r = 0; r < 2; r++) MARCAS_LOGOS.forEach(m => ul.append(el("li", {}, [bolhaMarca(m)])));
-    return ul;
+  trilho.replaceChildren();
+  const ul = ocultar => {
+    const u = el("ul", ocultar ? { "aria-hidden": "true" } : {});
+    for (let r = 0; r < 2; r++) lista.forEach(m => u.append(el("li", {}, [bolhaMarca(m)])));
+    return u;
   };
-  trilho.append(lista(false), lista(true));
-})();
+  trilho.append(ul(false), ul(true));
+}
+montarMarcas(MARCAS_LOGOS);
 
 /* Cartões flutuantes da capa: acompanham o mouse de leve (só em telas com mouse) */
 (function () {
@@ -895,8 +901,6 @@ function cartaoVideo(v, i) {
 }
 
 /* Catálogo por nicho */
-const TODOS_VIDEOS = VIDEOS_VIAGEM.concat(VIDEOS_NOVOS);
-const grades = $("#nichosGrades");
 function moverTrilho(trilho, dir) {
   const max = trilho.scrollWidth - trilho.clientWidth;
   let alvo;
@@ -905,26 +909,32 @@ function moverTrilho(trilho, dir) {
   else alvo = Math.max(0, Math.min(max, trilho.scrollLeft + dir * trilho.clientWidth));
   trilho.scrollTo({ left: alvo, behavior: "smooth" });
 }
-NICHOS.forEach(n => {
-  const itens = TODOS_VIDEOS.filter(v => v.nicho === n.slug);
-  if (!itens.length) return;
-  $("#filtroPills").append(el("a", { href: "#nicho-" + n.slug, text: n.nome }));
-  const trilho = el("div", { class: "nicho-trilho" });
-  itens.forEach((v, i) => trilho.append(cartaoVideo(v, i)));
-  const cab = el("div", { class: "nicho-cab" }, [el("h3", { text: n.nome }), el("span", { text: String(itens.length).padStart(2, "0") })]);
-  if (itens.length > 5) {
-    const btnAnt = el("button", { class: "nicho-seta", type: "button", "aria-label": "Vídeos anteriores de " + n.nome, text: "‹" });
-    const btnProx = el("button", { class: "nicho-seta", type: "button", "aria-label": "Mais vídeos de " + n.nome, text: "›" });
-    btnAnt.addEventListener("click", () => moverTrilho(trilho, -1));
-    btnProx.addEventListener("click", () => moverTrilho(trilho, 1));
-    cab.append(el("div", { class: "nicho-nav" }, [btnAnt, btnProx]));
-  }
-  grades.append(el("div", { class: "nicho-linha", id: "nicho-" + n.slug }, [
-    cab,
-    el("p", { class: "nicho-desc", text: n.desc }),
-    trilho
-  ]));
-});
+function montarNichos(todosVideos) {
+  const grades = $("#nichosGrades");
+  $("#filtroPills").replaceChildren();
+  grades.replaceChildren();
+  NICHOS.forEach(n => {
+    const itens = todosVideos.filter(v => v.nicho === n.slug);
+    if (!itens.length) return;
+    $("#filtroPills").append(el("a", { href: "#nicho-" + n.slug, text: n.nome }));
+    const trilho = el("div", { class: "nicho-trilho" });
+    itens.forEach((v, i) => trilho.append(cartaoVideo(v, i)));
+    const cab = el("div", { class: "nicho-cab" }, [el("h3", { text: n.nome }), el("span", { text: String(itens.length).padStart(2, "0") })]);
+    if (itens.length > 5) {
+      const btnAnt = el("button", { class: "nicho-seta", type: "button", "aria-label": "Vídeos anteriores de " + n.nome, text: "‹" });
+      const btnProx = el("button", { class: "nicho-seta", type: "button", "aria-label": "Mais vídeos de " + n.nome, text: "›" });
+      btnAnt.addEventListener("click", () => moverTrilho(trilho, -1));
+      btnProx.addEventListener("click", () => moverTrilho(trilho, 1));
+      cab.append(el("div", { class: "nicho-nav" }, [btnAnt, btnProx]));
+    }
+    grades.append(el("div", { class: "nicho-linha", id: "nicho-" + n.slug }, [
+      cab,
+      el("p", { class: "nicho-desc", text: n.desc }),
+      trilho
+    ]));
+  });
+}
+montarNichos(VIDEOS_VIAGEM.concat(VIDEOS_NOVOS));
 
 /* Os melhores resultados */
 /* Carrossel "Os melhores resultados": cartões com fundo colorido (sem foto real ainda) que avançam sozinhos */
