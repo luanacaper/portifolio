@@ -158,6 +158,7 @@ section{scroll-margin-top:92px}
 .marca-fundo{display:grid;place-items:center;width:76px;height:76px;border-radius:50%;padding:13px}
 .marca-fundo img{width:100%;height:100%;object-fit:contain}
 .marca-fundo.pequeno{width:62px;height:62px;padding:12px}
+.marca-fundo.grande{width:94px;height:94px;padding:5px}
 @keyframes rolar2{to{transform:translateX(-50%)}}
 
 /* Faixa de destaques (3 cards curtos logo após as marcas) */
@@ -584,7 +585,7 @@ const MARCAS_LOGOS = [
   { nome: "Lola Cosmetics", arq: "img/marcas/lola-cosmetics.png" },
   { nome: "Forever Liss", arq: "img/marcas/forever-liss.png" },
   { nome: "Milky Moo", arq: "img/marcas/milky-moo.png" },
-  { nome: "Stabile & Pessoa Advogados", arq: "img/marcas/stabile-pessoa.png", fundo: "#14130f", pequeno: true },
+  { nome: "Stabile & Pessoa Advogados", arq: "img/marcas/stabile-pessoa.png", fundo: "#14130f", grande: true },
   { nome: "HF Consultoria", arq: "img/marcas/hf-consultoria.png" },
   { nome: "Facilita", arq: "img/marcas/facilita.png" },
   { nome: "Ouze Loja", arq: "img/marcas/ouze-loja.png", fundo: "#14130f" },
@@ -748,7 +749,7 @@ function bolhaMarca(m) {
   const img = el("img", { src: m.arq, alt: m.nome, loading: "lazy", width: 96, height: 96 });
   if (m.fundo) {
     return el("span", { class: "marca-bolha tem-fundo" }, [
-      el("span", { class: "marca-fundo" + (m.pequeno ? " pequeno" : ""), style: "background:" + m.fundo }, [img])
+      el("span", { class: "marca-fundo" + (m.pequeno ? " pequeno" : "") + (m.grande ? " grande" : ""), style: "background:" + m.fundo }, [img])
     ]);
   }
   return el("span", { class: "marca-bolha" }, [img]);
