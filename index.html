@@ -295,18 +295,18 @@ section{scroll-margin-top:92px}
 .vm .btn{min-height:44px;padding:10px 20px;font-size:.95rem}
 .vm :focus-visible{outline-color:#fff}
 
-/* "O que podemos criar juntos": foto + serviços lado a lado */
-.criar-grade{display:grid;grid-template-columns:.78fr 1.22fr;gap:clamp(24px,4vw,48px);align-items:start}
-.criar-foto{display:flex;max-width:270px;margin:0 auto;border-radius:var(--raio-g);overflow:hidden}
+/* "O que podemos criar juntos": serviços em faixa + foto à direita */
+.criar-grade{display:flex;align-items:center;gap:clamp(20px,3vw,36px);flex-wrap:wrap}
+.criar-foto{display:flex;flex:none;width:200px;border-radius:var(--raio-g);overflow:hidden}
 .criar-foto img{width:100%;height:auto;display:block}
 
 /* Serviços */
-.serv-grade{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-.serv{background:var(--gelo);border:1px solid var(--linha);border-radius:var(--raio);padding:28px 24px;transition:transform .25s,box-shadow .25s,background .25s;min-width:0}
+.serv-grade{display:flex;flex:1 1 560px;gap:16px;flex-wrap:wrap}
+.serv{flex:1 1 130px;min-width:130px;background:var(--gelo);border:1px solid var(--linha);border-radius:var(--raio);padding:20px 18px;transition:transform .25s,box-shadow .25s,background .25s}
 .serv:hover{transform:translateY(-4px);box-shadow:var(--sombra);background:#fff}
-.serv-n{display:inline-grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--laranja-claro);font-weight:800;font-size:1rem}
-.serv h3{margin-top:18px;font-size:1.2rem;letter-spacing:-.01em}
-.serv p{margin-top:8px;color:var(--suave);font-size:.98rem}
+.serv-n{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--laranja-claro);font-weight:800;font-size:.76rem}
+.serv h3{margin-top:14px;font-size:1.05rem;letter-spacing:-.01em}
+.serv p{margin-top:6px;color:var(--suave);font-size:.88rem;line-height:1.5}
 
 /* Depoimentos: carrossel de 1 faixa só, sempre com 1 depoimento em foco (igual ao de resultados) */
 .dep-carrossel{position:relative}
@@ -378,8 +378,8 @@ body.trava{overflow:hidden}
   .sobre-grade{grid-template-columns:1fr}
   .sobre-grade .foto{max-width:340px}
   .contato-grade{grid-template-columns:1fr}
-  .criar-grade{grid-template-columns:1fr}
-  .serv-grade{grid-template-columns:1fr}
+  .criar-grade{flex-direction:column}
+  .serv-grade{flex-direction:column}
 }
 @media (max-width:700px){
   html{font-size:15px}
@@ -549,10 +549,10 @@ body.trava{overflow:hidden}
       <p class="revelar" style="--d:.1s" data-i18n="criar.p">Cada formato tem um objetivo: vender, escalar ou construir marca. Me conta o seu que a gente monta o combo perfeito pra sua marca.</p>
     </div>
     <div class="criar-grade">
+      <div class="serv-grade" id="servGrade"></div>
       <div class="criar-foto">
         <img src="img/bora-criar.png" alt="Luana Caper segurando o celular e apontando pra tela, que mostra &quot;Vamos criar?&quot;" loading="lazy" width="985" height="1110">
       </div>
-      <div class="serv-grade" id="servGrade"></div>
     </div>
   </div>
 </section>
