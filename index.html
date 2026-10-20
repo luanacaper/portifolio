@@ -173,18 +173,22 @@ section{scroll-margin-top:92px}
 .vp-play::before{content:"";margin-left:5px;border-style:solid;border-width:11px 0 11px 18px;border-color:transparent transparent transparent #fff}
 .vp-selo b{font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 
-/* Melhores resultados */
-.resultados-grade{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(28px,5vw,56px);align-items:start}
-.stats-coluna{display:grid;gap:14px}
-.stat-chip{background:var(--verde-esc);color:#fff;border-radius:var(--raio);padding:22px 24px}
-.stat-chip strong{display:block;font-size:clamp(2rem,4vw,2.6rem);font-weight:800;letter-spacing:-.03em;color:var(--laranja-claro);line-height:1}
-.stat-chip span{display:block;margin-top:6px;font-size:.92rem;color:rgba(255,255,255,.88)}
-.ranking{display:grid;gap:10px;counter-reset:rk}
-.rk-item{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--linha);border-radius:18px;padding:16px 18px;box-shadow:var(--sombra)}
-.rk-num{flex:none;counter-increment:rk;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--gelo);color:var(--verde-esc);font-weight:800;font-size:.95rem}
-.rk-num::before{content:counter(rk)}
-.rk-txt b{display:block;font-size:1rem;line-height:1.3}
-.rk-txt span{display:block;margin-top:4px;color:var(--verde-esc);font-weight:700;font-size:.9rem}
+/* Melhores resultados: painel de texto + carrossel automático */
+.resultados-grade2{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(28px,5vw,56px);align-items:center}
+.resultados-info p{margin-top:16px;color:var(--suave);font-size:1.05rem;line-height:1.6}
+.resultados-info strong{color:var(--tinta)}
+.resultados-carrossel{position:relative}
+.rc-trilho{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 4px 10px;scrollbar-width:none;-ms-overflow-style:none}
+.rc-trilho::-webkit-scrollbar{display:none}
+.rc-card{flex:none;width:clamp(150px,19vw,200px);scroll-snap-align:start}
+.rc-marca{display:block;text-align:center;font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--suave);margin-bottom:10px}
+.rc-foto{position:relative;aspect-ratio:3/4;border-radius:var(--raio-g);overflow:hidden;box-shadow:var(--sombra);display:grid;place-items:center;padding:14px;text-align:center}
+.rc-foto b{color:#fff;font-size:clamp(1.3rem,2.4vw,1.6rem);font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.rc-ctx{display:block;margin-top:10px;text-align:center;color:var(--suave);font-size:.84rem;line-height:1.4}
+.rc-seta{position:absolute;top:42%;width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid var(--linha);box-shadow:var(--sombra);display:grid;place-items:center;font-size:1.3rem;cursor:pointer;z-index:2;color:var(--tinta);padding:0;line-height:1}
+.rc-seta:hover{background:var(--gelo)}
+.rc-ant{left:-10px}
+.rc-prox{right:-10px}
 
 /* Miniaturas de vídeo (nichos) */
 .mini{position:relative;display:block;width:100%;aspect-ratio:9/16;padding:0;border:0;border-radius:18px;overflow:hidden;cursor:pointer;background:#000;flex:none}
@@ -276,7 +280,7 @@ section{scroll-margin-top:92px}
 body.trava{overflow:hidden}
 
 @media (max-width:1020px){
-  .resultados-grade{grid-template-columns:1fr}
+  .resultados-grade2{grid-template-columns:1fr}
   .destaques-rapidos{grid-template-columns:1fr;gap:16px}
   .dr-card{border-right:0;border-bottom:1px solid var(--linha);padding:0 0 16px}
   .dr-card:last-child{border-bottom:0;padding-bottom:0}
@@ -315,9 +319,10 @@ body.trava{overflow:hidden}
   .destaques-rapidos{gap:12px}
   .dr-card{padding:0 0 12px}
   .dr-card:last-child{padding-bottom:0}
-  .resultados-grade{gap:20px}
-  .stat-chip{padding:16px 18px}
-  .rk-item{padding:12px 14px;gap:10px}
+  .resultados-grade2{gap:24px}
+  .rc-ant{left:-4px}
+  .rc-prox{right:-4px}
+  .rc-card{width:clamp(130px,42vw,170px)}
   .nc{width:122px}
   .filtro-pills a{font-size:.78rem;padding:6px 12px}
   .serv-grade{gap:8px}
@@ -427,13 +432,17 @@ body.trava{overflow:hidden}
 <!-- 3. OS MELHORES RESULTADOS -->
 <section class="secao" id="resultados" aria-labelledby="t-result">
   <div class="container">
-    <div class="cab">
-      <p class="etiqueta revelar">Prova social</p>
-      <h2 class="titulo revelar" id="t-result" style="--d:.05s">Os melhores <span class="serif">resultados</span></h2>
-    </div>
-    <div class="resultados-grade">
-      <div class="stats-coluna" id="statsResultados"></div>
-      <ol class="ranking" id="rankingResultados"></ol>
+    <div class="resultados-grade2">
+      <div class="resultados-info">
+        <p class="etiqueta revelar">Prova social</p>
+        <h2 class="titulo revelar" id="t-result" style="--d:.05s">Os melhores <span class="serif">resultados</span></h2>
+        <p class="revelar" style="--d:.1s">Mais de <strong>10 anos</strong> criando conteúdo que performa, com <strong>ROAS de até 7,54</strong> e resultados reais pra mais de <strong>280 marcas</strong>. Da Tekoá ao App Place, cada vídeo nasce pensado pra vender.</p>
+      </div>
+      <div class="resultados-carrossel">
+        <button class="rc-seta rc-ant" id="rcAnt" type="button" aria-label="Resultado anterior">‹</button>
+        <div class="rc-trilho" id="rcTrilho"></div>
+        <button class="rc-seta rc-prox" id="rcProx" type="button" aria-label="Próximo resultado">›</button>
+      </div>
     </div>
   </div>
 </section>
@@ -577,47 +586,43 @@ const VIDEOS_VIAGEM = [
 
 /* Vídeos novos (ainda sem link — ficam "em breve" até a Luana mandar o link de cada um) */
 const VIDEOS_NOVOS = [
-  { titulo: "Tekoá 01 – Anúncio", nota: "versão crua disponível", nicho: "ecommerce-assinatura", id: null },
-  { titulo: "Tekoá 02 – Anúncio", nota: "ROAS 6,90", nicho: "ecommerce-assinatura", id: null },
-  { titulo: "Tekoá 03 – Orgânico", nota: "", nicho: "ecommerce-assinatura", id: null },
-  { titulo: "Tekoá 03 – Anúncio", nota: "ROAS 7,54", nicho: "ecommerce-assinatura", id: null },
-  { titulo: "Tekoá 03 – Anúncio", nota: "ROAS 7,20", nicho: "ecommerce-assinatura", id: null },
-  { titulo: "App Place (versão original)", nota: "R$27.383 orgânico + R$6.082, ROAS 5,6", nicho: "tech", id: null },
-  { titulo: "Cinta Press Fitness", nota: "", nicho: "ecommerce", id: null },
-  { titulo: "Unboxing Ambro", nota: "", nicho: "ecommerce", id: null },
+  { titulo: "Tekoá 01 – Anúncio", nota: "versão crua disponível", nicho: "gastronomia-assinaturas", id: null },
+  { titulo: "Tekoá 02 – Anúncio", nota: "ROAS 6,90", nicho: "gastronomia-assinaturas", id: null },
+  { titulo: "Tekoá 03 – Orgânico", nota: "", nicho: "gastronomia-assinaturas", id: null },
+  { titulo: "Tekoá 03 – Anúncio", nota: "ROAS 7,54", nicho: "gastronomia-assinaturas", id: null },
+  { titulo: "Tekoá 03 – Anúncio", nota: "ROAS 7,20", nicho: "gastronomia-assinaturas", id: null },
+  { titulo: "App Place (versão original)", nota: "R$27.383 orgânico + R$6.082, ROAS 5,6", nicho: "tech-infoprodutos", id: null },
+  { titulo: "Cinta Press Fitness", nota: "", nicho: "beleza-saude", id: null },
+  { titulo: "Unboxing Ambro", nota: "", nicho: "beleza-saude", id: null },
   { titulo: "Casa da Gê – Orgânico", nota: "", nicho: "casa-decoracao", id: null },
   { titulo: "Achadinho da Shopee", nota: "", nicho: "casa-decoracao", id: null },
   { titulo: "Magalu 01", nota: "", nicho: "casa-decoracao", id: null },
   { titulo: "Magalu 02", nota: "", nicho: "casa-decoracao", id: null },
-  { titulo: "Bendita Ghee Lola", nota: "", nicho: "beleza", id: null },
-  { titulo: "Forever Liss", nota: "", nicho: "beleza", id: null },
-  { titulo: "Infoproduto Ana Neves", nota: "", nicho: "infoproduto", id: null },
-  { titulo: "MilkMoo – Orgânico", nota: "até 50x mais alcance", nicho: "gastronomia", id: null },
-  { titulo: "MilkMoo – Anúncio", nota: "", nicho: "gastronomia", id: null },
-  { titulo: "Café", nota: "", nicho: "gastronomia", id: null },
-  { titulo: "Block Carbo", nota: "bem-estar e saúde", nicho: "saude-fitness", id: null },
+  { titulo: "Bendita Ghee Lola", nota: "", nicho: "beleza-saude", id: null },
+  { titulo: "Forever Liss", nota: "", nicho: "beleza-saude", id: null },
+  { titulo: "Infoproduto Ana Neves", nota: "", nicho: "tech-infoprodutos", id: null },
+  { titulo: "MilkMoo – Orgânico", nota: "até 50x mais alcance", nicho: "gastronomia-assinaturas", id: null },
+  { titulo: "MilkMoo – Anúncio", nota: "", nicho: "gastronomia-assinaturas", id: null },
+  { titulo: "Café", nota: "", nicho: "gastronomia-assinaturas", id: null },
+  { titulo: "Block Carbo", nota: "bem-estar e saúde", nicho: "beleza-saude", id: null },
   { titulo: "Viagem: aniversário do meu pai", nota: "", nicho: "viagem", id: null }
 ];
 
 const NICHOS = [
-  { slug: "ecommerce-assinatura", nome: "E-commerce por Assinatura", desc: "Conteúdo recorrente pra quem vende por assinatura" },
-  { slug: "tech", nome: "Tech & Apps", desc: "Apps e produtos tech em linguagem humana" },
-  { slug: "ecommerce", nome: "E-commerce", desc: "Produto em uso, do jeito que converte" },
-  { slug: "casa-decoracao", nome: "Casa & Decoração", desc: "Ambientes que inspiram quem assiste" },
-  { slug: "beleza", nome: "Beleza & Cosméticos", desc: "Produtos que viram ritual" },
-  { slug: "infoproduto", nome: "Infoproduto", desc: "Conteúdo que vende curso e mentoria" },
-  { slug: "gastronomia", nome: "Gastronomia", desc: "Comida que dá água na boca" },
-  { slug: "saude-fitness", nome: "Bem-estar & Saúde", desc: "Suplementos e rotina saudável" },
+  { slug: "gastronomia-assinaturas", nome: "Alimentação & Lifestyle Saudável", desc: "Gastronomia e e-commerce por assinatura" },
+  { slug: "casa-decoracao", nome: "Casa, Decoração & Achadinhos", desc: "Ambientes e achadinhos que inspiram quem assiste" },
+  { slug: "beleza-saude", nome: "Beleza, Saúde & Bem-Estar", desc: "Cosméticos, suplementos e fitness" },
+  { slug: "tech-infoprodutos", nome: "Tech, Apps & Infoprodutos", desc: "Apps, telas e conteúdo digital em linguagem humana" },
   { slug: "viagem", nome: "Viagem", desc: "Experiências e destinos narrados" }
 ];
 
-const RANKING_RESULTADOS = [
-  { titulo: "Viagem: aniversário do meu pai", nota: "Um dos conteúdos mais queridos do portfólio" },
-  { titulo: "Tekoá 03 – Anúncio – E-commerce por assinatura", nota: "ROAS 7,54" },
-  { titulo: "App Place – Tech", nota: "R$27.383 vendidos organicamente + R$6.082 e ROAS de 5,6 em 5 dias" },
-  { titulo: "Tekoá 02 – Anúncio – E-commerce por assinatura", nota: "ROAS 6,90" },
-  { titulo: "Tekoá 03 – Anúncio – E-commerce por assinatura", nota: "ROAS 7,20" },
-  { titulo: "Milkmoo – Orgânico", nota: "Até 50x mais alcance nos vídeos UGC, só no orgânico" }
+const RESULTADOS_CARROSSEL = [
+  { marca: "Viagem", stat: "♥ Favorito", ctx: "Aniversário do meu pai — um dos mais queridos do portfólio" },
+  { marca: "Tekoá", stat: "ROAS 7,54", ctx: "E-commerce por assinatura · anúncio" },
+  { marca: "App Place", stat: "R$33,4 mil", ctx: "Vendas em 5 dias · orgânico + ROAS 5,6" },
+  { marca: "Tekoá", stat: "ROAS 6,90", ctx: "E-commerce por assinatura · anúncio" },
+  { marca: "Tekoá", stat: "ROAS 7,20", ctx: "E-commerce por assinatura · anúncio" },
+  { marca: "Milkmoo", stat: "+50x", ctx: "Alcance a mais só no orgânico" }
 ];
 
 const SERVICOS = [
@@ -831,18 +836,40 @@ NICHOS.forEach(n => {
 });
 
 /* Os melhores resultados */
-const STATS = [
-  { valor: "ROAS 7,54", texto: "Tekoá · e-commerce por assinatura, melhor campanha" },
-  { valor: "R$33,4 mil", texto: "App Place · vendas em 5 dias (orgânico + ROAS 5,6)" },
-  { valor: "+50x", texto: "Milkmoo · alcance a mais só no orgânico" }
-];
-STATS.forEach(s => $("#statsResultados").append(el("div", { class: "stat-chip revelar" }, [el("strong", { text: s.valor }), el("span", { text: s.texto })])));
-RANKING_RESULTADOS.forEach((r, i) => {
-  $("#rankingResultados").append(el("li", { class: "rk-item revelar", style: atraso(i) }, [
-    el("span", { class: "rk-num", "aria-hidden": "true" }),
-    el("div", { class: "rk-txt" }, [el("b", { text: r.titulo }), r.nota ? el("span", { text: r.nota }) : null])
-  ]));
-});
+/* Carrossel "Os melhores resultados": cartões com fundo colorido (sem foto real ainda) que avançam sozinhos */
+(function () {
+  const trilho = $("#rcTrilho");
+  RESULTADOS_CARROSSEL.forEach((r, i) => {
+    trilho.append(el("div", { class: "rc-card revelar", style: atraso(i % 4) }, [
+      el("span", { class: "rc-marca", text: r.marca }),
+      el("div", { class: "rc-foto", style: "background:" + TONS[i % TONS.length] }, [el("b", { text: r.stat })]),
+      el("span", { class: "rc-ctx", text: r.ctx })
+    ]));
+  });
+
+  function passo() {
+    const card = trilho.querySelector(".rc-card");
+    return card ? card.getBoundingClientRect().width + 16 : 200;
+  }
+  function mover(dir) {
+    const max = trilho.scrollWidth - trilho.clientWidth;
+    let alvo = trilho.scrollLeft + dir * passo();
+    if (alvo < 2) alvo = max;
+    else if (alvo > max - 2) alvo = 0;
+    trilho.scrollTo({ left: alvo, behavior: "smooth" });
+  }
+  $("#rcAnt").addEventListener("click", () => mover(-1));
+  $("#rcProx").addEventListener("click", () => mover(1));
+
+  if (!reduzido) {
+    let auto = setInterval(() => mover(1), 3800);
+    const pausar = () => clearInterval(auto);
+    const retomar = () => { clearInterval(auto); auto = setInterval(() => mover(1), 3800); };
+    trilho.addEventListener("pointerenter", pausar);
+    trilho.addEventListener("pointerleave", retomar);
+    trilho.addEventListener("touchstart", pausar, { passive: true });
+  }
+})();
 
 /* Vídeo "Sobre mim" (ainda sem link — avisa que está em breve, sem travar a página) */
 $("#btnVideoSobre").addEventListener("click", () => {
