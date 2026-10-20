@@ -149,10 +149,15 @@ section{scroll-margin-top:92px}
 .trilho ul{display:flex;align-items:center;flex-shrink:0}
 .trilho li{display:flex;align-items:center;white-space:nowrap;font-weight:700;color:var(--tinta);font-size:1rem}
 .trilho li::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--laranja);margin:0 28px;box-shadow:0 0 0 2px #fff,0 0 0 3px var(--laranja)}
+.ticker-marcas .trilho{animation-duration:72s}
 .ticker-marcas .trilho li{margin-right:18px}
 .ticker-marcas .trilho li::after{content:none}
-.marca-bolha{display:grid;place-items:center;width:84px;height:84px;border-radius:50%;background:var(--gelo);border:1px solid var(--linha);overflow:hidden;padding:14px}
+.marca-bolha{display:grid;place-items:center;width:100px;height:100px;border-radius:50%;background:var(--gelo);border:1px solid var(--linha);overflow:hidden;padding:11px}
 .marca-bolha img{width:100%;height:100%;object-fit:contain}
+.marca-bolha.tem-fundo{padding:0}
+.marca-fundo{display:grid;place-items:center;width:76px;height:76px;border-radius:50%;padding:13px}
+.marca-fundo img{width:100%;height:100%;object-fit:contain}
+.marca-fundo.pequeno{width:62px;height:62px;padding:12px}
 @keyframes rolar2{to{transform:translateX(-50%)}}
 
 /* Faixa de destaques (3 cards curtos logo após as marcas) */
@@ -575,23 +580,23 @@ const MARCAS_LOGOS = [
   { nome: "Nold Pet", arq: "img/marcas/nold-pet.png" },
   { nome: "Fast Escova", arq: "img/marcas/fast-escova.png" },
   { nome: "Place Company", arq: "img/marcas/place-company.png" },
-  { nome: "Pressfit", arq: "img/marcas/pressfit.png" },
+  { nome: "Pressfit", arq: "img/marcas/pressfit.png", fundo: "#e8457f" },
   { nome: "Lola Cosmetics", arq: "img/marcas/lola-cosmetics.png" },
   { nome: "Forever Liss", arq: "img/marcas/forever-liss.png" },
   { nome: "Milky Moo", arq: "img/marcas/milky-moo.png" },
-  { nome: "Stabile & Pessoa Advogados", arq: "img/marcas/stabile-pessoa.png" },
+  { nome: "Stabile & Pessoa Advogados", arq: "img/marcas/stabile-pessoa.png", fundo: "#14130f", pequeno: true },
   { nome: "HF Consultoria", arq: "img/marcas/hf-consultoria.png" },
   { nome: "Facilita", arq: "img/marcas/facilita.png" },
-  { nome: "Ouze Loja", arq: "img/marcas/ouze-loja.png" },
+  { nome: "Ouze Loja", arq: "img/marcas/ouze-loja.png", fundo: "#14130f" },
   { nome: "Rocklin", arq: "img/marcas/rocklin.png" },
   { nome: "BuzzLead", arq: "img/marcas/buzzlead.png" },
   { nome: "Instituto Deândhela", arq: "img/marcas/instituto-deandhela.png" },
   { nome: "Aldeia Multiétnica", arq: "img/marcas/aldeia-multietnica.png" },
   { nome: "Feel.Good Shop Online", arq: "img/marcas/feelgood.png" },
   { nome: "La's Palmas", arq: "img/marcas/las-palmas.png" },
-  { nome: "Barba Men", arq: "img/marcas/barba-men.png" },
+  { nome: "Barba Men", arq: "img/marcas/barba-men.png", fundo: "#2f7a73" },
   { nome: "Eliefe", arq: "img/marcas/eliefe.png" },
-  { nome: "Zoe", arq: "img/marcas/zoe.png" },
+  { nome: "Zoe", arq: "img/marcas/zoe.png", fundo: "#13123a" },
   { nome: "MaGê", arq: "img/marcas/mage.png" },
   { nome: "UniAraguaia", arq: "img/marcas/uniaraguaia.png" },
   { nome: "Cílios Showroom", arq: "img/marcas/cilios-showroom.png" },
@@ -737,14 +742,22 @@ function montarTicker(sel, itens) {
 }
 montarTicker("#trilhoEntrega", ENTREGA);
 
-/* Ticker de marcas: bolinha com a logo de cada marca, rolando sozinho */
+/* Ticker de marcas: bolinha com a logo de cada marca, rolando sozinho.
+   Marcas com "fundo" têm logo clara (branca/neon) e precisam de um selo colorido atrás pra não sumir no fundo claro da bolinha. */
+function bolhaMarca(m) {
+  const img = el("img", { src: m.arq, alt: m.nome, loading: "lazy", width: 96, height: 96 });
+  if (m.fundo) {
+    return el("span", { class: "marca-bolha tem-fundo" }, [
+      el("span", { class: "marca-fundo" + (m.pequeno ? " pequeno" : ""), style: "background:" + m.fundo }, [img])
+    ]);
+  }
+  return el("span", { class: "marca-bolha" }, [img]);
+}
 (function () {
   const trilho = $("#trilhoMarcas");
   const lista = ocultar => {
     const ul = el("ul", ocultar ? { "aria-hidden": "true" } : {});
-    for (let r = 0; r < 2; r++) MARCAS_LOGOS.forEach(m => ul.append(el("li", {}, [
-      el("span", { class: "marca-bolha" }, [el("img", { src: m.arq, alt: m.nome, loading: "lazy", width: 96, height: 96 })])
-    ])));
+    for (let r = 0; r < 2; r++) MARCAS_LOGOS.forEach(m => ul.append(el("li", {}, [bolhaMarca(m)])));
     return ul;
   };
   trilho.append(lista(false), lista(true));
