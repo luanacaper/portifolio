@@ -75,6 +75,9 @@ ul,ol{padding:0;list-style:none}
 .btn-menu[aria-expanded="true"] span{background:transparent}
 .btn-menu[aria-expanded="true"] span::before{transform:translateY(6px) rotate(45deg)}
 .btn-menu[aria-expanded="true"] span::after{transform:translateY(-6px) rotate(-45deg)}
+.idioma-botao{display:flex;align-items:center;gap:2px;background:var(--gelo);border:1.5px solid var(--linha);border-radius:999px;padding:3px;margin-left:8px;cursor:pointer;font-weight:800;font-size:.72rem;letter-spacing:.03em;flex:none}
+.idioma-botao span{padding:5px 10px;border-radius:999px;color:var(--suave);transition:background .2s,color .2s}
+.idioma-botao[data-ativo="pt"] span:first-child,.idioma-botao[data-ativo="en"] span:last-child{background:var(--verde-esc);color:#fff}
 
 /* Botões */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 24px;border-radius:999px;font:inherit;font-weight:700;font-size:1rem;text-decoration:none;border:2px solid transparent;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s}
@@ -221,7 +224,7 @@ section{scroll-margin-top:92px}
 .filtro-pills a:hover{background:var(--gelo);border-color:var(--verde)}
 .nicho-linha{margin-bottom:clamp(32px,4vw,48px);scroll-margin-top:92px}
 .nicho-cab{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
-.nicho-cab h3{font-size:1.3rem;letter-spacing:-.01em}
+.nicho-cab h3{font-size:clamp(1.5rem,2.6vw,1.9rem);font-weight:800;letter-spacing:-.02em;color:var(--verde)}
 .nicho-cab span{font-size:.8rem;font-weight:800;color:var(--suave);background:var(--gelo);border-radius:999px;padding:2px 10px}
 .nicho-nav{margin-left:auto;display:flex;gap:6px}
 .nicho-seta{width:30px;height:30px;border-radius:50%;background:#fff;border:1px solid var(--linha);display:grid;place-items:center;cursor:pointer;color:var(--tinta);font-size:1.05rem;line-height:1;padding:0;transition:background .2s}
@@ -354,16 +357,16 @@ body.trava{overflow:hidden}
 </style>
 </head>
 <body>
-<a class="pular" href="#sobre">Pular para o conteúdo</a>
+<a class="pular" href="#sobre" data-i18n="skip">Pular para o conteúdo</a>
 
 <div class="faixa-topo">
   <div class="faixa-bf">
-    <span class="bf-selo">Black Friday</span>
+    <span class="bf-selo" data-i18n="bf.selo">Black Friday</span>
     <span class="bf-txt" id="bfTxt"></span>
     <span class="bf-sep" aria-hidden="true">·</span>
     <span class="bf-rotativo" id="bfRotativo"></span>
     <span class="bf-sep" aria-hidden="true">·</span>
-    <a class="bf-cta" href="#contato">reservar agenda →</a>
+    <a class="bf-cta" href="#contato" data-i18n="bf.cta">reservar agenda →</a>
   </div>
 </div>
 
@@ -372,12 +375,15 @@ body.trava{overflow:hidden}
     <a class="marca" href="#inicio" aria-label="Voltar ao início"><b aria-hidden="true">L</b><span data-nome>Luana Caper</span></a>
     <button class="btn-menu" id="btnMenu" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span></button>
     <nav class="nav" id="menu" aria-label="Menu principal">
-      <a href="#sobre">Sobre</a>
-      <a href="#resultados">Resultados</a>
-      <a href="#conteudos">Conteúdos</a>
-      <a href="#criar-juntos">Criar juntos</a>
-      <a href="#depoimentos">Depoimentos</a>
-      <a class="cta" href="#contato">Contato</a>
+      <a href="#sobre" data-i18n="nav.sobre">Sobre</a>
+      <a href="#resultados" data-i18n="nav.resultados">Resultados</a>
+      <a href="#conteudos" data-i18n="nav.conteudos">Conteúdos</a>
+      <a href="#criar-juntos" data-i18n="nav.criar">Criar juntos</a>
+      <a href="#depoimentos" data-i18n="nav.depoimentos">Depoimentos</a>
+      <a class="cta" href="#contato" data-i18n="nav.contato">Contato</a>
+      <button class="idioma-botao" id="btnIdioma" type="button" data-ativo="pt" aria-label="Mudar idioma do site / Change site language">
+        <span>PT</span><span>EN</span>
+      </button>
     </nav>
   </div>
 </header>
@@ -388,34 +394,34 @@ body.trava{overflow:hidden}
 <section class="capa" id="inicio" aria-label="Apresentação">
   <div class="capa-hero revelar">
     <img class="capa-hero-img" src="foto-capa.jpg" alt="Luana Caper sorrindo, de gola alta verde-oliva" width="1673" height="940" fetchpriority="high">
-    <span class="selo">Novo</span>
+    <span class="selo" data-i18n="hero.selo">Novo</span>
 
     <!-- FLUTUANTES: destaques de resultado deste portfólio. Pra trocar, edite o <b> e o <small>. -->
     <a class="flutuante f1" href="#resultados">
       <span class="flut-in">
         <span class="flut-ico" aria-hidden="true"><svg viewBox="0 0 24 26" width="30" height="30"><path d="M9 9V7a3 3 0 0 1 6 0v2" fill="none" stroke="#3f4a2b" stroke-width="1.6" stroke-linecap="round"/><path d="M5 9h14l1 13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" fill="#55613b"/><path d="M8.3 15.2l2.7 2.7L16 12.3" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <span class="flut-txt"><b>ROAS de 7,54</b><small>Em campanha de e-commerce por assinatura</small></span>
+        <span class="flut-txt" data-i18n="hero.flut1"><b>ROAS de 7,54</b><small>Em campanha de e-commerce por assinatura</small></span>
       </span>
     </a>
     <a class="flutuante f2" href="#resultados">
       <span class="flut-in">
         <span class="flut-ico" aria-hidden="true"><svg viewBox="0 0 24 26" width="30" height="30"><path d="M9 9V7a3 3 0 0 1 6 0v2" fill="none" stroke="#3f4a2b" stroke-width="1.6" stroke-linecap="round"/><path d="M5 9h14l1 13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" fill="#55613b"/><path d="M8.3 15.2l2.7 2.7L16 12.3" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <span class="flut-txt"><b>+50x mais alcance</b><small>Resultado orgânico pra Milkmoo</small></span>
+        <span class="flut-txt" data-i18n="hero.flut2"><b>+50x mais alcance</b><small>Resultado orgânico pra Milkmoo</small></span>
       </span>
     </a>
 
     <div class="capa-hero-texto">
-      <p class="etiqueta revelar capa-etiqueta">UGC Creator · Estrategista · Goiânia, GO · Brasil</p>
-      <h1 class="revelar" style="--d:.05s">Seu conteúdo <span class="serif">se converte mais!</span></h1>
-      <p class="lead revelar" style="--d:.1s">Analiso seu público e crio do hook ao CTA o criativo que é pensado para vender.</p>
+      <p class="etiqueta revelar capa-etiqueta" data-i18n="hero.etiqueta">UGC Creator · Estrategista · Goiânia, GO · Brasil</p>
+      <h1 class="revelar" style="--d:.05s" data-i18n="hero.h1">Seu conteúdo <span class="serif">se converte mais!</span></h1>
+      <p class="lead revelar" style="--d:.1s" data-i18n="hero.lead">Analiso seu público e crio do hook ao CTA o criativo que é pensado para vender.</p>
       <div class="acoes revelar" style="--d:.15s">
-        <a class="btn btn-primario" href="#contato">Quero criar com a Luana</a>
+        <a class="btn btn-primario" href="#contato" data-i18n="hero.btn">Quero criar com a Luana</a>
       </div>
-      <a class="link-sutil revelar" style="--d:.18s" href="#contato">Gerenciar minha campanha com a Luana →</a>
+      <a class="link-sutil revelar" style="--d:.18s" href="#contato" data-i18n="hero.linkSutil">Gerenciar minha campanha com a Luana →</a>
     </div>
   </div>
 
-  <div class="ticker ticker-entrega" aria-label="O que eu entrego">
+  <div class="ticker ticker-entrega" aria-label="O que eu entrego" data-i18n-aria="ticker.entregaAria">
     <div class="trilho" id="trilhoEntrega"></div>
   </div>
 
@@ -423,8 +429,8 @@ body.trava{overflow:hidden}
     <div class="destaques-rapidos" id="destaquesRapidos"></div>
   </div>
 
-  <div class="ticker ticker-marcas" aria-label="Marcas que confiaram no meu trabalho">
-    <span class="ticker-rot">Marcas que confiaram no meu trabalho</span>
+  <div class="ticker ticker-marcas" aria-label="Marcas que confiaram no meu trabalho" data-i18n-aria="ticker.marcasAria">
+    <span class="ticker-rot" data-i18n="ticker.marcasRot">Marcas que confiaram no meu trabalho</span>
     <div class="trilho" id="trilhoMarcas"></div>
   </div>
 </section>
@@ -432,18 +438,18 @@ body.trava{overflow:hidden}
 <!-- 2. SOBRE MIM -->
 <section class="secao gelo" id="sobre" aria-labelledby="t-sobre">
   <div class="container sobre-grade">
-    <button class="foto r45 revelar video-pendente" id="btnVideoSobre" type="button" aria-label="Vídeo: Como eu gravo seu conteúdo UGC (em breve)">
+    <button class="foto r45 revelar video-pendente" id="btnVideoSobre" type="button" aria-label="Vídeo: Como eu gravo seu conteúdo UGC (em breve)" data-i18n-aria="sobre.videoAria">
       <img src="foto-sobre.jpg" alt="Luana Caper com uma caixa de produto, sorrindo" width="1200" height="1600" loading="lazy">
-      <span class="vp-selo"><span class="vp-play" aria-hidden="true"></span><b>Como eu gravo seu conteúdo UGC · em breve</b></span>
+      <span class="vp-selo"><span class="vp-play" aria-hidden="true"></span><b data-i18n="sobre.videoSelo">Como eu gravo seu conteúdo UGC · em breve</b></span>
     </button>
 
     <div class="sobre-texto">
-      <p class="etiqueta revelar">Sobre mim</p>
-      <h2 class="titulo revelar" id="t-sobre" style="--d:.05s">Oie, sou a <span class="serif">Luana Caper</span></h2>
-      <p class="forte revelar" style="--d:.1s">Tenho 35 anos, sou UGC, estrategista de conteúdo e gestora de tráfego. Atuo no mercado há mais de 10 anos e já trabalhei com mais de 280 marcas entre vídeos gravados e gestão de campanhas.</p>
-      <p class="sobre-p revelar" style="--d:.15s">Desenvolvo conteúdos para que cada etapa do funil gere o resultado desejado e converta.</p>
+      <p class="etiqueta revelar" data-i18n="sobre.etiqueta">Sobre mim</p>
+      <h2 class="titulo revelar" id="t-sobre" style="--d:.05s" data-i18n="sobre.h2">Oie, sou a <span class="serif">Luana Caper</span></h2>
+      <p class="forte revelar" style="--d:.1s" data-i18n="sobre.p1">Tenho 35 anos, sou UGC, estrategista de conteúdo e gestora de tráfego. Atuo no mercado há mais de 10 anos e já trabalhei com mais de 280 marcas entre vídeos gravados e gestão de campanhas.</p>
+      <p class="sobre-p revelar" style="--d:.15s" data-i18n="sobre.p2">Desenvolvo conteúdos para que cada etapa do funil gere o resultado desejado e converta.</p>
       <ul class="promessas revelar" id="promessasLista" style="--d:.2s"></ul>
-      <p class="sobre-p revelar" style="--d:.2s">Goiânia · GO · Brasil</p>
+      <p class="sobre-p revelar" style="--d:.2s" data-i18n="sobre.local">Goiânia · GO · Brasil</p>
     </div>
   </div>
 </section>
@@ -453,14 +459,14 @@ body.trava{overflow:hidden}
   <div class="container">
     <div class="resultados-grade2">
       <div class="resultados-info">
-        <p class="etiqueta revelar">Prova social</p>
-        <h2 class="titulo revelar" id="t-result" style="--d:.05s">Os melhores <span class="serif">resultados</span></h2>
-        <p class="revelar" style="--d:.1s">Mais de <strong>10 anos</strong> criando conteúdo que performa, com <strong>ROAS de até 7,54</strong> e resultados reais pra mais de <strong>280 marcas</strong>. Da Tekoá ao App Place, cada vídeo nasce pensado pra vender.</p>
+        <p class="etiqueta revelar" data-i18n="resultados.etiqueta">Prova social</p>
+        <h2 class="titulo revelar" id="t-result" style="--d:.05s" data-i18n="resultados.h2">Os melhores <span class="serif">resultados</span></h2>
+        <p class="revelar" style="--d:.1s" data-i18n="resultados.p">Mais de <strong>10 anos</strong> criando conteúdo que performa, com <strong>ROAS de até 7,54</strong> e resultados reais pra mais de <strong>280 marcas</strong>. Da Tekoá ao App Place, cada vídeo nasce pensado pra vender.</p>
       </div>
       <div class="resultados-carrossel">
-        <button class="rc-seta rc-ant" id="rcAnt" type="button" aria-label="Resultado anterior">‹</button>
+        <button class="rc-seta rc-ant" id="rcAnt" type="button" aria-label="Resultado anterior" data-i18n-aria="resultados.ant">‹</button>
         <div class="rc-trilho" id="rcTrilho"></div>
-        <button class="rc-seta rc-prox" id="rcProx" type="button" aria-label="Próximo resultado">›</button>
+        <button class="rc-seta rc-prox" id="rcProx" type="button" aria-label="Próximo resultado" data-i18n-aria="resultados.prox">›</button>
       </div>
     </div>
   </div>
@@ -470,9 +476,9 @@ body.trava{overflow:hidden}
 <section class="secao gelo" id="conteudos" aria-labelledby="t-cont">
   <div class="container">
     <div class="cab">
-      <p class="etiqueta revelar">Catálogo</p>
-      <h2 class="titulo revelar" id="t-cont" style="--d:.05s">Que tipo de conteúdo <span class="serif">você precisa?</span></h2>
-      <p class="revelar" style="--d:.1s">Navegue pelos nichos. Cada linha é uma especialidade. Deslize pro lado pra ver mais.</p>
+      <p class="etiqueta revelar" data-i18n="catalogo.etiqueta">Catálogo</p>
+      <h2 class="titulo revelar" id="t-cont" style="--d:.05s" data-i18n="catalogo.h2">Que tipo de conteúdo <span class="serif">você precisa?</span></h2>
+      <p class="revelar" style="--d:.1s" data-i18n="catalogo.p">Navegue pelos nichos. Cada linha é uma especialidade. Deslize pro lado pra ver mais.</p>
     </div>
     <div class="filtro-pills" id="filtroPills"></div>
     <div id="nichosGrades"></div>
@@ -483,9 +489,9 @@ body.trava{overflow:hidden}
 <section class="secao" id="criar-juntos" aria-labelledby="t-criar">
   <div class="container">
     <div class="cab">
-      <p class="etiqueta revelar">Serviços</p>
-      <h2 class="titulo revelar" id="t-criar" style="--d:.05s">O que podemos <span class="serif">criar juntos?</span></h2>
-      <p class="revelar" style="--d:.1s">Cada formato tem um objetivo: vender, escalar ou construir marca. Me conta o seu que a gente monta o combo perfeito pra sua marca.</p>
+      <p class="etiqueta revelar" data-i18n="criar.etiqueta">Serviços</p>
+      <h2 class="titulo revelar" id="t-criar" style="--d:.05s" data-i18n="criar.h2">O que podemos <span class="serif">criar juntos?</span></h2>
+      <p class="revelar" style="--d:.1s" data-i18n="criar.p">Cada formato tem um objetivo: vender, escalar ou construir marca. Me conta o seu que a gente monta o combo perfeito pra sua marca.</p>
     </div>
     <div class="serv-grade" id="servGrade"></div>
   </div>
@@ -495,8 +501,8 @@ body.trava{overflow:hidden}
 <section class="secao escuro" id="depoimentos" aria-labelledby="t-dep">
   <div class="container">
     <div class="cab">
-      <p class="etiqueta revelar">Prova social</p>
-      <h2 class="titulo revelar" id="t-dep" style="--d:.05s">O que dizem sobre o <span class="serif">trabalho</span></h2>
+      <p class="etiqueta revelar" data-i18n="dep.etiqueta">Prova social</p>
+      <h2 class="titulo revelar" id="t-dep" style="--d:.05s" data-i18n="dep.h2">O que dizem sobre o <span class="serif">trabalho</span></h2>
     </div>
     <div class="dep-grade" id="depGrade"></div>
   </div>
@@ -506,26 +512,26 @@ body.trava{overflow:hidden}
 <section class="secao gelo" id="contato" aria-labelledby="t-contato">
   <div class="container">
     <div class="cab">
-      <p class="etiqueta revelar">Contato</p>
-      <h2 class="titulo revelar" id="t-contato" style="--d:.05s">Vamos criar <span class="serif">algo juntos?</span></h2>
-      <p class="revelar" style="--d:.1s">Conte rapidinho o que você tem em mente e eu te respondo com uma proposta.</p>
+      <p class="etiqueta revelar" data-i18n="contato.etiqueta">Contato</p>
+      <h2 class="titulo revelar" id="t-contato" style="--d:.05s" data-i18n="contato.h2">Vamos criar <span class="serif">algo juntos?</span></h2>
+      <p class="revelar" style="--d:.1s" data-i18n="contato.p">Conte rapidinho o que você tem em mente e eu te respondo com uma proposta.</p>
     </div>
     <div class="contato-grade">
       <div class="revelar">
         <form class="form" id="formContato">
           <div class="campo">
-            <label for="c-nome">Nome</label>
+            <label for="c-nome" data-i18n="contato.nome">Nome</label>
             <input id="c-nome" name="nome" type="text" autocomplete="name" required>
           </div>
           <div class="campo">
-            <label for="c-email">E-mail</label>
+            <label for="c-email" data-i18n="contato.email">E-mail</label>
             <input id="c-email" name="email" type="email" autocomplete="email" required>
           </div>
           <div class="campo">
-            <label for="c-msg">Mensagem</label>
+            <label for="c-msg" data-i18n="contato.msg">Mensagem</label>
             <textarea id="c-msg" name="mensagem" required></textarea>
           </div>
-          <button class="btn btn-primario btn-bloco" type="submit">Enviar mensagem</button>
+          <button class="btn btn-primario btn-bloco" type="submit" data-i18n="contato.enviar">Enviar mensagem</button>
         </form>
         <div class="conf" id="confContato" tabindex="-1" hidden></div>
       </div>
@@ -541,13 +547,13 @@ body.trava{overflow:hidden}
   <div class="container rodape-grade">
     <strong data-nome>Luana Caper</strong>
     <ul id="redes" aria-label="Redes"></ul>
-    <small>© <span id="ano">2026</span> <span data-nome>Luana Caper</span>. Todos os direitos reservados.</small>
+    <small>© <span id="ano">2026</span> <span data-nome>Luana Caper</span>. <span data-i18n="rodape.direitos">Todos os direitos reservados.</span></small>
   </div>
 </footer>
 
 <!-- PLAYER AMPLIADO -->
 <div class="vm" id="vm" role="dialog" aria-modal="true" aria-label="Assistir ao vídeo" hidden>
-  <button class="lb-btn lb-fechar" id="vmFechar" type="button" aria-label="Fechar vídeo" style="position:absolute;top:14px;right:14px;width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:1.8rem;line-height:1;cursor:pointer">&times;</button>
+  <button class="lb-btn lb-fechar" id="vmFechar" type="button" aria-label="Fechar vídeo" data-i18n-aria="modal.fechar" style="position:absolute;top:14px;right:14px;width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:1.8rem;line-height:1;cursor:pointer">&times;</button>
   <div class="vm-caixa">
     <div class="vm-player" id="vmPlayer"></div>
     <div class="vm-info">
@@ -565,6 +571,7 @@ body.trava{overflow:hidden}
 const CONFIG = {
   nome: "Luana Caper",
   instagram: "luhcaper",
+  tiktok: "luhcaper",
   email: "caperluana@gmail.com",
   whatsapp: "5562993896847",
   whatsappExibir: "(62) 99389-6847",
@@ -687,6 +694,43 @@ const DEPOIMENTOS = [
   { marca: "Casa Cachoeira Sonho Meu", texto: "Aquele primeiro vídeo fechou nossa agenda de fim de ano até junho deste ano.", ctx: "Vídeo de viagem" }
 ];
 
+/* Traduções (EN) do conteúdo acima. Chaveadas por slug/índice/marca pra não depender da ordem. */
+const ENTREGA_EN = ["Strategic scripting", "UGC Photos", "E-commerce Content", "Ads that convert", "Creator strategy"];
+const DESTAQUES_RAPIDOS_EN = [
+  { valor: "+10 years", texto: "of experience with creators, campaigns, strategy and traffic." },
+  { valor: "ROAS 7.54", texto: "in a subscription e-commerce campaign (Tekoá)." },
+  { valor: "Fully booked", texto: "6 months out from a single organic video." }
+];
+const NICHOS_EN = {
+  "casa-decoracao": { nome: "Home, Decor & Finds", desc: "Spaces and finds that inspire whoever's watching" },
+  "gastronomia-assinaturas": { nome: "Food & Healthy Lifestyle", desc: "Food and subscription e-commerce" },
+  "beleza-saude": { nome: "Beauty, Health & Wellness", desc: "Cosmetics, supplements and fitness" },
+  "tech-infoprodutos": { nome: "Tech, Apps & Digital Products", desc: "Apps, screens and digital content in plain language" },
+  "viagem": { nome: "Travel", desc: "Experiences and destinations, narrated" }
+};
+const RESULTADOS_CARROSSEL_EN = [
+  { marca: "Travel", ctx: "My dad's birthday trip — one of the portfolio's favorites" },
+  { marca: "Tekoá", ctx: "Subscription e-commerce · ad" },
+  { marca: "App Place", ctx: "Sales in 5 days · organic + ROAS 5.6" },
+  { marca: "Tekoá", ctx: "Subscription e-commerce · ad" },
+  { marca: "Tekoá", ctx: "Subscription e-commerce · ad" },
+  { marca: "Milkmoo", ctx: "Extra reach, organic only" }
+];
+const SERVICOS_EN = [
+  { titulo: "Traffic creatives", texto: "Ads optimized for Meta, TikTok and YouTube, built to get the best result at the lowest cost." },
+  { titulo: "Scaled management", texto: "Campaigns with multiple creators (UGC, nano, micro and influencers), from brief to delivery, to scale your content hassle-free — for organic or paid traffic." },
+  { titulo: "UGC for E-commerce", texto: "Authentic product videos that help your store sell every day, with the natural feel of someone who actually uses it." },
+  { titulo: "UGC Photos", texto: "Images with the same natural feel as the videos, ready for feed, website and static ads that need to sell too." }
+];
+const DEPOIMENTOS_EN = [
+  { marca: "Place Company", texto: "Luana delivered a ROAS we'd never hit in paid traffic before — it was the first time we'd seen that number, and it became our new benchmark.", ctx: "Paid traffic · ROAS record" },
+  { marca: "Tekoá", texto: "We ran the creatives with Luana and hit the best ROAS numbers we've ever had on our subscription business: 6.90, 7.20 and 7.54.", ctx: "ROAS 6.90 · 7.20 · 7.54" },
+  { marca: "Milkmoo", texto: "The videos delivered 5 times more organic results on our profile. Luana understands, better than almost anyone, what makes content perform.", ctx: "+5x organic results" },
+  { marca: "Cinta Press", texto: "I loved the content because she covered everything we wanted to show about the product's benefits. It came out exactly how we needed.", ctx: "Product video" },
+  { marca: "Block Carbo", texto: "I loved the video. You're so creative, and now we have a great piece of content to promote.", ctx: "Product video" },
+  { marca: "Casa Cachoeira Sonho Meu", texto: "That first video booked out our end-of-year calendar all the way through to June this year.", ctx: "Travel video" }
+];
+
 const TONS = [
   "linear-gradient(160deg,#55613b 0%,#8a9a63 100%)",
   "linear-gradient(160deg,#ffbf85 0%,#d4691f 100%)",
@@ -699,6 +743,8 @@ const TONS = [
    ===================================================================== */
 document.documentElement.classList.add("js");
 const reduzido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+let idioma = "pt";
+try { if (localStorage.getItem("idioma") === "en") idioma = "en"; } catch (e) {}
 const $ = (s, r = document) => r.querySelector(s);
 function el(tag, attrs, filhos) {
   const n = document.createElement(tag);
@@ -732,28 +778,35 @@ document.addEventListener("keydown", e => { if (e.key === "Escape" && menu.class
 window.matchMedia("(min-width:981px)").addEventListener("change", e => { if (e.matches) menuAbrir(false); });
 
 /* Faixa do topo: contagem regressiva pra Black Friday (fixa, só a frase do meio alterna) */
-(function () {
+const FRASES_BF = ["vídeo de e-commerce que vende no dia", "reserve a sua agenda de novembro"];
+const FRASES_BF_EN = ["e-commerce video that sells on the day", "book your November slot"];
+let bfRotIndex = 0;
+function montarFaixaBF() {
   const dias = Math.max(0, Math.ceil((new Date(CONFIG.blackFriday) - new Date()) / 86400000));
-  $("#bfTxt").textContent = dias > 0 ? "Faltam " + dias + " dias pra Black Friday" : "É Black Friday!";
-
-  const FRASES_BF = ["vídeo de e-commerce que vende no dia", "reserve a sua agenda de novembro"];
-  const rot = $("#bfRotativo");
-  let i = 0;
-  rot.textContent = FRASES_BF[0];
-  if (reduzido) return;
+  $("#bfTxt").textContent = idioma === "en"
+    ? (dias > 0 ? "Only " + dias + " days left for Black Friday" : "It's Black Friday!")
+    : (dias > 0 ? "Faltam " + dias + " dias pra Black Friday" : "É Black Friday!");
+  const frases = idioma === "en" ? FRASES_BF_EN : FRASES_BF;
+  $("#bfRotativo").textContent = frases[bfRotIndex % frases.length];
+}
+montarFaixaBF();
+if (!reduzido) {
   setInterval(() => {
+    const rot = $("#bfRotativo");
     rot.style.opacity = "0";
     setTimeout(() => {
-      i = (i + 1) % FRASES_BF.length;
-      rot.textContent = FRASES_BF[i];
+      bfRotIndex++;
+      const frases = idioma === "en" ? FRASES_BF_EN : FRASES_BF;
+      rot.textContent = frases[bfRotIndex % frases.length];
       rot.style.opacity = "1";
     }, 350);
   }, 3200);
-})();
+}
 
 /* Tickers (entrega + marcas) */
 function montarTicker(sel, itens) {
   const trilho = $(sel);
+  trilho.replaceChildren();
   const lista = ocultar => {
     const ul = el("ul", ocultar ? { "aria-hidden": "true" } : {});
     for (let r = 0; r < 2; r++) itens.forEach(nm => ul.append(el("li", { text: nm })));
@@ -761,7 +814,8 @@ function montarTicker(sel, itens) {
   };
   trilho.append(lista(false), lista(true));
 }
-montarTicker("#trilhoEntrega", ENTREGA);
+function renderizarEntrega() { montarTicker("#trilhoEntrega", idioma === "en" ? ENTREGA_EN : ENTREGA); }
+renderizarEntrega();
 
 /* Ticker de marcas: bolinha com a logo de cada marca, rolando sozinho.
    Marcas com "fundo" têm logo clara (branca/neon) e precisam de um selo colorido atrás pra não sumir no fundo claro da bolinha. */
@@ -784,7 +838,8 @@ function montarMarcas(lista) {
   };
   trilho.append(ul(false), ul(true));
 }
-montarMarcas(MARCAS_LOGOS);
+let MARCAS_ATIVAS = MARCAS_LOGOS;
+montarMarcas(MARCAS_ATIVAS);
 
 /* Cartões flutuantes da capa: acompanham o mouse de leve (só em telas com mouse) */
 (function () {
@@ -843,9 +898,15 @@ montarMarcas(MARCAS_LOGOS);
 })();
 
 /* Destaques rápidos */
-DESTAQUES_RAPIDOS.forEach((d, i) => {
-  $("#destaquesRapidos").append(el("div", { class: "dr-card revelar", style: atraso(i) }, [el("strong", { text: d.valor }), el("span", { text: d.texto })]));
-});
+function montarDestaquesRapidos(lista, animar) {
+  const grade = $("#destaquesRapidos");
+  grade.replaceChildren();
+  lista.forEach((d, i) => {
+    grade.append(el("div", { class: "dr-card" + (animar === false ? "" : " revelar"), style: animar === false ? null : atraso(i) }, [el("strong", { text: d.valor }), el("span", { text: d.texto })]));
+  });
+}
+function renderizarDestaquesRapidos(animar) { montarDestaquesRapidos(idioma === "en" ? DESTAQUES_RAPIDOS_EN : DESTAQUES_RAPIDOS, animar); }
+renderizarDestaquesRapidos(true);
 
 /* "Sobre mim": lista de promessas no estilo notificação, com a mesma sacolinha dos cartões da capa */
 function iconeSacola() {
@@ -862,9 +923,22 @@ const DESTAQUES_SOBRE = [
   { titulo: "ROAS de 7,54", sub: "Em campanha de e-commerce por assinatura" },
   { titulo: "+50x mais alcance", sub: "Resultado orgânico pra Milkmoo" }
 ];
-DESTAQUES_SOBRE.forEach(d => {
-  $("#promessasLista").append(el("li", {}, [iconeSacola(), el("span", {}, [el("b", { text: d.titulo }), d.sub ? el("small", { text: d.sub }) : null])]));
-});
+const DESTAQUES_SOBRE_EN = [
+  { titulo: "Script approved before filming" },
+  { titulo: "Strategy built for every funnel stage" },
+  { titulo: "+280 brands served" },
+  { titulo: "ROAS of 7.54", sub: "In a subscription e-commerce campaign" },
+  { titulo: "+50x more reach", sub: "Organic result for Milkmoo" }
+];
+function montarPromessas(lista) {
+  const grade = $("#promessasLista");
+  grade.replaceChildren();
+  lista.forEach(d => {
+    grade.append(el("li", {}, [iconeSacola(), el("span", {}, [el("b", { text: d.titulo }), d.sub ? el("small", { text: d.sub }) : null])]));
+  });
+}
+function renderizarPromessas() { montarPromessas(idioma === "en" ? DESTAQUES_SOBRE_EN : DESTAQUES_SOBRE); }
+renderizarPromessas();
 
 /* Player: miniatura abre o vídeo ampliado dentro do site */
 function urlPlayer(v) {
@@ -903,17 +977,17 @@ function cartaoVideo(v, i, animar) {
   const marcaSelo = el("span", { class: "nc-marca", text: v.marca || v.titulo });
   let miolo;
   if (temVideo) {
-    const b = el("button", { class: "mini", type: "button", "aria-label": "Assistir vídeo de " + (v.marca || v.titulo), style: thumb ? null : "background:" + TONS[i % TONS.length] }, [
+    const b = el("button", { class: "mini", type: "button", "aria-label": (idioma === "en" ? "Watch video from " : "Assistir vídeo de ") + (v.marca || v.titulo), style: thumb ? null : "background:" + TONS[i % TONS.length] }, [
       thumb ? el("img", { src: thumb, alt: "", loading: "lazy", width: 300, height: 533 }) : null,
       marcaSelo,
       el("span", { class: "play", "aria-hidden": "true" })
     ]);
-    b.addEventListener("click", () => abrirVideo(v, { texto: "Quero um vídeo assim →", href: "#contato" }));
+    b.addEventListener("click", () => abrirVideo(v, { texto: idioma === "en" ? "I want a video like this →" : "Quero um vídeo assim →", href: "#contato" }));
     miolo = b;
   } else {
     miolo = el("div", { class: "mini", style: "background:" + TONS[i % TONS.length] }, [
       marcaSelo,
-      el("span", { class: "nc-em-breve", text: "Em breve" }),
+      el("span", { class: "nc-em-breve", text: idioma === "en" ? "Coming soon" : "Em breve" }),
       el("span", { class: "play", "aria-hidden": "true" })
     ]);
   }
@@ -962,11 +1036,15 @@ function misturarMarcas(itens) {
   }
   return resultado;
 }
+function nichosAtuais() {
+  if (idioma !== "en") return NICHOS;
+  return NICHOS.map(n => ({ ...n, ...(NICHOS_EN[n.slug] || {}) }));
+}
 function montarNichos(todosVideos, animar) {
   const grades = $("#nichosGrades");
   $("#filtroPills").replaceChildren();
   grades.replaceChildren();
-  NICHOS.forEach(n => {
+  nichosAtuais().forEach(n => {
     const itens = misturarMarcas(todosVideos.filter(v => v.nicho === n.slug));
     if (!itens.length) return;
     $("#filtroPills").append(el("a", { href: "#nicho-" + n.slug, text: n.nome }));
@@ -975,8 +1053,8 @@ function montarNichos(todosVideos, animar) {
     trilho.dataset.copias = copias;
     for (let r = 0; r < copias; r++) itens.forEach((v, i) => trilho.append(cartaoVideo(v, i, animar)));
     const cab = el("div", { class: "nicho-cab" }, [el("h3", { text: n.nome }), el("span", { text: String(itens.length).padStart(2, "0") })]);
-    const btnAnt = el("button", { class: "nicho-seta", type: "button", "aria-label": "Vídeos anteriores de " + n.nome, text: "‹" });
-    const btnProx = el("button", { class: "nicho-seta", type: "button", "aria-label": "Mais vídeos de " + n.nome, text: "›" });
+    const btnAnt = el("button", { class: "nicho-seta", type: "button", "aria-label": (idioma === "en" ? "Previous videos from " : "Vídeos anteriores de ") + n.nome, text: "‹" });
+    const btnProx = el("button", { class: "nicho-seta", type: "button", "aria-label": (idioma === "en" ? "More videos from " : "Mais vídeos de ") + n.nome, text: "›" });
     btnAnt.addEventListener("click", () => moverTrilho(trilho, -1));
     btnProx.addEventListener("click", () => moverTrilho(trilho, 1));
     cab.append(el("div", { class: "nicho-nav" }, [btnAnt, btnProx]));
@@ -987,20 +1065,27 @@ function montarNichos(todosVideos, animar) {
     ]));
   });
 }
-montarNichos(VIDEOS_VIAGEM.concat(VIDEOS_NOVOS));
+let VIDEOS_ATIVOS = VIDEOS_VIAGEM.concat(VIDEOS_NOVOS);
+function renderizarNichos(animar) { montarNichos(VIDEOS_ATIVOS, animar); }
+renderizarNichos(true);
 
 /* Os melhores resultados */
 /* Carrossel "Os melhores resultados": cartões com fundo colorido (sem foto real ainda) que avançam sozinhos */
-(function () {
+function montarResultadosCarrossel(lista, animar) {
   const trilho = $("#rcTrilho");
-  RESULTADOS_CARROSSEL.forEach((r, i) => {
-    trilho.append(el("div", { class: "rc-card revelar", style: atraso(i % 4) }, [
+  trilho.replaceChildren();
+  lista.forEach((r, i) => {
+    trilho.append(el("div", { class: "rc-card" + (animar === false ? "" : " revelar"), style: animar === false ? null : atraso(i % 4) }, [
       el("span", { class: "rc-marca", text: r.marca }),
       el("div", { class: "rc-foto", style: "background:" + TONS[i % TONS.length] }, [el("b", { text: r.stat })]),
       el("span", { class: "rc-ctx", text: r.ctx })
     ]));
   });
-
+}
+function renderizarResultadosCarrossel(animar) { montarResultadosCarrossel(idioma === "en" ? RESULTADOS_CARROSSEL_EN : RESULTADOS_CARROSSEL, animar); }
+renderizarResultadosCarrossel(true);
+(function () {
+  const trilho = $("#rcTrilho");
   function passo() {
     const card = trilho.querySelector(".rc-card");
     return card ? card.getBoundingClientRect().width + 16 : 200;
@@ -1027,7 +1112,7 @@ montarNichos(VIDEOS_VIAGEM.concat(VIDEOS_NOVOS));
 
 /* Vídeo "Sobre mim" (ainda sem link — avisa que está em breve, sem travar a página) */
 $("#btnVideoSobre").addEventListener("click", () => {
-  alert("Esse vídeo ainda não foi publicado. Assim que estiver pronto, ele toca aqui mesmo.");
+  alert(idioma === "en" ? "This video isn't published yet. As soon as it's ready, it'll play right here." : "Esse vídeo ainda não foi publicado. Assim que estiver pronto, ele toca aqui mesmo.");
 });
 
 /* Serviços */
@@ -1042,7 +1127,9 @@ function montarServicos(lista, animar) {
     ]));
   });
 }
-montarServicos(SERVICOS);
+let SERVICOS_ATIVOS = SERVICOS, servicosDoBanco = false;
+function renderizarServicos(animar) { montarServicos(idioma === "en" && !servicosDoBanco ? SERVICOS_EN : SERVICOS_ATIVOS, animar); }
+renderizarServicos(true);
 
 /* Depoimentos */
 function montarDepoimentos(lista, animar) {
@@ -1056,7 +1143,9 @@ function montarDepoimentos(lista, animar) {
     ]));
   });
 }
-montarDepoimentos(DEPOIMENTOS);
+let DEPOIMENTOS_ATIVOS = DEPOIMENTOS, depoimentosDoBanco = false;
+function renderizarDepoimentos(animar) { montarDepoimentos(idioma === "en" && !depoimentosDoBanco ? DEPOIMENTOS_EN : DEPOIMENTOS_ATIVOS, animar); }
+renderizarDepoimentos(true);
 
 /* Conteúdo do banco (painel /login/ do Portfolio UGC): tenta buscar e, se vier algo, troca o conteúdo fixo do código.
    Se não tiver internet ou o banco estiver fora do ar, o site continua normal com as listas fixas acima. */
@@ -1077,28 +1166,43 @@ montarDepoimentos(DEPOIMENTOS);
     buscar("depoimentos_geral", "marca,texto,ctx,ordem", "ordem.asc,created_at.asc"),
     buscar("servicos_geral", "titulo,texto,ordem", "ordem.asc,created_at.asc")
   ]);
-  if (videos) montarNichos(videos.map(v => ({ titulo: v.titulo, marca: v.marca, nicho: v.nicho, prov: v.plataforma, id: v.video_id })), false);
-  if (marcas) montarMarcas(marcas.map(m => ({ nome: m.nome, arq: "img/marcas/" + m.arquivo, fundo: m.fundo, pequeno: m.tamanho === "pequeno", grande: m.tamanho === "grande" })));
-  if (depo) montarDepoimentos(depo, false);
-  if (serv) montarServicos(serv, false);
+  if (videos) {
+    VIDEOS_ATIVOS = videos.map(v => ({ titulo: v.titulo, marca: v.marca, nicho: v.nicho, prov: v.plataforma, id: v.video_id }));
+    renderizarNichos(false);
+  }
+  if (marcas) {
+    MARCAS_ATIVAS = marcas.map(m => ({ nome: m.nome, arq: "img/marcas/" + m.arquivo, fundo: m.fundo, pequeno: m.tamanho === "pequeno", grande: m.tamanho === "grande" }));
+    montarMarcas(MARCAS_ATIVAS);
+  }
+  if (depo) { DEPOIMENTOS_ATIVOS = depo; depoimentosDoBanco = true; renderizarDepoimentos(false); }
+  if (serv) { SERVICOS_ATIVOS = serv; servicosDoBanco = true; renderizarServicos(false); }
 })();
 
 /* Canais de contato e rodapé */
-const canais = [
-  { sigla: "W", nome: "WhatsApp", info: CONFIG.whatsappExibir, href: wa("Oi Luana, vim pelo seu portfólio e quero conversar."), externo: true },
-  { sigla: "@", nome: "E-mail", info: CONFIG.email, href: mail("Contato pelo portfólio", "Oi Luana, "), externo: false },
-  { sigla: "I", nome: "Instagram", info: "@" + CONFIG.instagram, href: "https://instagram.com/" + CONFIG.instagram, externo: true }
-];
-canais.forEach(c => {
-  $("#canais").append(el("a", { class: "canal", href: c.href, target: c.externo ? "_blank" : false, rel: c.externo ? "noopener noreferrer" : false }, [
-    el("i", { "aria-hidden": "true", text: c.sigla }),
-    el("span", {}, [el("b", { text: c.nome }), el("small", { text: c.info })])
-  ]));
-});
-$("#canais").prepend(el("p", { text: "Prefere falar direto? Escolha o canal que for mais fácil pra você." }));
-canais.forEach(c => {
-  $("#redes").append(el("li", {}, [el("a", { href: c.href, target: c.externo ? "_blank" : false, rel: c.externo ? "noopener noreferrer" : false, text: c.nome })]));
-});
+function canaisAtuais() {
+  return [
+    { sigla: "W", nome: "WhatsApp", info: CONFIG.whatsappExibir, href: wa("Oi Luana, vim pelo seu portfólio e quero conversar."), externo: true },
+    { sigla: "@", nome: idioma === "en" ? "Email" : "E-mail", info: CONFIG.email, href: mail("Contato pelo portfólio", "Oi Luana, "), externo: false },
+    { sigla: "I", nome: "Instagram", info: "@" + CONFIG.instagram, href: "https://instagram.com/" + CONFIG.instagram, externo: true },
+    { sigla: "T", nome: "TikTok", info: "@" + CONFIG.tiktok, href: "https://tiktok.com/@" + CONFIG.tiktok, externo: true }
+  ];
+}
+function montarCanais() {
+  const canais = canaisAtuais();
+  $("#canais").replaceChildren();
+  canais.forEach(c => {
+    $("#canais").append(el("a", { class: "canal", href: c.href, target: c.externo ? "_blank" : false, rel: c.externo ? "noopener noreferrer" : false }, [
+      el("i", { "aria-hidden": "true", text: c.sigla }),
+      el("span", {}, [el("b", { text: c.nome }), el("small", { text: c.info })])
+    ]));
+  });
+  $("#canais").prepend(el("p", { text: idioma === "en" ? "Prefer to talk directly? Pick whichever channel is easiest for you." : "Prefere falar direto? Escolha o canal que for mais fácil pra você." }));
+  $("#redes").replaceChildren();
+  canais.forEach(c => {
+    $("#redes").append(el("li", {}, [el("a", { href: c.href, target: c.externo ? "_blank" : false, rel: c.externo ? "noopener noreferrer" : false, text: c.nome })]));
+  });
+}
+montarCanais();
 
 /* Envio do formulário de contato (mesma tabela "marcas" do painel admin, situação "Lead") */
 async function enviar(dados) {
@@ -1116,14 +1220,17 @@ async function enviar(dados) {
 function mostrarConfirmacao(caixa, enviado, nome, assunto, texto) {
   caixa.replaceChildren();
   if (enviado) {
-    caixa.append(el("h3", { text: "Recebi, " + nome + "!" }), el("p", { text: "Obrigada pelo contato. Eu te respondo em breve." }));
+    caixa.append(
+      el("h3", { text: (idioma === "en" ? "Got it, " : "Recebi, ") + nome + "!" }),
+      el("p", { text: idioma === "en" ? "Thanks for reaching out. I'll get back to you soon." : "Obrigada pelo contato. Eu te respondo em breve." })
+    );
   } else {
     caixa.append(
-      el("h3", { text: "Quase lá, " + nome + "!" }),
-      el("p", { text: "Escolha por onde quer enviar. A mensagem já vai pronta." }),
+      el("h3", { text: (idioma === "en" ? "Almost there, " : "Quase lá, ") + nome + "!" }),
+      el("p", { text: idioma === "en" ? "Choose where to send it. The message is already written." : "Escolha por onde quer enviar. A mensagem já vai pronta." }),
       el("div", { class: "acoes" }, [
-        el("a", { class: "btn btn-primario", href: wa(texto), target: "_blank", rel: "noopener noreferrer", text: "Enviar por WhatsApp" }),
-        el("a", { class: "btn btn-contorno", href: mail(assunto, texto), text: "Enviar por e-mail" })
+        el("a", { class: "btn btn-primario", href: wa(texto), target: "_blank", rel: "noopener noreferrer", text: idioma === "en" ? "Send via WhatsApp" : "Enviar por WhatsApp" }),
+        el("a", { class: "btn btn-contorno", href: mail(assunto, texto), text: idioma === "en" ? "Send via email" : "Enviar por e-mail" })
       ])
     );
   }
@@ -1183,6 +1290,86 @@ formContato.addEventListener("submit", async e => {
   };
   registrarMetrica("visita");
 })();
+
+/* Idioma: PT/EN. Textos estáticos trocam via data-i18n/data-i18n-aria (o original em PT fica
+   guardado em memória pra "voltar" sem precisar repetir o texto no dicionário); as seções
+   montadas por JS (nichos, serviços, depoimentos, destaques, resultados, ticker de entrega)
+   re-renderizam puxando a lista traduzida certa. */
+const I18N_EN = {
+  "nav.sobre": "About", "nav.resultados": "Results", "nav.conteudos": "Content",
+  "nav.criar": "Let's create", "nav.depoimentos": "Testimonials", "nav.contato": "Contact",
+  "skip": "Skip to content",
+  "bf.selo": "Black Friday", "bf.cta": "book your slot →",
+  "hero.selo": "New",
+  "hero.etiqueta": "UGC Creator · Strategist · Goiânia, GO · Brazil",
+  "hero.h1": "Your content <span class=\"serif\">converts more!</span>",
+  "hero.lead": "I analyze your audience and build every creative from hook to CTA, made to sell.",
+  "hero.btn": "Create with Luana",
+  "hero.linkSutil": "Manage my campaign with Luana →",
+  "hero.flut1": "<b>ROAS of 7.54</b><small>In a subscription e-commerce campaign</small>",
+  "hero.flut2": "<b>+50x more reach</b><small>Organic result for Milkmoo</small>",
+  "ticker.marcasRot": "Brands that trusted my work",
+  "sobre.videoSelo": "How I shoot your UGC content · coming soon",
+  "sobre.etiqueta": "About me",
+  "sobre.h2": "Hey, I'm <span class=\"serif\">Luana Caper</span>",
+  "sobre.p1": "I'm 35, a UGC creator, content strategist and traffic manager. I've been in the market for over 10 years and have worked with more than 280 brands, between filmed videos and campaign management.",
+  "sobre.p2": "I build content so every stage of the funnel gets the result you want, and converts.",
+  "sobre.local": "Goiânia · GO · Brazil",
+  "resultados.etiqueta": "Social proof",
+  "resultados.h2": "The best <span class=\"serif\">results</span>",
+  "resultados.p": "Over <strong>10 years</strong> creating content that performs, with <strong>ROAS up to 7.54</strong> and real results for more than <strong>280 brands</strong>. From Tekoá to App Place, every video is built to sell.",
+  "catalogo.etiqueta": "Catalog",
+  "catalogo.h2": "What kind of content <span class=\"serif\">do you need?</span>",
+  "catalogo.p": "Browse the niches. Each row is a specialty. Swipe sideways to see more.",
+  "criar.etiqueta": "Services",
+  "criar.h2": "What can we <span class=\"serif\">create together?</span>",
+  "criar.p": "Every format has a goal: sell, scale or build your brand. Tell me yours and we'll put together the perfect combo for it.",
+  "dep.etiqueta": "Social proof",
+  "dep.h2": "What people say about the <span class=\"serif\">work</span>",
+  "contato.etiqueta": "Contact",
+  "contato.h2": "Shall we create <span class=\"serif\">something together?</span>",
+  "contato.p": "Tell me quickly what you have in mind and I'll get back to you with a proposal.",
+  "contato.nome": "Name", "contato.email": "Email", "contato.msg": "Message", "contato.enviar": "Send message",
+  "rodape.direitos": "All rights reserved."
+};
+const I18N_EN_ARIA = {
+  "ticker.entregaAria": "What I deliver",
+  "ticker.marcasAria": "Brands that trusted my work",
+  "sobre.videoAria": "Video: How I shoot your UGC content (coming soon)",
+  "resultados.ant": "Previous result",
+  "resultados.prox": "Next result",
+  "modal.fechar": "Close video"
+};
+const PT_HTML = new Map();
+document.querySelectorAll("[data-i18n]").forEach(n => PT_HTML.set(n, n.innerHTML));
+const PT_ARIA = new Map();
+document.querySelectorAll("[data-i18n-aria]").forEach(n => PT_ARIA.set(n, n.getAttribute("aria-label")));
+
+function aplicarIdioma(lang) {
+  idioma = lang === "en" ? "en" : "pt";
+  try { localStorage.setItem("idioma", idioma); } catch (e) {}
+  document.documentElement.lang = idioma === "en" ? "en" : "pt-BR";
+  document.querySelectorAll("[data-i18n]").forEach(n => {
+    const chave = n.dataset.i18n;
+    n.innerHTML = idioma === "en" && I18N_EN[chave] ? I18N_EN[chave] : PT_HTML.get(n);
+  });
+  document.querySelectorAll("[data-i18n-aria]").forEach(n => {
+    const chave = n.dataset.i18nAria;
+    n.setAttribute("aria-label", idioma === "en" && I18N_EN_ARIA[chave] ? I18N_EN_ARIA[chave] : PT_ARIA.get(n));
+  });
+  $("#btnIdioma").dataset.ativo = idioma;
+  renderizarEntrega();
+  renderizarDestaquesRapidos(false);
+  renderizarPromessas();
+  renderizarResultadosCarrossel(false);
+  renderizarNichos(false);
+  renderizarServicos(false);
+  renderizarDepoimentos(false);
+  montarFaixaBF();
+  montarCanais();
+}
+$("#btnIdioma").addEventListener("click", () => aplicarIdioma(idioma === "en" ? "pt" : "en"));
+if (idioma === "en") aplicarIdioma("en");
 
 /* Entrada ao rolar */
 if ("IntersectionObserver" in window && !reduzido) {
