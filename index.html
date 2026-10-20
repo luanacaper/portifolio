@@ -901,19 +901,26 @@ function cartaoVideo(v, i, animar) {
   return el("article", { class: "nc" + (animar === false ? "" : " revelar") + (temVideo ? "" : " pendente"), style: animar === false ? null : atraso(i % 6) }, [miolo, corpo]);
 }
 
-/* Catálogo por nicho. Quando tem mais vídeo do que cabe, o trilho é renderizado em dobro (igual
-   ao ticker de marcas) pra as setas funcionarem como um carrossel infinito, sem o "pulo" de
-   voltar pro início: ao chegar perto do fim da 2ª cópia, volta uma cópia pra trás na hora (sem
-   animação, invisível porque o conteúdo é idêntico) antes de continuar o scroll suave. */
-function moverTrilho(trilho, dir, loop) {
-  if (loop) {
-    const umSet = trilho.scrollWidth / 2;
-    const max = trilho.scrollWidth - trilho.clientWidth;
-    if (dir > 0 && trilho.scrollLeft >= max - 2) trilho.scrollLeft -= umSet;
+/* Catálogo por nicho. O trilho sempre repete os itens (quantas vezes forem precisas pra
+   garantir pelo menos 12 cartões) pra as setas funcionarem como um carrossel infinito, mesmo
+   quando o nicho tem poucos vídeos. Ao chegar perto do fim da última cópia, volta uma cópia pra
+   trás na hora (sem animação, invisível porque o conteúdo é idêntico) antes de continuar o
+   scroll suave — nunca dá o "pulo" de voltar pro início. */
+function passoTrilho(trilho) {
+  const card = trilho.querySelector(".nc");
+  return card ? card.getBoundingClientRect().width + 12 : 200;
+}
+function moverTrilho(trilho, dir) {
+  const copias = Number(trilho.dataset.copias) || 1;
+  const passo = passoTrilho(trilho);
+  if (copias > 1) {
+    const umSet = trilho.scrollWidth / copias;
+    const max0 = trilho.scrollWidth - trilho.clientWidth;
+    if (dir > 0 && trilho.scrollLeft >= max0 - 2) trilho.scrollLeft -= umSet;
     else if (dir < 0 && trilho.scrollLeft <= 2) trilho.scrollLeft += umSet;
   }
   const max = trilho.scrollWidth - trilho.clientWidth;
-  const alvo = Math.max(0, Math.min(max, trilho.scrollLeft + dir * trilho.clientWidth));
+  const alvo = Math.max(0, Math.min(max, trilho.scrollLeft + dir * passo));
   trilho.scrollTo({ left: alvo, behavior: "smooth" });
 }
 function montarNichos(todosVideos, animar) {
@@ -925,17 +932,15 @@ function montarNichos(todosVideos, animar) {
     if (!itens.length) return;
     $("#filtroPills").append(el("a", { href: "#nicho-" + n.slug, text: n.nome }));
     const trilho = el("div", { class: "nicho-trilho" });
-    const loop = itens.length > 5;
-    const voltas = loop ? 2 : 1;
-    for (let r = 0; r < voltas; r++) itens.forEach((v, i) => trilho.append(cartaoVideo(v, i, animar)));
+    const copias = Math.max(2, Math.ceil(12 / itens.length));
+    trilho.dataset.copias = copias;
+    for (let r = 0; r < copias; r++) itens.forEach((v, i) => trilho.append(cartaoVideo(v, i, animar)));
     const cab = el("div", { class: "nicho-cab" }, [el("h3", { text: n.nome }), el("span", { text: String(itens.length).padStart(2, "0") })]);
-    if (loop) {
-      const btnAnt = el("button", { class: "nicho-seta", type: "button", "aria-label": "Vídeos anteriores de " + n.nome, text: "‹" });
-      const btnProx = el("button", { class: "nicho-seta", type: "button", "aria-label": "Mais vídeos de " + n.nome, text: "›" });
-      btnAnt.addEventListener("click", () => moverTrilho(trilho, -1, true));
-      btnProx.addEventListener("click", () => moverTrilho(trilho, 1, true));
-      cab.append(el("div", { class: "nicho-nav" }, [btnAnt, btnProx]));
-    }
+    const btnAnt = el("button", { class: "nicho-seta", type: "button", "aria-label": "Vídeos anteriores de " + n.nome, text: "‹" });
+    const btnProx = el("button", { class: "nicho-seta", type: "button", "aria-label": "Mais vídeos de " + n.nome, text: "›" });
+    btnAnt.addEventListener("click", () => moverTrilho(trilho, -1));
+    btnProx.addEventListener("click", () => moverTrilho(trilho, 1));
+    cab.append(el("div", { class: "nicho-nav" }, [btnAnt, btnProx]));
     grades.append(el("div", { class: "nicho-linha", id: "nicho-" + n.slug }, [
       cab,
       el("p", { class: "nicho-desc", text: n.desc }),
