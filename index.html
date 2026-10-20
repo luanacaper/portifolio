@@ -303,9 +303,12 @@ section{scroll-margin-top:92px}
 .serv h3{margin-top:18px;font-size:1.2rem;letter-spacing:-.01em}
 .serv p{margin-top:8px;color:var(--suave);font-size:.98rem}
 
-/* Depoimentos */
-.dep-grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
-.dep-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:var(--raio-g);padding:clamp(22px,3vw,28px);display:flex;flex-direction:column;gap:14px}
+/* Depoimentos: carrossel de 1 faixa só, sempre com 1 depoimento em foco (igual ao de resultados) */
+.dep-carrossel{position:relative}
+.dep-grade{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 4px 10px;scrollbar-width:none;-ms-overflow-style:none}
+.dep-grade::-webkit-scrollbar{display:none}
+.dep-card{flex:none;width:clamp(260px,40vw,400px);scroll-snap-align:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:var(--raio-g);padding:clamp(22px,3vw,28px);display:flex;flex-direction:column;gap:14px;transition:opacity .4s ease,filter .4s ease,transform .4s ease}
+.dep-card:not(.ativo){opacity:.35!important;filter:blur(2px);transform:scale(.93)!important}
 .dep-aspas{font-family:Georgia,serif;font-size:2.6rem;line-height:1;color:var(--laranja-claro);opacity:.85}
 .dep-texto{color:rgba(255,255,255,.92);font-size:.98rem;line-height:1.55}
 .dep-rodape{margin-top:auto;padding-top:14px;border-top:1px solid rgba(255,255,255,.14)}
@@ -392,6 +395,7 @@ body.trava{overflow:hidden}
   .rc-ant{left:-4px}
   .rc-prox{right:-4px}
   .rc-card{width:clamp(160px,58vw,210px)}
+  .dep-card{width:clamp(220px,78vw,320px)}
   .nc{width:165px}
   .nicho-trilho{max-width:calc(165px*5 + 12px*4)}
   .filtro-pills a{font-size:.78rem;padding:6px 12px}
@@ -549,7 +553,11 @@ body.trava{overflow:hidden}
       <p class="etiqueta revelar" data-i18n="dep.etiqueta">Prova social</p>
       <h2 class="titulo revelar" id="t-dep" style="--d:.05s" data-i18n="dep.h2">O que dizem sobre o <span class="serif">trabalho</span></h2>
     </div>
-    <div class="dep-grade" id="depGrade"></div>
+    <div class="dep-carrossel">
+      <button class="rc-seta rc-ant" id="depAnt" type="button" aria-label="Depoimento anterior" data-i18n-aria="dep.ant">‹</button>
+      <div class="dep-grade" id="depGrade"></div>
+      <button class="rc-seta rc-prox" id="depProx" type="button" aria-label="Próximo depoimento" data-i18n-aria="dep.prox">›</button>
+    </div>
   </div>
 </section>
 
@@ -1330,14 +1338,51 @@ renderizarServicos(true);
 function montarDepoimentos(lista, animar) {
   const grade = $("#depGrade");
   grade.replaceChildren();
-  lista.forEach((d, i) => {
-    grade.append(el("article", { class: "dep-card" + (animar === false ? "" : " revelar"), style: animar === false ? null : atraso(i % 6) }, [
-      el("span", { class: "dep-aspas", "aria-hidden": "true", text: "“" }),
-      el("p", { class: "dep-texto", text: d.texto }),
-      el("div", { class: "dep-rodape" }, [el("span", { class: "dep-marca", text: d.marca }), el("span", { class: "dep-ctx", text: d.ctx })])
-    ]));
-  });
+  const copias = Math.max(2, Math.ceil(12 / lista.length));
+  grade.dataset.copias = copias;
+  for (let c = 0; c < copias; c++) {
+    lista.forEach((d, i) => {
+      grade.append(el("article", { class: "dep-card" + (animar === false ? "" : " revelar"), style: animar === false ? null : atraso(i % 6), "data-idx": i }, [
+        el("span", { class: "dep-aspas", "aria-hidden": "true", text: "“" }),
+        el("p", { class: "dep-texto", text: d.texto }),
+        el("div", { class: "dep-rodape" }, [el("span", { class: "dep-marca", text: d.marca }), el("span", { class: "dep-ctx", text: d.ctx })])
+      ]));
+    });
+  }
+  atualizarFocoDepoimentos();
 }
+/* Marca o depoimento mais perto do centro como "ativo" (nítido); os outros ficam
+   borrados/apagados — mesmo efeito do carrossel de "Os melhores resultados". */
+function atualizarFocoDepoimentos() {
+  const grade = $("#depGrade");
+  const centro = grade.getBoundingClientRect().left + grade.clientWidth / 2;
+  let maisPerto = null, menorDist = Infinity;
+  grade.querySelectorAll(".dep-card").forEach(c => {
+    const r = c.getBoundingClientRect();
+    const dist = Math.abs((r.left + r.width / 2) - centro);
+    if (dist < menorDist) { menorDist = dist; maisPerto = c; }
+    c.classList.remove("ativo");
+  });
+  if (maisPerto) maisPerto.classList.add("ativo");
+}
+(function () {
+  const grade = $("#depGrade");
+  grade.addEventListener("scroll", () => {
+    clearTimeout(grade._focoTimer);
+    grade._focoTimer = setTimeout(atualizarFocoDepoimentos, 80);
+  }, { passive: true });
+  function mover(dir) { moverTrilho(grade, dir); }
+  $("#depAnt").addEventListener("click", () => mover(-1));
+  $("#depProx").addEventListener("click", () => mover(1));
+  if (!reduzido) {
+    let auto = setInterval(() => mover(1), 4200);
+    const pausar = () => clearInterval(auto);
+    const retomar = () => { clearInterval(auto); auto = setInterval(() => mover(1), 4200); };
+    grade.addEventListener("pointerenter", pausar);
+    grade.addEventListener("pointerleave", retomar);
+    grade.addEventListener("touchstart", pausar, { passive: true });
+  }
+})();
 let DEPOIMENTOS_ATIVOS = DEPOIMENTOS, depoimentosDoBanco = false;
 function renderizarDepoimentos(animar) { montarDepoimentos(idioma === "en" && !depoimentosDoBanco ? DEPOIMENTOS_EN : DEPOIMENTOS_ATIVOS, animar); }
 renderizarDepoimentos(true);
@@ -1533,6 +1578,8 @@ const I18N_EN_ARIA = {
   "sobre.videoAria": "Video: How I shoot your UGC content (coming soon)",
   "resultados.ant": "Previous result",
   "resultados.prox": "Next result",
+  "dep.ant": "Previous testimonial",
+  "dep.prox": "Next testimonial",
   "modal.fechar": "Close video"
 };
 const PT_HTML = new Map();
