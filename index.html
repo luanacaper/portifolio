@@ -295,6 +295,12 @@ section{scroll-margin-top:92px}
 .vm .btn{min-height:44px;padding:10px 20px;font-size:.95rem}
 .vm :focus-visible{outline-color:#fff}
 
+/* "O que podemos criar juntos": foto + serviços lado a lado */
+.criar-grade{display:grid;grid-template-columns:.78fr 1.22fr;gap:clamp(24px,4vw,48px);align-items:start}
+.criar-foto{display:flex;flex-direction:column;max-width:360px;margin:0 auto;border-radius:var(--raio-g);overflow:hidden}
+.criar-foto img{width:100%;display:block}
+.criar-foto-bloco{height:clamp(90px,14vw,140px);background:var(--verde)}
+
 /* Serviços */
 .serv-grade{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
 .serv{background:var(--gelo);border:1px solid var(--linha);border-radius:var(--raio);padding:28px 24px;transition:transform .25s,box-shadow .25s,background .25s;min-width:0}
@@ -373,6 +379,7 @@ body.trava{overflow:hidden}
   .sobre-grade{grid-template-columns:1fr}
   .sobre-grade .foto{max-width:340px}
   .contato-grade{grid-template-columns:1fr}
+  .criar-grade{grid-template-columns:1fr}
   .serv-grade{grid-template-columns:1fr}
 }
 @media (max-width:700px){
@@ -542,7 +549,13 @@ body.trava{overflow:hidden}
       <h2 class="titulo revelar" id="t-criar" style="--d:.05s" data-i18n="criar.h2">O que podemos <span class="serif">criar juntos?</span></h2>
       <p class="revelar" style="--d:.1s" data-i18n="criar.p">Cada formato tem um objetivo: vender, escalar ou construir marca. Me conta o seu que a gente monta o combo perfeito pra sua marca.</p>
     </div>
-    <div class="serv-grade" id="servGrade"></div>
+    <div class="criar-grade">
+      <div class="criar-foto">
+        <img src="img/bora-criar.png" alt="Luana Caper segurando o celular e apontando pra tela, que mostra &quot;Vamos criar?&quot;" loading="lazy" width="985" height="1185">
+        <div class="criar-foto-bloco" aria-hidden="true"></div>
+      </div>
+      <div class="serv-grade" id="servGrade"></div>
+    </div>
   </div>
 </section>
 
