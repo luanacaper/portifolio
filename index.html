@@ -253,9 +253,14 @@ section{scroll-margin-top:92px}
 .serv h3{margin-top:18px;font-size:1.2rem;letter-spacing:-.01em}
 .serv p{margin-top:8px;color:var(--suave);font-size:.98rem}
 
-/* Depoimentos (em breve) */
-.dep-vazio{background:rgba(255,255,255,.08);border:1px dashed rgba(255,255,255,.35);border-radius:var(--raio-g);padding:clamp(28px,5vw,44px);text-align:center;color:rgba(255,255,255,.85)}
-.dep-vazio b{display:block;font-size:1.1rem;color:#fff;margin-bottom:6px}
+/* Depoimentos */
+.dep-grade{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.dep-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:var(--raio-g);padding:clamp(22px,3vw,28px);display:flex;flex-direction:column;gap:14px}
+.dep-aspas{font-family:Georgia,serif;font-size:2.6rem;line-height:1;color:var(--laranja-claro);opacity:.85}
+.dep-texto{color:rgba(255,255,255,.92);font-size:.98rem;line-height:1.55}
+.dep-rodape{margin-top:auto;padding-top:14px;border-top:1px solid rgba(255,255,255,.14)}
+.dep-marca{display:block;font-weight:800;color:#fff;font-size:.95rem}
+.dep-ctx{display:block;margin-top:2px;font-size:.78rem;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.04em}
 
 /* Contato */
 .contato-grade{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,56px);align-items:start}
@@ -398,12 +403,12 @@ body.trava{overflow:hidden}
 
     <div class="capa-hero-texto">
       <p class="etiqueta revelar capa-etiqueta">UGC Creator · Estrategista · Goiânia, GO · Brasil</p>
-      <h1 class="revelar" style="--d:.05s">Crio conteúdo que <span class="serif">vende mais</span> para sua marca.</h1>
-      <p class="lead revelar" style="--d:.1s">De hook a CTA, tudo pensado para converter.</p>
+      <h1 class="revelar" style="--d:.05s">Seu conteúdo <span class="serif">se converte mais!</span></h1>
+      <p class="lead revelar" style="--d:.1s">Analiso seu público e crio do hook ao CTA o criativo que é pensado para vender.</p>
       <div class="acoes revelar" style="--d:.15s">
         <a class="btn btn-primario" href="#contato">Quero criar com a Luana</a>
       </div>
-      <a class="link-sutil revelar" style="--d:.18s" href="#contato">Quero gerenciar minha campanha →</a>
+      <a class="link-sutil revelar" style="--d:.18s" href="#contato">Gerenciar minha campanha com a Luana →</a>
     </div>
   </div>
 
@@ -494,10 +499,7 @@ body.trava{overflow:hidden}
       <p class="etiqueta revelar">Prova social</p>
       <h2 class="titulo revelar" id="t-dep" style="--d:.05s">O que dizem sobre o <span class="serif">trabalho</span></h2>
     </div>
-    <div class="dep-vazio revelar">
-      <b>Depoimentos a caminho</b>
-      <p>Essa vitrine vai trazer o feedback real das marcas assim que eu organizar os prints. Volte em breve.</p>
-    </div>
+    <div class="dep-grade" id="depGrade"></div>
   </div>
 </section>
 
@@ -672,6 +674,15 @@ const SERVICOS = [
   { titulo: "Gestão em escala", texto: "Campanhas com vários creators (UGC, nano, micro e influenciadores), do briefing à entrega, pra escalar seu conteúdo sem dor de cabeça — seja para orgânico ou tráfego pago." },
   { titulo: "UGC para E-commerce", texto: "Vídeos autênticos de produto pra sua loja vender todo dia, com a naturalidade de quem realmente usa." },
   { titulo: "Fotos UGC", texto: "Imagens com a mesma naturalidade dos vídeos, prontas pra feed, site e anúncios estáticos que também precisam vender." }
+];
+
+const DEPOIMENTOS = [
+  { marca: "Place Company", texto: "A Luana entregou um ROAS que a gente nunca tinha alcançado em tráfego — foi a primeira vez que vimos esse número, e virou o novo padrão pra gente.", ctx: "Tráfego pago · recorde de ROAS" },
+  { marca: "Tekoá", texto: "Rodamos os criativos com a Luana e emplacamos os melhores números de ROAS que já tivemos em assinatura: 6,90, 7,20 e 7,54.", ctx: "ROAS 6,90 · 7,20 · 7,54" },
+  { marca: "Milkmoo", texto: "Os vídeos entregaram 5 vezes mais resultado de forma orgânica no nosso perfil. A Luana entende como poucos o que faz o conteúdo performar.", ctx: "+5x de resultado orgânico" },
+  { marca: "Cinta Press", texto: "Amei o conteúdo porque ela falou de tudo que a gente queria mostrar sobre os benefícios da cinta. Ficou exatamente como a gente precisava.", ctx: "Vídeo de produto" },
+  { marca: "Block Carbo", texto: "Amei o vídeo. Você é muito criativa e agora a gente tem um material rico pra divulgação.", ctx: "Vídeo de produto" },
+  { marca: "Casa Cachoeira Sonho Meu", texto: "Aquele primeiro vídeo fechou nossa agenda de fim de ano até junho deste ano.", ctx: "Vídeo de viagem" }
 ];
 
 const TONS = [
@@ -962,6 +973,15 @@ SERVICOS.forEach((s, i) => {
     el("span", { class: "serv-n", "aria-hidden": "true", text: String(i + 1).padStart(2, "0") }),
     el("h3", { text: s.titulo }),
     el("p", { text: s.texto })
+  ]));
+});
+
+/* Depoimentos */
+DEPOIMENTOS.forEach((d, i) => {
+  $("#depGrade").append(el("article", { class: "dep-card revelar", style: atraso(i % 6) }, [
+    el("span", { class: "dep-aspas", "aria-hidden": "true", text: "“" }),
+    el("p", { class: "dep-texto", text: d.texto }),
+    el("div", { class: "dep-rodape" }, [el("span", { class: "dep-marca", text: d.marca }), el("span", { class: "dep-ctx", text: d.ctx })])
   ]));
 });
 
