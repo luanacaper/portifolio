@@ -879,7 +879,7 @@ vm.addEventListener("click", e => { if (e.target === vm) vmFechar(); });
 document.addEventListener("keydown", e => { if (!vm.hidden && e.key === "Escape") vmFechar(); });
 
 /* Cartão de vídeo: se tiver id, toca no site; sem id, mostra "em breve" */
-function cartaoVideo(v, i) {
+function cartaoVideo(v, i, animar) {
   const temVideo = !!v.id;
   const thumb = v.thumb || (v.prov === "yt" ? "https://i.ytimg.com/vi/" + v.id + "/hqdefault.jpg" : "");
   const corpo = el("div", { class: "nc-corpo" }, [el("b", { text: v.titulo }), v.nota ? el("span", { text: v.nota }) : null]);
@@ -897,7 +897,7 @@ function cartaoVideo(v, i) {
       el("span", { class: "play", "aria-hidden": "true" })
     ]);
   }
-  return el("article", { class: "nc revelar" + (temVideo ? "" : " pendente"), style: atraso(i % 6) }, [miolo, corpo]);
+  return el("article", { class: "nc" + (animar === false ? "" : " revelar") + (temVideo ? "" : " pendente"), style: animar === false ? null : atraso(i % 6) }, [miolo, corpo]);
 }
 
 /* Catálogo por nicho */
@@ -909,7 +909,7 @@ function moverTrilho(trilho, dir) {
   else alvo = Math.max(0, Math.min(max, trilho.scrollLeft + dir * trilho.clientWidth));
   trilho.scrollTo({ left: alvo, behavior: "smooth" });
 }
-function montarNichos(todosVideos) {
+function montarNichos(todosVideos, animar) {
   const grades = $("#nichosGrades");
   $("#filtroPills").replaceChildren();
   grades.replaceChildren();
@@ -918,7 +918,7 @@ function montarNichos(todosVideos) {
     if (!itens.length) return;
     $("#filtroPills").append(el("a", { href: "#nicho-" + n.slug, text: n.nome }));
     const trilho = el("div", { class: "nicho-trilho" });
-    itens.forEach((v, i) => trilho.append(cartaoVideo(v, i)));
+    itens.forEach((v, i) => trilho.append(cartaoVideo(v, i, animar)));
     const cab = el("div", { class: "nicho-cab" }, [el("h3", { text: n.nome }), el("span", { text: String(itens.length).padStart(2, "0") })]);
     if (itens.length > 5) {
       const btnAnt = el("button", { class: "nicho-seta", type: "button", "aria-label": "Vídeos anteriores de " + n.nome, text: "‹" });
@@ -978,22 +978,57 @@ $("#btnVideoSobre").addEventListener("click", () => {
 });
 
 /* Serviços */
-SERVICOS.forEach((s, i) => {
-  $("#servGrade").append(el("article", { class: "serv revelar", style: atraso(i) }, [
-    el("span", { class: "serv-n", "aria-hidden": "true", text: String(i + 1).padStart(2, "0") }),
-    el("h3", { text: s.titulo }),
-    el("p", { text: s.texto })
-  ]));
-});
+function montarServicos(lista, animar) {
+  const grade = $("#servGrade");
+  grade.replaceChildren();
+  lista.forEach((s, i) => {
+    grade.append(el("article", { class: "serv" + (animar === false ? "" : " revelar"), style: animar === false ? null : atraso(i) }, [
+      el("span", { class: "serv-n", "aria-hidden": "true", text: String(i + 1).padStart(2, "0") }),
+      el("h3", { text: s.titulo }),
+      el("p", { text: s.texto })
+    ]));
+  });
+}
+montarServicos(SERVICOS);
 
 /* Depoimentos */
-DEPOIMENTOS.forEach((d, i) => {
-  $("#depGrade").append(el("article", { class: "dep-card revelar", style: atraso(i % 6) }, [
-    el("span", { class: "dep-aspas", "aria-hidden": "true", text: "“" }),
-    el("p", { class: "dep-texto", text: d.texto }),
-    el("div", { class: "dep-rodape" }, [el("span", { class: "dep-marca", text: d.marca }), el("span", { class: "dep-ctx", text: d.ctx })])
-  ]));
-});
+function montarDepoimentos(lista, animar) {
+  const grade = $("#depGrade");
+  grade.replaceChildren();
+  lista.forEach((d, i) => {
+    grade.append(el("article", { class: "dep-card" + (animar === false ? "" : " revelar"), style: animar === false ? null : atraso(i % 6) }, [
+      el("span", { class: "dep-aspas", "aria-hidden": "true", text: "“" }),
+      el("p", { class: "dep-texto", text: d.texto }),
+      el("div", { class: "dep-rodape" }, [el("span", { class: "dep-marca", text: d.marca }), el("span", { class: "dep-ctx", text: d.ctx })])
+    ]));
+  });
+}
+montarDepoimentos(DEPOIMENTOS);
+
+/* Conteúdo do banco (painel /login/ do Portfolio UGC): tenta buscar e, se vier algo, troca o conteúdo fixo do código.
+   Se não tiver internet ou o banco estiver fora do ar, o site continua normal com as listas fixas acima. */
+(async function () {
+  const sb = CONFIG.supabase;
+  if (!sb || !sb.url) return;
+  async function buscar(tabela, campos, ordem) {
+    try {
+      const r = await fetch(sb.url + "/rest/v1/" + tabela + "?select=" + campos + "&publicado=eq.true&order=" + ordem, { headers: { apikey: sb.chave } });
+      if (!r.ok) return null;
+      const lista = await r.json();
+      return Array.isArray(lista) && lista.length ? lista : null;
+    } catch (e) { return null; }
+  }
+  const [videos, marcas, depo, serv] = await Promise.all([
+    buscar("videos_geral", "titulo,nota,nicho,plataforma,video_id,ordem", "ordem.asc,created_at.asc"),
+    buscar("marcas_logos", "nome,arquivo,fundo,tamanho,ordem", "ordem.asc,created_at.asc"),
+    buscar("depoimentos_geral", "marca,texto,ctx,ordem", "ordem.asc,created_at.asc"),
+    buscar("servicos_geral", "titulo,texto,ordem", "ordem.asc,created_at.asc")
+  ]);
+  if (videos) montarNichos(videos.map(v => ({ titulo: v.titulo, nota: v.nota, nicho: v.nicho, prov: v.plataforma, id: v.video_id })), false);
+  if (marcas) montarMarcas(marcas.map(m => ({ nome: m.nome, arq: "img/marcas/" + m.arquivo, fundo: m.fundo, pequeno: m.tamanho === "pequeno", grande: m.tamanho === "grande" })));
+  if (depo) montarDepoimentos(depo, false);
+  if (serv) montarServicos(serv, false);
+})();
 
 /* Canais de contato e rodapé */
 const canais = [
