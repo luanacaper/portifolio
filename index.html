@@ -149,6 +149,10 @@ section{scroll-margin-top:92px}
 .trilho ul{display:flex;align-items:center;flex-shrink:0}
 .trilho li{display:flex;align-items:center;white-space:nowrap;font-weight:700;color:var(--tinta);font-size:1rem}
 .trilho li::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--laranja);margin:0 28px;box-shadow:0 0 0 2px #fff,0 0 0 3px var(--laranja)}
+.ticker-marcas .trilho li{margin-right:18px}
+.ticker-marcas .trilho li::after{content:none}
+.marca-bolha{display:grid;place-items:center;width:84px;height:84px;border-radius:50%;background:var(--gelo);border:1px solid var(--linha);overflow:hidden;padding:14px}
+.marca-bolha img{width:100%;height:100%;object-fit:contain}
 @keyframes rolar2{to{transform:translateX(-50%)}}
 
 /* Faixa de destaques (3 cards curtos logo após as marcas) */
@@ -400,7 +404,7 @@ body.trava{overflow:hidden}
     <div class="destaques-rapidos" id="destaquesRapidos"></div>
   </div>
 
-  <div class="ticker" aria-label="Marcas que confiaram no meu trabalho">
+  <div class="ticker ticker-marcas" aria-label="Marcas que confiaram no meu trabalho">
     <span class="ticker-rot">Marcas que confiaram no meu trabalho</span>
     <div class="trilho" id="trilhoMarcas"></div>
   </div>
@@ -561,11 +565,38 @@ const CONFIG = {
 
 const ENTREGA = ["Roteiro estratégico", "Fotos UGC", "Conteúdo E-commerce", "Anúncios que convertem", "Estratégia com creators"];
 
-const MARCAS = [
-  "Aimê", "Magalu", "Shopee", "Casa da Gê", "Ambrô", "Tekoá", "Sums Club", "Nold Pet", "Fast Escova",
-  "Place Company", "Pressfit", "Lola Cosmetics", "Forever Liss", "Milkmoo", "Block Carbo", "Café",
-  "Stabille", "Pessoa Advogados", "HF Consultoria", "Facilita", "Ouze Loja", "Rocklin Store", "Buzzlead",
-  "Institut Dandhela", "Aldeia Multiétnica", "Fell Good Shop Online Portugal", "Las Pams", "Barba Men", "Eliefe", "Zoe"
+const MARCAS_LOGOS = [
+  { nome: "Aimê", arq: "img/marcas/aime.png" },
+  { nome: "Magalu", arq: "img/marcas/magalu.png" },
+  { nome: "Shopee", arq: "img/marcas/shopee.png" },
+  { nome: "Casa de Gê", arq: "img/marcas/casa-de-ge.webp" },
+  { nome: "Ambrô", arq: "img/marcas/ambro.png" },
+  { nome: "Sam's Club", arq: "img/marcas/sams-club.png" },
+  { nome: "Nold Pet", arq: "img/marcas/nold-pet.png" },
+  { nome: "Fast Escova", arq: "img/marcas/fast-escova.png" },
+  { nome: "Place Company", arq: "img/marcas/place-company.png" },
+  { nome: "Pressfit", arq: "img/marcas/pressfit.jpg" },
+  { nome: "Lola Cosmetics", arq: "img/marcas/lola-cosmetics.jpg" },
+  { nome: "Forever Liss", arq: "img/marcas/forever-liss.png" },
+  { nome: "Milky Moo", arq: "img/marcas/milky-moo.png" },
+  { nome: "Stabile & Pessoa Advogados", arq: "img/marcas/stabile-pessoa.jpg" },
+  { nome: "HF Consultoria", arq: "img/marcas/hf-consultoria.png" },
+  { nome: "Facilita", arq: "img/marcas/facilita.jpg" },
+  { nome: "Ouze Loja", arq: "img/marcas/ouze-loja.png" },
+  { nome: "Rocklin", arq: "img/marcas/rocklin.jpg" },
+  { nome: "BuzzLead", arq: "img/marcas/buzzlead.png" },
+  { nome: "Instituto Deândhela", arq: "img/marcas/instituto-deandhela.png" },
+  { nome: "Aldeia Multiétnica", arq: "img/marcas/aldeia-multietnica.png" },
+  { nome: "Feel.Good Shop Online", arq: "img/marcas/feelgood.png" },
+  { nome: "La's Palmas", arq: "img/marcas/las-palmas.jpg" },
+  { nome: "Barba Men", arq: "img/marcas/barba-men.png" },
+  { nome: "Eliefe", arq: "img/marcas/eliefe.png" },
+  { nome: "Zoe", arq: "img/marcas/zoe.jpg" },
+  { nome: "MaGê", arq: "img/marcas/mage.png" },
+  { nome: "UniAraguaia", arq: "img/marcas/uniaraguaia.png" },
+  { nome: "Cílios Showroom", arq: "img/marcas/cilios-showroom.png" },
+  { nome: "BioCenter", arq: "img/marcas/biocenter.jpg" },
+  { nome: "Indeniza Voo", arq: "img/marcas/indeniza-voo.jpg" }
 ];
 
 const DESTAQUES_RAPIDOS = [
@@ -705,7 +736,19 @@ function montarTicker(sel, itens) {
   trilho.append(lista(false), lista(true));
 }
 montarTicker("#trilhoEntrega", ENTREGA);
-montarTicker("#trilhoMarcas", MARCAS);
+
+/* Ticker de marcas: bolinha com a logo de cada marca, rolando sozinho */
+(function () {
+  const trilho = $("#trilhoMarcas");
+  const lista = ocultar => {
+    const ul = el("ul", ocultar ? { "aria-hidden": "true" } : {});
+    for (let r = 0; r < 2; r++) MARCAS_LOGOS.forEach(m => ul.append(el("li", {}, [
+      el("span", { class: "marca-bolha" }, [el("img", { src: m.arq, alt: m.nome, loading: "lazy", width: 96, height: 96 })])
+    ])));
+    return ul;
+  };
+  trilho.append(lista(false), lista(true));
+})();
 
 /* Cartões flutuantes da capa: acompanham o mouse de leve (só em telas com mouse) */
 (function () {
