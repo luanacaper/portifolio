@@ -1096,8 +1096,11 @@ function cartaoVideo(v, i, animar) {
    trás na hora (sem animação, invisível porque o conteúdo é idêntico) antes de continuar o
    scroll suave — nunca dá o "pulo" de voltar pro início. */
 function passoTrilho(trilho) {
-  const card = trilho.querySelector(".nc");
-  return card ? card.getBoundingClientRect().width + 12 : 200;
+  const card = trilho.firstElementChild;
+  if (!card) return 200;
+  const cs = getComputedStyle(trilho);
+  const gap = parseFloat(cs.columnGap || cs.gap) || 0;
+  return card.getBoundingClientRect().width + gap;
 }
 function moverTrilho(trilho, dir) {
   const copias = Number(trilho.dataset.copias) || 1;
@@ -1248,13 +1251,17 @@ function montarResultadosCarrossel(lista, animar) {
   trilho.replaceChildren();
   RESULTADOS_LISTA_ATUAL = lista;
   RESULTADOS_PROVA_ATUAL = -1;
-  lista.forEach((r, i) => {
-    trilho.append(el("div", { class: "rc-card" + (animar === false ? "" : " revelar"), style: animar === false ? null : atraso(i % 4), "data-idx": i }, [
-      el("span", { class: "rc-marca", text: r.marca }),
-      el("div", { class: "rc-foto", style: "background:" + TONS[i % TONS.length] }),
-      el("div", { class: "rc-stat" }, [el("b", { text: r.stat }), r.ctx ? el("small", { class: "rc-ctx", text: r.ctx }) : null])
-    ]));
-  });
+  const copias = Math.max(2, Math.ceil(12 / lista.length));
+  trilho.dataset.copias = copias;
+  for (let c = 0; c < copias; c++) {
+    lista.forEach((r, i) => {
+      trilho.append(el("div", { class: "rc-card" + (animar === false ? "" : " revelar"), style: animar === false ? null : atraso(i % 4), "data-idx": i }, [
+        el("span", { class: "rc-marca", text: r.marca }),
+        el("div", { class: "rc-foto", style: "background:" + TONS[i % TONS.length] }),
+        el("div", { class: "rc-stat" }, [el("b", { text: r.stat }), r.ctx ? el("small", { class: "rc-ctx", text: r.ctx }) : null])
+      ]));
+    });
+  }
   atualizarFocoResultados();
 }
 function renderizarResultadosCarrossel(animar) { montarResultadosCarrossel(idioma === "en" ? RESULTADOS_CARROSSEL_EN : RESULTADOS_CARROSSEL, animar); }
@@ -1284,17 +1291,7 @@ function atualizarFocoResultados() {
     clearTimeout(trilho._focoTimer);
     trilho._focoTimer = setTimeout(atualizarFocoResultados, 80);
   }, { passive: true });
-  function passo() {
-    const card = trilho.querySelector(".rc-card");
-    return card ? card.getBoundingClientRect().width + 18 : 200;
-  }
-  function mover(dir) {
-    const max = trilho.scrollWidth - trilho.clientWidth;
-    let alvo = trilho.scrollLeft + dir * passo();
-    if (alvo < 2) alvo = max;
-    else if (alvo > max - 2) alvo = 0;
-    trilho.scrollTo({ left: alvo, behavior: "smooth" });
-  }
+  function mover(dir) { moverTrilho(trilho, dir); }
   $("#rcAnt").addEventListener("click", () => mover(-1));
   $("#rcProx").addEventListener("click", () => mover(1));
 
