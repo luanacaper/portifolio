@@ -174,8 +174,9 @@ section{scroll-margin-top:92px}
 .sobre-texto p{margin-top:16px;color:var(--suave);font-size:1.05rem}
 .sobre-texto p.forte{color:var(--tinta);font-weight:600}
 .promessas{margin-top:24px;display:grid;gap:12px}
-.promessas li{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--linha);border-radius:18px;padding:14px 18px;font-weight:700;box-shadow:var(--sombra)}
-.promessas li::before{content:"✓";flex:none;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--verde);color:#fff;font-size:.9rem}
+.promessas li{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--linha);border-radius:18px;padding:13px 18px;box-shadow:var(--sombra)}
+.promessas b{font-size:.95rem;font-weight:700;line-height:1.25}
+.promessas small{display:block;font-size:.82rem;font-weight:400;color:var(--suave);margin-top:2px}
 .video-pendente{position:relative}
 .video-pendente::after{content:"";position:absolute;inset:0;background:rgba(20,25,16,.42)}
 .vp-selo{position:absolute;z-index:2;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:#fff;text-align:center}
@@ -230,12 +231,10 @@ section{scroll-margin-top:92px}
 .nicho-trilho::-webkit-scrollbar{height:6px}
 .nicho-trilho::-webkit-scrollbar-thumb{background:var(--linha);border-radius:99px}
 .nc{flex:none;width:210px;scroll-snap-align:start}
-.nc-corpo{margin-top:8px}
-.nc-corpo b{display:block;font-size:.82rem;line-height:1.25}
-.nc-corpo span{display:block;margin-top:2px;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--suave)}
 .nc.pendente .mini{cursor:default;background:linear-gradient(160deg,#55613b 0%,#8a9a63 100%)}
 .nc.pendente .play{background:rgba(255,255,255,.3);border:2px solid rgba(255,255,255,.7)}
 .nc.pendente .play::before{border-color:transparent transparent transparent #fff}
+.nc-marca{position:absolute;left:8px;top:8px;z-index:2;background:rgba(255,255,255,.95);color:var(--tinta);font-size:.74rem;font-weight:800;letter-spacing:-.01em;padding:5px 11px;border-radius:999px;max-width:calc(100% - 16px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .nc-em-breve{position:absolute;left:8px;bottom:8px;z-index:2;background:rgba(255,255,255,.92);color:var(--tinta);font-size:.62rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:999px}
 
 /* Player ampliado */
@@ -443,11 +442,7 @@ body.trava{overflow:hidden}
       <h2 class="titulo revelar" id="t-sobre" style="--d:.05s">Oie, sou a <span class="serif">Luana Caper</span></h2>
       <p class="forte revelar" style="--d:.1s">Tenho 35 anos, sou UGC, estrategista de conteúdo e gestora de tráfego. Atuo no mercado há mais de 10 anos e já trabalhei com mais de 280 marcas entre vídeos gravados e gestão de campanhas.</p>
       <p class="sobre-p revelar" style="--d:.15s">Desenvolvo conteúdos para que cada etapa do funil gere o resultado desejado e converta.</p>
-      <ul class="promessas revelar" style="--d:.2s">
-        <li>Roteiro aprovado antes de gravar</li>
-        <li>Estratégia pensada por etapa do funil</li>
-        <li>+280 marcas atendidas</li>
-      </ul>
+      <ul class="promessas revelar" id="promessasLista" style="--d:.2s"></ul>
       <p class="sobre-p revelar" style="--d:.2s">Goiânia · GO · Brasil</p>
     </div>
   </div>
@@ -624,42 +619,44 @@ const DESTAQUES_RAPIDOS = [
 
 /* Vídeos de viagem (mesmos do portfólio de Viagens, já têm link) */
 const VIDEOS_VIAGEM = [
-  { titulo: "Chalé Lua", nicho: "viagem", prov: "yt", id: "ARMfs907Fbw" },
-  { titulo: "Flutuante Serra da Mesa", nicho: "viagem", prov: "yt", id: "nmZHI9Psc44" },
-  { titulo: "Lajinha", nicho: "viagem", prov: "yt", id: "OAcfpc5pOr4" },
-  { titulo: "Pousada Aimê", nicho: "viagem", prov: "yt", id: "CnLIGnGYo_s" },
-  { titulo: "Casa Cachoeira Sonho Meu", nicho: "viagem", prov: "yt", id: "b49WhEAw0Sc" },
-  { titulo: "Mirante do Ipê", nicho: "viagem", prov: "yt", id: "5bYZJZyPr2g" }
+  { titulo: "Chalé Lua", marca: "Chalé Lua", nicho: "viagem", prov: "yt", id: "ARMfs907Fbw" },
+  { titulo: "Flutuante Serra da Mesa", marca: "Flutuante Serra da Mesa", nicho: "viagem", prov: "yt", id: "nmZHI9Psc44" },
+  { titulo: "Lajinha", marca: "Lajinha", nicho: "viagem", prov: "yt", id: "OAcfpc5pOr4" },
+  { titulo: "Pousada Aimê", marca: "Pousada Aimê", nicho: "viagem", prov: "yt", id: "CnLIGnGYo_s" },
+  { titulo: "Casa Cachoeira Sonho Meu", marca: "Casa Cachoeira Sonho Meu", nicho: "viagem", prov: "yt", id: "b49WhEAw0Sc" },
+  { titulo: "Mirante do Ipê", marca: "Mirante do Ipê", nicho: "viagem", prov: "yt", id: "5bYZJZyPr2g" }
 ];
 
-/* Vídeos novos (ainda sem link — ficam "em breve" até a Luana mandar o link de cada um) */
+/* Vídeos novos (ainda sem link — ficam "em breve" até a Luana mandar o link de cada um).
+   "titulo" e "nota" são só pra referência interna (lista do painel); quem aparece no site
+   pro público é só "marca", em destaque na própria miniatura. */
 const VIDEOS_NOVOS = [
-  { titulo: "Tekoá 01 – Anúncio", nota: "versão crua disponível", nicho: "gastronomia-assinaturas", id: null },
-  { titulo: "Tekoá 02 – Anúncio", nota: "ROAS 6,90", nicho: "gastronomia-assinaturas", prov: "yt", id: "-MRT1kAlS00" },
-  { titulo: "Tekoá 03 – Orgânico", nota: "", nicho: "gastronomia-assinaturas", prov: "yt", id: "H73cFN3u548" },
-  { titulo: "Tekoá 03 – Anúncio", nota: "ROAS 7,54", nicho: "gastronomia-assinaturas", prov: "yt", id: "DK6EsJaCXWo" },
-  { titulo: "Tekoá 03 – Anúncio", nota: "ROAS 7,20", nicho: "gastronomia-assinaturas", id: null },
-  { titulo: "Tekoá 05 – Anúncio", nota: "", nicho: "gastronomia-assinaturas", prov: "yt", id: "_p9r453wBb4" },
-  { titulo: "App Place (versão original)", nota: "R$27.383 orgânico + R$6.082, ROAS 5,6", nicho: "tech-infoprodutos", id: null },
-  { titulo: "Cinta Press Fitness", nota: "", nicho: "beleza-saude", prov: "yt", id: "5oyfMuKEP-A" },
-  { titulo: "Unboxing Ambro", nota: "", nicho: "beleza-saude", id: null },
-  { titulo: "Casa da Gê – Orgânico", nota: "", nicho: "casa-decoracao", prov: "yt", id: "Zimf7dAbZcw" },
-  { titulo: "Achadinho da Shopee", nota: "", nicho: "casa-decoracao", prov: "yt", id: "75YRk5h9hQY" },
-  { titulo: "Magalu 01", nota: "", nicho: "casa-decoracao", id: null },
-  { titulo: "Magalu 02", nota: "", nicho: "casa-decoracao", id: null },
-  { titulo: "Bendita Ghee Lola", nota: "", nicho: "beleza-saude", prov: "yt", id: "XSHE4IoIWj4" },
-  { titulo: "Forever Liss", nota: "", nicho: "beleza-saude", prov: "yt", id: "S1Z4bVlxLhE" },
-  { titulo: "Infoproduto Ana Neves", nota: "", nicho: "tech-infoprodutos", prov: "yt", id: "VLDEq3BO1lg" },
-  { titulo: "MilkMoo – Orgânico", nota: "até 50x mais alcance", nicho: "gastronomia-assinaturas", id: null },
-  { titulo: "MilkMoo – Anúncio", nota: "", nicho: "gastronomia-assinaturas", id: null },
-  { titulo: "Café", nota: "", nicho: "gastronomia-assinaturas", id: null },
-  { titulo: "Block Carbo", nota: "bem-estar e saúde", nicho: "beleza-saude", id: null },
-  { titulo: "Viagem: aniversário do meu pai", nota: "", nicho: "viagem", id: null }
+  { titulo: "Tekoá 01 – Anúncio", marca: "Tekoá", nota: "versão crua disponível", nicho: "gastronomia-assinaturas", id: null },
+  { titulo: "Tekoá 02 – Anúncio", marca: "Tekoá", nota: "ROAS 6,90", nicho: "gastronomia-assinaturas", prov: "yt", id: "-MRT1kAlS00" },
+  { titulo: "Tekoá 03 – Orgânico", marca: "Tekoá", nota: "", nicho: "gastronomia-assinaturas", prov: "yt", id: "H73cFN3u548" },
+  { titulo: "Tekoá 03 – Anúncio", marca: "Tekoá", nota: "ROAS 7,54", nicho: "gastronomia-assinaturas", prov: "yt", id: "DK6EsJaCXWo" },
+  { titulo: "Tekoá 03 – Anúncio", marca: "Tekoá", nota: "ROAS 7,20", nicho: "gastronomia-assinaturas", id: null },
+  { titulo: "Tekoá 05 – Anúncio", marca: "Tekoá", nota: "", nicho: "gastronomia-assinaturas", prov: "yt", id: "_p9r453wBb4" },
+  { titulo: "App Place (versão original)", marca: "App Place", nota: "R$27.383 orgânico + R$6.082, ROAS 5,6", nicho: "tech-infoprodutos", id: null },
+  { titulo: "Cinta Press Fitness", marca: "Pressfit", nota: "", nicho: "beleza-saude", prov: "yt", id: "5oyfMuKEP-A" },
+  { titulo: "Unboxing Ambro", marca: "Ambrô", nota: "", nicho: "beleza-saude", id: null },
+  { titulo: "Casa da Gê – Orgânico", marca: "Casa de Gê", nota: "", nicho: "casa-decoracao", prov: "yt", id: "Zimf7dAbZcw" },
+  { titulo: "Achadinho da Shopee", marca: "Shopee", nota: "", nicho: "casa-decoracao", prov: "yt", id: "75YRk5h9hQY" },
+  { titulo: "Magalu 01", marca: "Magalu", nota: "", nicho: "casa-decoracao", id: null },
+  { titulo: "Magalu 02", marca: "Magalu", nota: "", nicho: "casa-decoracao", id: null },
+  { titulo: "Bendita Ghee Lola", marca: "Lola Cosmetics", nota: "", nicho: "beleza-saude", prov: "yt", id: "XSHE4IoIWj4" },
+  { titulo: "Forever Liss", marca: "Forever Liss", nota: "", nicho: "beleza-saude", prov: "yt", id: "S1Z4bVlxLhE" },
+  { titulo: "Infoproduto Ana Neves", marca: "Ana Neves", nota: "", nicho: "tech-infoprodutos", prov: "yt", id: "VLDEq3BO1lg" },
+  { titulo: "MilkMoo – Orgânico", marca: "Milky Moo", nota: "até 50x mais alcance", nicho: "gastronomia-assinaturas", id: null },
+  { titulo: "MilkMoo – Anúncio", marca: "Milky Moo", nota: "", nicho: "gastronomia-assinaturas", id: null },
+  { titulo: "Café", marca: "Café", nota: "", nicho: "gastronomia-assinaturas", id: null },
+  { titulo: "Block Carbo", marca: "Block Carbo", nota: "bem-estar e saúde", nicho: "beleza-saude", id: null },
+  { titulo: "Viagem: aniversário do meu pai", marca: "Aniversário do meu pai", nota: "", nicho: "viagem", id: null }
 ];
 
 const NICHOS = [
-  { slug: "gastronomia-assinaturas", nome: "Alimentação & Lifestyle Saudável", desc: "Gastronomia e e-commerce por assinatura" },
   { slug: "casa-decoracao", nome: "Casa, Decoração & Achadinhos", desc: "Ambientes e achadinhos que inspiram quem assiste" },
+  { slug: "gastronomia-assinaturas", nome: "Alimentação & Lifestyle Saudável", desc: "Gastronomia e e-commerce por assinatura" },
   { slug: "beleza-saude", nome: "Beleza, Saúde & Bem-Estar", desc: "Cosméticos, suplementos e fitness" },
   { slug: "tech-infoprodutos", nome: "Tech, Apps & Infoprodutos", desc: "Apps, telas e conteúdo digital em linguagem humana" },
   { slug: "viagem", nome: "Viagem", desc: "Experiências e destinos narrados" }
@@ -850,6 +847,25 @@ DESTAQUES_RAPIDOS.forEach((d, i) => {
   $("#destaquesRapidos").append(el("div", { class: "dr-card revelar", style: atraso(i) }, [el("strong", { text: d.valor }), el("span", { text: d.texto })]));
 });
 
+/* "Sobre mim": lista de promessas no estilo notificação, com a mesma sacolinha dos cartões da capa */
+function iconeSacola() {
+  const span = document.createElement("span");
+  span.className = "flut-ico";
+  span.setAttribute("aria-hidden", "true");
+  span.innerHTML = '<svg viewBox="0 0 24 26" width="30" height="30"><path d="M9 9V7a3 3 0 0 1 6 0v2" fill="none" stroke="#3f4a2b" stroke-width="1.6" stroke-linecap="round"/><path d="M5 9h14l1 13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z" fill="#55613b"/><path d="M8.3 15.2l2.7 2.7L16 12.3" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  return span;
+}
+const DESTAQUES_SOBRE = [
+  { titulo: "Roteiro aprovado antes de gravar" },
+  { titulo: "Estratégia pensada por etapa do funil" },
+  { titulo: "+280 marcas atendidas" },
+  { titulo: "ROAS de 7,54", sub: "Em campanha de e-commerce por assinatura" },
+  { titulo: "+50x mais alcance", sub: "Resultado orgânico pra Milkmoo" }
+];
+DESTAQUES_SOBRE.forEach(d => {
+  $("#promessasLista").append(el("li", {}, [iconeSacola(), el("span", {}, [el("b", { text: d.titulo }), d.sub ? el("small", { text: d.sub }) : null])]));
+});
+
 /* Player: miniatura abre o vídeo ampliado dentro do site */
 function urlPlayer(v) {
   if (v.prov === "tt") return "https://www.tiktok.com/player/v1/" + v.id + "?autoplay=1&music_info=0&description=0&rel=0";
@@ -879,26 +895,29 @@ $("#vmFechar").addEventListener("click", vmFechar);
 vm.addEventListener("click", e => { if (e.target === vm) vmFechar(); });
 document.addEventListener("keydown", e => { if (!vm.hidden && e.key === "Escape") vmFechar(); });
 
-/* Cartão de vídeo: se tiver id, toca no site; sem id, mostra "em breve" */
+/* Cartão de vídeo: se tiver id, toca no site; sem id, mostra "em breve". A marca aparece em
+   destaque na própria miniatura (selo), sem legenda embaixo. */
 function cartaoVideo(v, i, animar) {
   const temVideo = !!v.id;
   const thumb = v.thumb || (v.prov === "yt" ? "https://i.ytimg.com/vi/" + v.id + "/hqdefault.jpg" : "");
-  const corpo = el("div", { class: "nc-corpo" }, [el("b", { text: v.titulo }), v.nota ? el("span", { text: v.nota }) : null]);
+  const marcaSelo = el("span", { class: "nc-marca", text: v.marca || v.titulo });
   let miolo;
   if (temVideo) {
-    const b = el("button", { class: "mini", type: "button", "aria-label": "Assistir: " + v.titulo, style: thumb ? null : "background:" + TONS[i % TONS.length] }, [
+    const b = el("button", { class: "mini", type: "button", "aria-label": "Assistir vídeo de " + (v.marca || v.titulo), style: thumb ? null : "background:" + TONS[i % TONS.length] }, [
       thumb ? el("img", { src: thumb, alt: "", loading: "lazy", width: 300, height: 533 }) : null,
+      marcaSelo,
       el("span", { class: "play", "aria-hidden": "true" })
     ]);
     b.addEventListener("click", () => abrirVideo(v, { texto: "Quero um vídeo assim →", href: "#contato" }));
     miolo = b;
   } else {
     miolo = el("div", { class: "mini", style: "background:" + TONS[i % TONS.length] }, [
+      marcaSelo,
       el("span", { class: "nc-em-breve", text: "Em breve" }),
       el("span", { class: "play", "aria-hidden": "true" })
     ]);
   }
-  return el("article", { class: "nc" + (animar === false ? "" : " revelar") + (temVideo ? "" : " pendente"), style: animar === false ? null : atraso(i % 6) }, [miolo, corpo]);
+  return el("article", { class: "nc" + (animar === false ? "" : " revelar") + (temVideo ? "" : " pendente"), style: animar === false ? null : atraso(i % 6) }, [miolo]);
 }
 
 /* Catálogo por nicho. O trilho sempre repete os itens (quantas vezes forem precisas pra
@@ -923,12 +942,32 @@ function moverTrilho(trilho, dir) {
   const alvo = Math.max(0, Math.min(max, trilho.scrollLeft + dir * passo));
   trilho.scrollTo({ left: alvo, behavior: "smooth" });
 }
+/* Intercala os vídeos pela marca (maior grupo primeiro, nunca repetindo a mesma marca duas vezes
+   seguidas quando dá) pra não empilhar tudo da mesma marca em fila, tipo Tekoá, Tekoá, Tekoá. */
+function misturarMarcas(itens) {
+  const grupos = new Map();
+  itens.forEach(v => {
+    const chave = v.marca || v.titulo;
+    if (!grupos.has(chave)) grupos.set(chave, []);
+    grupos.get(chave).push(v);
+  });
+  const resultado = [];
+  let ultima = null;
+  while (resultado.length < itens.length) {
+    const chaves = [...grupos.keys()].filter(k => grupos.get(k).length);
+    chaves.sort((a, b) => grupos.get(b).length - grupos.get(a).length);
+    const escolhida = chaves.find(k => k !== ultima) || chaves[0];
+    resultado.push(grupos.get(escolhida).shift());
+    ultima = escolhida;
+  }
+  return resultado;
+}
 function montarNichos(todosVideos, animar) {
   const grades = $("#nichosGrades");
   $("#filtroPills").replaceChildren();
   grades.replaceChildren();
   NICHOS.forEach(n => {
-    const itens = todosVideos.filter(v => v.nicho === n.slug);
+    const itens = misturarMarcas(todosVideos.filter(v => v.nicho === n.slug));
     if (!itens.length) return;
     $("#filtroPills").append(el("a", { href: "#nicho-" + n.slug, text: n.nome }));
     const trilho = el("div", { class: "nicho-trilho" });
@@ -1033,12 +1072,12 @@ montarDepoimentos(DEPOIMENTOS);
     } catch (e) { return null; }
   }
   const [videos, marcas, depo, serv] = await Promise.all([
-    buscar("videos_geral", "titulo,nota,nicho,plataforma,video_id,ordem", "ordem.asc,created_at.asc"),
+    buscar("videos_geral", "titulo,marca,nicho,plataforma,video_id,ordem", "ordem.asc,created_at.asc"),
     buscar("marcas_logos", "nome,arquivo,fundo,tamanho,ordem", "ordem.asc,created_at.asc"),
     buscar("depoimentos_geral", "marca,texto,ctx,ordem", "ordem.asc,created_at.asc"),
     buscar("servicos_geral", "titulo,texto,ordem", "ordem.asc,created_at.asc")
   ]);
-  if (videos) montarNichos(videos.map(v => ({ titulo: v.titulo, nota: v.nota, nicho: v.nicho, prov: v.plataforma, id: v.video_id })), false);
+  if (videos) montarNichos(videos.map(v => ({ titulo: v.titulo, marca: v.marca, nicho: v.nicho, prov: v.plataforma, id: v.video_id })), false);
   if (marcas) montarMarcas(marcas.map(m => ({ nome: m.nome, arq: "img/marcas/" + m.arquivo, fundo: m.fundo, pequeno: m.tamanho === "pequeno", grande: m.tamanho === "grande" })));
   if (depo) montarDepoimentos(depo, false);
   if (serv) montarServicos(serv, false);
