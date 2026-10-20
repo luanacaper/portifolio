@@ -213,6 +213,41 @@ section{scroll-margin-top:92px}
 .escuro .rc-stat b{color:#fff}
 .rc-ctx{display:block;margin-top:4px;text-align:center;color:var(--suave);font-size:.84rem;line-height:1.4}
 .escuro .rc-ctx{color:rgba(255,255,255,.72)}
+
+/* Prova social: troca conforme o vídeo em foco no carrossel ao lado */
+.prova-painel{margin-top:28px;min-height:120px}
+.prova{animation:provaIn .4s ease}
+@keyframes provaIn{0%{opacity:0;transform:translateY(8px)}100%{opacity:1;transform:translateY(0)}}
+.prova-direct{display:flex;flex-direction:column;gap:9px}
+.prova-direct-cab{display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.prova-direct-avatar{flex:none;width:34px;height:34px;border-radius:50%;background:#fff;display:grid;place-items:center;font-weight:800;color:var(--verde-esc);font-size:.76rem;letter-spacing:-.02em}
+.prova-direct-cab b{display:block;color:#fff;font-size:.92rem}
+.prova-direct-cab small{display:block;color:rgba(255,255,255,.55);font-size:.76rem;margin-top:1px}
+.prova-bolha{max-width:80%;padding:10px 15px;border-radius:20px;font-size:.86rem;line-height:1.42;color:#fff}
+.prova-bolha.eles{align-self:flex-start;background:rgba(255,255,255,.14);border-bottom-left-radius:6px}
+.prova-bolha.eu{align-self:flex-end;background:linear-gradient(135deg,#8b4fe8,#c23fc2);border-bottom-right-radius:6px}
+.prova-bolha time{display:block;margin-top:5px;font-size:.68rem;opacity:.65;text-align:right}
+.prova-stats{display:flex;gap:16px;margin-top:18px;flex-wrap:wrap}
+.prova-stat{display:flex;flex-direction:column;align-items:center;gap:5px;color:#fff;min-width:50px}
+.prova-ico svg{width:20px;height:20px;display:block}
+.prova-stat b{font-size:.98rem;font-weight:800;white-space:nowrap}
+.prova-stat small{font-size:.64rem;color:rgba(255,255,255,.58);text-align:center;line-height:1.3;max-width:80px}
+.prova-ads{position:relative;border-radius:var(--raio-g);overflow:hidden;background:#fff;box-shadow:var(--sombra)}
+.prova-ads img{display:block;width:100%;height:auto}
+.prova-ads-base{filter:blur(4px);transform:scale(1.02)}
+.prova-ads-foco{position:absolute;inset:0;overflow:hidden}
+.prova-ads-foco img{position:absolute;top:0;left:0;width:100%;height:auto}
+.prova-ads-realce{position:absolute;left:6px;right:6px;border:2.5px solid var(--laranja-claro);border-radius:10px;pointer-events:none;box-shadow:0 0 0 2000px rgba(20,25,16,.5)}
+.prova-place{display:flex;flex-direction:column;gap:6px}
+.prova-place-chips{display:flex;gap:12px;flex-wrap:wrap}
+.prova-chip{flex:1;min-width:150px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:16px;padding:12px 16px}
+.prova-chip b{display:block;color:#fff;font-size:1.25rem;font-weight:800;letter-spacing:-.01em}
+.prova-chip small{display:block;color:rgba(255,255,255,.65);font-size:.78rem;margin-top:2px}
+.prova-milkmoo{display:flex;flex-direction:column;gap:14px}
+.prova-milkmoo-grades{display:flex;gap:10px}
+.prova-milkmoo-grades img{width:50%;border-radius:14px;box-shadow:var(--sombra);display:block}
+.prova-milkmoo b{color:#fff;font-size:1.05rem;font-weight:800}
+@media (max-width:640px){.prova-ads-realce{box-shadow:0 0 0 999px rgba(20,25,16,.5)}}
 .rc-seta{position:absolute;top:42%;width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid var(--linha);box-shadow:var(--sombra);display:grid;place-items:center;font-size:1.3rem;cursor:pointer;z-index:2;color:var(--tinta);padding:0;line-height:1}
 .rc-seta:hover{background:var(--gelo)}
 .rc-ant{left:-10px}
@@ -471,6 +506,7 @@ body.trava{overflow:hidden}
         <p class="etiqueta revelar" data-i18n="resultados.etiqueta">Prova social</p>
         <h2 class="titulo revelar" id="t-result" style="--d:.05s" data-i18n="resultados.h2">Os melhores <span class="serif">resultados</span></h2>
         <p class="revelar" style="--d:.1s" data-i18n="resultados.p">Mais de <strong>10 anos</strong> criando conteúdo que performa, com <strong>ROAS de até 7,54</strong> e resultados reais pra mais de <strong>280 marcas</strong>. Da Tekoá ao App Place, cada vídeo nasce pensado pra vender.</p>
+        <div id="provaPanel" class="prova-painel"></div>
       </div>
       <div class="resultados-carrossel">
         <button class="rc-seta rc-ant" id="rcAnt" type="button" aria-label="Resultado anterior" data-i18n-aria="resultados.ant">‹</button>
@@ -679,12 +715,29 @@ const NICHOS = [
 ];
 
 const RESULTADOS_CARROSSEL = [
-  { marca: "Viagem", stat: "♥ Favorito", ctx: "Aniversário do meu pai — um dos mais queridos do portfólio" },
-  { marca: "Tekoá", stat: "ROAS 7,54", ctx: "E-commerce por assinatura · anúncio" },
-  { marca: "App Place", stat: "R$33,4 mil", ctx: "Vendas em 5 dias · orgânico + ROAS 5,6" },
-  { marca: "Tekoá", stat: "ROAS 6,90", ctx: "E-commerce por assinatura · anúncio" },
-  { marca: "Tekoá", stat: "ROAS 7,20", ctx: "E-commerce por assinatura · anúncio" },
-  { marca: "Milkmoo", stat: "+50x", ctx: "Alcance a mais só no orgânico" }
+  { marca: "Viagem", stat: "♥ Favorito", ctx: "Aniversário do meu pai — um dos mais queridos do portfólio",
+    prova: { tipo: "direct", conta: "cachoeirasonhomeu", sub: "Conversa comercial",
+      mensagens: [
+        { de: "eu", texto: "Muito top, ficou muito bom.... Parabéns" },
+        { de: "eles", texto: "Boa noite" },
+        { de: "eles", texto: "Podemos fazer um tráfego pago com seu vídeo?" },
+        { de: "eu", texto: "Nossa! Queremos. Aquele primeiro vídeo fechou a nossa agenda de final de ano e até junho desse ano.", hora: "19:56" }
+      ],
+      stats: [
+        { tipo: "views", valor: 180000, sufixo: " mil", divisor: 1000, extra: "+107,3 mil no TikTok" },
+        { tipo: "likes", valor: 9486, extra: "+8.041 no TikTok" },
+        { tipo: "comments", valor: 660, extra: "+110 no TikTok" },
+        { tipo: "shares", valor: 3259, extra: "+3.033 no TikTok" },
+        { tipo: "saves", valor: 2653, extra: "+3.150 no TikTok" }
+      ]
+    } },
+  { marca: "Tekoá", stat: "ROAS 7,54", ctx: "E-commerce por assinatura · anúncio", prova: { tipo: "ads", linha: 0 } },
+  { marca: "App Place", stat: "R$33,4 mil", ctx: "Vendas em 5 dias · orgânico + ROAS 5,6",
+    prova: { tipo: "place", organico: "R$ 27.383", trafego: "R$ 6.082", roas: "5,6", likes: 218, comments: 579, shares: 79, saves: 43 } },
+  { marca: "Tekoá", stat: "ROAS 7,20", ctx: "E-commerce por assinatura · anúncio", prova: { tipo: "ads", linha: 2 } },
+  { marca: "Milkmoo", stat: "+50x", ctx: "Alcance a mais só no orgânico",
+    prova: { tipo: "milkmoo", imgs: ["img/provas/milkmoo-1.png", "img/provas/milkmoo-2.png"] } },
+  { marca: "Tekoá", stat: "ROAS 6,90", ctx: "E-commerce por assinatura · anúncio", prova: { tipo: "ads", linha: 1 } }
 ];
 
 const SERVICOS = [
@@ -718,12 +771,29 @@ const NICHOS_EN = {
   "viagem": { nome: "Travel", desc: "Experiences and destinations, narrated" }
 };
 const RESULTADOS_CARROSSEL_EN = [
-  { marca: "Travel", stat: "♥ Favorite", ctx: "My dad's birthday trip — one of the portfolio's favorites" },
-  { marca: "Tekoá", stat: "ROAS 7.54", ctx: "Subscription e-commerce · ad" },
-  { marca: "App Place", stat: "R$33.4k", ctx: "Sales in 5 days · organic + ROAS 5.6" },
-  { marca: "Tekoá", stat: "ROAS 6.90", ctx: "Subscription e-commerce · ad" },
-  { marca: "Tekoá", stat: "ROAS 7.20", ctx: "Subscription e-commerce · ad" },
-  { marca: "Milkmoo", stat: "+50x", ctx: "Extra reach, organic only" }
+  { marca: "Travel", stat: "♥ Favorite", ctx: "My dad's birthday trip — one of the portfolio's favorites",
+    prova: { tipo: "direct", conta: "cachoeirasonhomeu", sub: "Business chat",
+      mensagens: [
+        { de: "eu", texto: "Looks amazing.... Congrats" },
+        { de: "eles", texto: "Good evening" },
+        { de: "eles", texto: "Can we run paid traffic with your video?" },
+        { de: "eu", texto: "We'd love that. That first video booked out our end-of-year calendar all the way through to June.", hora: "19:56" }
+      ],
+      stats: [
+        { tipo: "views", valor: 180000, sufixo: " mil", divisor: 1000, extra: "+107.3k on TikTok" },
+        { tipo: "likes", valor: 9486, extra: "+8,041 on TikTok" },
+        { tipo: "comments", valor: 660, extra: "+110 on TikTok" },
+        { tipo: "shares", valor: 3259, extra: "+3,033 on TikTok" },
+        { tipo: "saves", valor: 2653, extra: "+3,150 on TikTok" }
+      ]
+    } },
+  { marca: "Tekoá", stat: "ROAS 7.54", ctx: "Subscription e-commerce · ad", prova: { tipo: "ads", linha: 0 } },
+  { marca: "App Place", stat: "R$33.4k", ctx: "Sales in 5 days · organic + ROAS 5.6",
+    prova: { tipo: "place", organico: "R$ 27,383", trafego: "R$ 6,082", roas: "5.6", likes: 218, comments: 579, shares: 79, saves: 43 } },
+  { marca: "Tekoá", stat: "ROAS 7.20", ctx: "Subscription e-commerce · ad", prova: { tipo: "ads", linha: 2 } },
+  { marca: "Milkmoo", stat: "+50x", ctx: "Extra reach, organic only",
+    prova: { tipo: "milkmoo", imgs: ["img/provas/milkmoo-1.png", "img/provas/milkmoo-2.png"] } },
+  { marca: "Tekoá", stat: "ROAS 6.90", ctx: "Subscription e-commerce · ad", prova: { tipo: "ads", linha: 1 } }
 ];
 const SERVICOS_EN = [
   { titulo: "Traffic creatives", texto: "Ads optimized for Meta, TikTok and YouTube, built to get the best result at the lowest cost." },
@@ -1097,11 +1167,89 @@ renderizarNichos(true);
 
 /* Os melhores resultados */
 /* Carrossel "Os melhores resultados": cartões com fundo colorido (sem foto real ainda) que avançam sozinhos */
+/* Prova social (lado esquerdo de "Os melhores resultados"): troca conforme o vídeo em foco. */
+const ICONES_PROVA = {
+  views: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>',
+  likes: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-9.5-8.5C1 9 2 5.5 5.5 4.5 8 3.8 10 5 12 7c2-2 4-3.2 6.5-2.5C22 5.5 23 9 21.5 12.5 19 16.65 12 21 12 21z"/></svg>',
+  comments: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.2 0-2.3-.25-3.3-.7L3 21l1.7-5.1A8.44 8.44 0 0 1 3.5 11.5 8.5 8.5 0 0 1 12 3a8.5 8.5 0 0 1 9 8.5z"/></svg>',
+  shares: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/></svg>',
+  saves: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21 12 16l-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>'
+};
+function iconeProva(tipo) {
+  const span = document.createElement("span");
+  span.className = "prova-ico";
+  span.innerHTML = ICONES_PROVA[tipo] || "";
+  return span;
+}
+function contarProva(elAlvo, s) {
+  const dur = 1300, t0 = performance.now();
+  function passo(t) {
+    const frac = Math.min(1, (t - t0) / dur);
+    const cur = Math.floor(s.valor * frac);
+    elAlvo.textContent = s.divisor ? Math.round(cur / s.divisor) + s.sufixo : cur.toLocaleString(idioma === "en" ? "en-US" : "pt-BR");
+    if (frac < 1) requestAnimationFrame(passo);
+    else elAlvo.textContent = s.divisor ? Math.round(s.valor / s.divisor) + s.sufixo : s.valor.toLocaleString(idioma === "en" ? "en-US" : "pt-BR");
+  }
+  requestAnimationFrame(passo);
+}
+const ROTULOS_PROVA = {
+  likes: { pt: "curtidas", en: "likes" }, comments: { pt: "comentários", en: "comments" },
+  shares: { pt: "compart.", en: "shares" }, saves: { pt: "salvos", en: "saves" }
+};
+function montarProva(item) {
+  const painel = $("#provaPanel");
+  painel.replaceChildren();
+  const p = item && item.prova;
+  if (!p) return;
+  if (p.tipo === "direct") {
+    const cab = el("div", { class: "prova-direct-cab" }, [
+      el("span", { class: "prova-direct-avatar", text: p.conta.slice(0, 2).toUpperCase() }),
+      el("span", {}, [el("b", { text: p.conta }), el("small", { text: p.sub })])
+    ]);
+    const msgs = p.mensagens.map(m => el("div", { class: "prova-bolha " + m.de }, [
+      document.createTextNode(m.texto),
+      m.hora ? el("time", { text: m.hora }) : null
+    ]));
+    const stats = el("div", { class: "prova-stats" }, p.stats.map(s => {
+      const b = el("b", { text: "0" });
+      contarProva(b, s);
+      return el("div", { class: "prova-stat" }, [iconeProva(s.tipo), b, el("small", { text: s.extra })]);
+    }));
+    painel.append(el("div", { class: "prova prova-direct" }, [cab, ...msgs, stats]));
+  } else if (p.tipo === "ads") {
+    const faixas = [[50.6, 32.6], [67.4, 16.0], [84.0, 0.74]];
+    const [topPct, botPct] = faixas[p.linha];
+    const src = "img/provas/tekoa-ads.png";
+    painel.append(el("div", { class: "prova prova-ads" }, [
+      el("img", { class: "prova-ads-base", src, alt: "", loading: "lazy" }),
+      el("div", { class: "prova-ads-foco", style: "clip-path:inset(" + topPct + "% 0 " + botPct + "% 0)" }, [el("img", { src, alt: "" })]),
+      el("div", { class: "prova-ads-realce", style: "top:" + topPct + "%;bottom:" + botPct + "%" })
+    ]));
+  } else if (p.tipo === "place") {
+    const chips = el("div", { class: "prova-place-chips" }, [
+      el("div", { class: "prova-chip" }, [el("b", { text: p.organico }), el("small", { text: idioma === "en" ? "Organic sales" : "Vendas no orgânico" })]),
+      el("div", { class: "prova-chip" }, [el("b", { text: p.trafego }), el("small", { text: (idioma === "en" ? "Paid traffic · ROAS " : "Tráfego pago · ROAS ") + p.roas })])
+    ]);
+    const stats = el("div", { class: "prova-stats" }, ["likes", "comments", "shares", "saves"].map(tipo => el("div", { class: "prova-stat" }, [
+      iconeProva(tipo), el("b", { text: String(p[tipo]) }), el("small", { text: ROTULOS_PROVA[tipo][idioma === "en" ? "en" : "pt"] })
+    ])));
+    painel.append(el("div", { class: "prova prova-place" }, [chips, stats]));
+  } else if (p.tipo === "milkmoo") {
+    painel.append(el("div", { class: "prova prova-milkmoo" }, [
+      el("div", { class: "prova-milkmoo-grades" }, p.imgs.map(src => el("img", { src, alt: "", loading: "lazy" }))),
+      el("b", { text: idioma === "en" ? "+5x organic results after the video" : "+5x de resultado orgânico depois do vídeo" })
+    ]));
+  }
+}
+let RESULTADOS_LISTA_ATUAL = [];
+let RESULTADOS_PROVA_ATUAL = -1;
 function montarResultadosCarrossel(lista, animar) {
   const trilho = $("#rcTrilho");
   trilho.replaceChildren();
+  RESULTADOS_LISTA_ATUAL = lista;
+  RESULTADOS_PROVA_ATUAL = -1;
   lista.forEach((r, i) => {
-    trilho.append(el("div", { class: "rc-card" + (animar === false ? "" : " revelar"), style: animar === false ? null : atraso(i % 4) }, [
+    trilho.append(el("div", { class: "rc-card" + (animar === false ? "" : " revelar"), style: animar === false ? null : atraso(i % 4), "data-idx": i }, [
       el("span", { class: "rc-marca", text: r.marca }),
       el("div", { class: "rc-foto", style: "background:" + TONS[i % TONS.length] }),
       el("div", { class: "rc-stat" }, [el("b", { text: r.stat }), r.ctx ? el("small", { class: "rc-ctx", text: r.ctx }) : null])
@@ -1112,7 +1260,8 @@ function montarResultadosCarrossel(lista, animar) {
 function renderizarResultadosCarrossel(animar) { montarResultadosCarrossel(idioma === "en" ? RESULTADOS_CARROSSEL_EN : RESULTADOS_CARROSSEL, animar); }
 renderizarResultadosCarrossel(true);
 /* Marca o cartão mais perto do centro como "ativo" (nítido); os outros ficam borrados/
-   apagados, igual à referência — reforça que é um carrossel, não uma grade. */
+   apagados, igual à referência — reforça que é um carrossel, não uma grade. Também troca
+   a prova social do lado esquerdo pra bater com o vídeo em foco. */
 function atualizarFocoResultados() {
   const trilho = $("#rcTrilho");
   const centro = trilho.getBoundingClientRect().left + trilho.clientWidth / 2;
@@ -1123,7 +1272,11 @@ function atualizarFocoResultados() {
     if (dist < menorDist) { menorDist = dist; maisPerto = c; }
     c.classList.remove("ativo");
   });
-  if (maisPerto) maisPerto.classList.add("ativo");
+  if (maisPerto) {
+    maisPerto.classList.add("ativo");
+    const idx = Number(maisPerto.dataset.idx);
+    if (idx !== RESULTADOS_PROVA_ATUAL) { RESULTADOS_PROVA_ATUAL = idx; montarProva(RESULTADOS_LISTA_ATUAL[idx]); }
+  }
 }
 (function () {
   const trilho = $("#rcTrilho");
