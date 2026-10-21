@@ -752,7 +752,7 @@ const NICHOS = [
 
 const RESULTADOS_CARROSSEL = [
   { marca: "App Place", stat: "R$33,4 mil", ctx: "Vendas em 5 dias · orgânico + ROAS 5,6",
-    prova: { tipo: "place", organico: "R$ 27.383", trafego: "R$ 6.082", roas: "5,6", likes: 218, comments: 579, shares: 79, saves: 43 } },
+    prova: { tipo: "place", organico: 27383, trafego: 6082, roas: "5,6", likes: 218, comments: 579, shares: 79, saves: 43 } },
   { marca: "Viagem", stat: "♥ Favorito", ctx: "Aniversário do meu pai — um dos mais queridos do portfólio",
     prova: { tipo: "direct", conta: "cachoeirasonhomeu", sub: "Conversa comercial",
       mensagens: [
@@ -808,7 +808,7 @@ const NICHOS_EN = {
 };
 const RESULTADOS_CARROSSEL_EN = [
   { marca: "App Place", stat: "R$33.4k", ctx: "Sales in 5 days · organic + ROAS 5.6",
-    prova: { tipo: "place", organico: "R$ 27,383", trafego: "R$ 6,082", roas: "5.6", likes: 218, comments: 579, shares: 79, saves: 43 } },
+    prova: { tipo: "place", organico: 27383, trafego: 6082, roas: "5.6", likes: 218, comments: 579, shares: 79, saves: 43 } },
   { marca: "Travel", stat: "♥ Favorite", ctx: "My dad's birthday trip — one of the portfolio's favorites",
     prova: { tipo: "direct", conta: "cachoeirasonhomeu", sub: "Business chat",
       mensagens: [
@@ -1243,12 +1243,13 @@ function iconeProva(tipo) {
 }
 function contarProva(elAlvo, s) {
   const dur = 1300, t0 = performance.now();
+  const formatar = v => (s.prefixo || "") + (s.divisor ? Math.round(v / s.divisor) + s.sufixo : v.toLocaleString(idioma === "en" ? "en-US" : "pt-BR"));
   function passo(t) {
     const frac = Math.min(1, (t - t0) / dur);
     const cur = Math.floor(s.valor * frac);
-    elAlvo.textContent = s.divisor ? Math.round(cur / s.divisor) + s.sufixo : cur.toLocaleString(idioma === "en" ? "en-US" : "pt-BR");
+    elAlvo.textContent = formatar(cur);
     if (frac < 1) requestAnimationFrame(passo);
-    else elAlvo.textContent = s.divisor ? Math.round(s.valor / s.divisor) + s.sufixo : s.valor.toLocaleString(idioma === "en" ? "en-US" : "pt-BR");
+    else elAlvo.textContent = formatar(s.valor);
   }
   requestAnimationFrame(passo);
 }
@@ -1291,13 +1292,19 @@ function montarProva(item) {
     bloco.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); abrirImagem(srcCompleto, altTxt); } });
     painel.append(el("div", { class: "prova" }, [bloco, el("small", { class: "prova-dica", text: idioma === "en" ? "Tap to see full size" : "Toque pra ver em tamanho real" })]));
   } else if (p.tipo === "place") {
+    const bOrganico = el("b", { text: "R$ 0" });
+    const bTrafego = el("b", { text: "R$ 0" });
+    contarProva(bOrganico, { valor: p.organico, prefixo: "R$ " });
+    contarProva(bTrafego, { valor: p.trafego, prefixo: "R$ " });
     const chips = el("div", { class: "prova-place-chips" }, [
-      el("div", { class: "prova-chip" }, [el("b", { text: p.organico }), el("small", { text: idioma === "en" ? "Organic sales" : "Vendas no orgânico" })]),
-      el("div", { class: "prova-chip" }, [el("b", { text: p.trafego }), el("small", { text: (idioma === "en" ? "Paid traffic · ROAS " : "Tráfego pago · ROAS ") + p.roas })])
+      el("div", { class: "prova-chip" }, [bOrganico, el("small", { text: idioma === "en" ? "Organic sales" : "Vendas no orgânico" })]),
+      el("div", { class: "prova-chip" }, [bTrafego, el("small", { text: (idioma === "en" ? "Paid traffic · ROAS " : "Tráfego pago · ROAS ") + p.roas })])
     ]);
-    const stats = el("div", { class: "prova-stats" }, ["likes", "comments", "shares", "saves"].map(tipo => el("div", { class: "prova-stat" }, [
-      iconeProva(tipo), el("b", { text: String(p[tipo]) }), el("small", { text: ROTULOS_PROVA[tipo][idioma === "en" ? "en" : "pt"] })
-    ])));
+    const stats = el("div", { class: "prova-stats" }, ["likes", "comments", "shares", "saves"].map(tipo => {
+      const b = el("b", { text: "0" });
+      contarProva(b, { valor: p[tipo] });
+      return el("div", { class: "prova-stat" }, [iconeProva(tipo), b, el("small", { text: ROTULOS_PROVA[tipo][idioma === "en" ? "en" : "pt"] })]);
+    }));
     painel.append(el("div", { class: "prova prova-place" }, [chips, stats]));
   } else if (p.tipo === "milkmoo") {
     const altTxt = idioma === "en" ? "Milkmoo content performance screenshot" : "Print do desempenho do conteúdo da Milkmoo";
