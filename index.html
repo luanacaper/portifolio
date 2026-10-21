@@ -6,7 +6,18 @@
 <title>Luana Caper | UGC Creative Strategist & Performance Media</title>
 <meta name="description" content="Luana Caper: UGC, estrategista de conteúdo e gestora de tráfego. Vídeos, roteiros e campanhas que convertem para marcas de todos os nichos.">
 <meta name="theme-color" content="#55613b">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%2355613b'/%3E%3Ctext x='32' y='43' font-family='Arial' font-weight='800' font-size='34' text-anchor='middle' fill='%23ffbf85'%3EL%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Luana Caper | UGC Creative Strategist & Performance Media">
+<meta property="og:description" content="UGC, estrategista de conteúdo e gestora de tráfego. Vídeos, roteiros e campanhas que convertem para marcas de todos os nichos.">
+<meta property="og:url" content="https://luanacaper.github.io/portifolio/">
+<meta property="og:image" content="https://luanacaper.github.io/portifolio/img/og-share.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Luana Caper | UGC Creative Strategist & Performance Media">
+<meta name="twitter:description" content="UGC, estrategista de conteúdo e gestora de tráfego. Vídeos, roteiros e campanhas que convertem para marcas de todos os nichos.">
+<meta name="twitter:image" content="https://luanacaper.github.io/portifolio/img/og-share.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%233f4a2b'/%3E%3Ctext x='33' y='44' font-family='Georgia,serif' font-style='italic' font-weight='700' font-size='36' text-anchor='middle' fill='%23ffbf85'%3EL%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -86,7 +97,8 @@ ul,ol{padding:0;list-style:none}
 .btn-primario:hover{background:var(--verde-esc)}
 .btn-contorno{background:#fff;color:var(--verde-esc);border-color:var(--verde)}
 .btn-bloco{width:100%}
-.link-sutil{display:inline-block;margin-top:14px;font-weight:700;color:var(--verde-esc);text-decoration:underline;text-underline-offset:3px;font-size:.95rem}
+.link-sutil{display:inline-block;margin-top:14px;font-weight:700;color:var(--verde-esc);text-decoration:underline;text-underline-offset:3px;font-size:.95rem;transition:color .2s,transform .2s}
+.link-sutil:hover{color:var(--laranja);transform:translateX(3px)}
 
 /* Seções */
 section{scroll-margin-top:92px}
@@ -154,7 +166,8 @@ section{scroll-margin-top:92px}
 .ticker-marcas .trilho{animation-duration:72s}
 .ticker-marcas .trilho li{margin-right:18px}
 .ticker-marcas .trilho li::after{content:none}
-.marca-bolha{display:grid;place-items:center;width:100px;height:100px;border-radius:50%;background:var(--gelo);border:1px solid var(--linha);overflow:hidden;padding:11px}
+.marca-bolha{display:grid;place-items:center;width:100px;height:100px;border-radius:50%;background:var(--gelo);border:1px solid var(--linha);overflow:hidden;padding:11px;transition:transform .25s,box-shadow .25s,border-color .25s}
+.marca-bolha:hover{transform:translateY(-3px) scale(1.05);box-shadow:var(--sombra);border-color:var(--laranja-claro)}
 .marca-bolha img{width:100%;height:100%;object-fit:contain}
 .marca-bolha.tem-fundo{padding:0}
 .marca-fundo{display:grid;place-items:center;width:76px;height:76px;border-radius:50%;padding:13px}
@@ -311,7 +324,8 @@ section{scroll-margin-top:92px}
 .serv:hover{transform:translateY(-4px);box-shadow:var(--sombra);background:#fff}
 .serv.destaque{background:#fff;border-color:var(--laranja)}
 .serv-tag{display:inline-block;margin-bottom:10px;background:var(--laranja);color:#fff;font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;padding:3px 10px;border-radius:999px}
-.serv-n{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--laranja-claro);color:var(--verde-esc)}
+.serv-n{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--laranja-claro);color:var(--verde-esc);transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+.serv:hover .serv-n{transform:scale(1.12) rotate(-8deg)}
 .serv-n svg{width:17px;height:17px}
 .serv h3{margin-top:14px;font-size:1.05rem;letter-spacing:-.01em}
 .serv p{margin-top:6px;color:var(--suave);font-size:.88rem;line-height:1.5}
@@ -322,7 +336,7 @@ section{scroll-margin-top:92px}
 .dep-grade::-webkit-scrollbar{display:none}
 .dep-card{flex:none;width:clamp(260px,40vw,400px);scroll-snap-align:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:var(--raio-g);padding:clamp(22px,3vw,28px);display:flex;flex-direction:column;gap:14px;transition:opacity .4s ease,filter .4s ease,transform .4s ease}
 .dep-card:not(.ativo){opacity:.35!important;filter:blur(2px);transform:scale(.93)!important}
-.dep-aspas{font-family:Georgia,serif;font-size:2.6rem;line-height:1;color:var(--laranja-claro);opacity:.85}
+.dep-aspas{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-size:2.8rem;line-height:1;color:var(--laranja-claro);opacity:.85}
 .dep-texto{color:rgba(255,255,255,.92);font-size:.98rem;line-height:1.55}
 .dep-rodape{margin-top:auto;padding-top:14px;border-top:1px solid rgba(255,255,255,.14)}
 .dep-marca{display:block;font-weight:800;color:#fff;font-size:.95rem}
