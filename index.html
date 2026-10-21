@@ -508,9 +508,9 @@ body.trava{overflow:hidden}
 <!-- 2. SOBRE MIM -->
 <section class="secao gelo" id="sobre" aria-labelledby="t-sobre">
   <div class="container sobre-grade">
-    <button class="foto r45 revelar video-pendente" id="btnVideoSobre" type="button" aria-label="Vídeo: Como eu gravo seu conteúdo UGC (em breve)" data-i18n-aria="sobre.videoAria">
+    <button class="foto r45 revelar" id="btnVideoSobre" type="button" aria-label="Vídeo: Como eu gravo meu conteúdo UGC" data-i18n-aria="sobre.videoAria">
       <img src="foto-sobre.jpg" alt="Luana Caper com uma caixa de produto, sorrindo" width="1200" height="1600" loading="lazy">
-      <span class="vp-selo"><span class="vp-play" aria-hidden="true"></span><b data-i18n="sobre.videoSelo">Como eu gravo seu conteúdo UGC · em breve</b></span>
+      <span class="vp-selo"><span class="vp-play" aria-hidden="true"></span><b data-i18n="sobre.videoSelo">Como eu gravo meu conteúdo UGC</b></span>
     </button>
 
     <div class="sobre-texto">
@@ -725,27 +725,28 @@ const VIDEOS_VIAGEM = [
    "titulo" e "nota" são só pra referência interna (lista do painel); quem aparece no site
    pro público é só "marca", em destaque na própria miniatura. */
 const VIDEOS_NOVOS = [
-  { titulo: "Tekoá 01 – Anúncio", marca: "Tekoá", nota: "versão crua disponível", nicho: "gastronomia-assinaturas", id: null },
+  { titulo: "Tekoá 01 – Anúncio", marca: "Tekoá", nota: "versão crua disponível", nicho: "gastronomia-assinaturas", prov: "yt", id: "ud_zfmstncQ" },
   { titulo: "Tekoá 02 – Anúncio", marca: "Tekoá", nota: "ROAS 6,90", nicho: "gastronomia-assinaturas", prov: "yt", id: "-MRT1kAlS00" },
   { titulo: "Tekoá 03 – Orgânico", marca: "Tekoá", nota: "", nicho: "gastronomia-assinaturas", prov: "yt", id: "H73cFN3u548" },
   { titulo: "Tekoá 03 – Anúncio", marca: "Tekoá", nota: "ROAS 7,54", nicho: "gastronomia-assinaturas", prov: "yt", id: "DK6EsJaCXWo" },
   { titulo: "Tekoá 03 – Anúncio", marca: "Tekoá", nota: "ROAS 7,20", nicho: "gastronomia-assinaturas", id: null },
   { titulo: "Tekoá 05 – Anúncio", marca: "Tekoá", nota: "", nicho: "gastronomia-assinaturas", prov: "yt", id: "_p9r453wBb4" },
-  { titulo: "App Place (versão original)", marca: "App Place", nota: "R$27.383 orgânico + R$6.082, ROAS 5,6", nicho: "tech-infoprodutos", id: null },
+  { titulo: "App Place (versão original)", marca: "App Place", nota: "R$27.383 orgânico + R$6.082, ROAS 5,6", nicho: "tech-infoprodutos", prov: "yt", id: "aOpO3Kbo53Q" },
   { titulo: "Cinta Press Fitness", marca: "Pressfit", nota: "", nicho: "beleza-saude", prov: "yt", id: "5oyfMuKEP-A" },
   { titulo: "Unboxing Ambro", marca: "Ambrô", nota: "", nicho: "beleza-saude", id: null },
   { titulo: "Casa da Gê – Orgânico", marca: "Casa de Gê", nota: "", nicho: "casa-decoracao", prov: "yt", id: "Zimf7dAbZcw" },
   { titulo: "Achadinho da Shopee", marca: "Shopee", nota: "", nicho: "casa-decoracao", prov: "yt", id: "75YRk5h9hQY" },
-  { titulo: "Magalu 01", marca: "Magalu", nota: "", nicho: "casa-decoracao", id: null },
-  { titulo: "Magalu 02", marca: "Magalu", nota: "", nicho: "casa-decoracao", id: null },
+  { titulo: "Magalu 01", marca: "Magalu", nota: "Airfryer Philco", nicho: "casa-decoracao", prov: "yt", id: "0en9l-o3EOY" },
+  { titulo: "Magalu 02", marca: "Magalu", nota: "Airfryer Philco", nicho: "casa-decoracao", prov: "yt", id: "SDSJ_uolCiQ" },
   { titulo: "Bendita Ghee Lola", marca: "Lola Cosmetics", nota: "", nicho: "beleza-saude", prov: "yt", id: "XSHE4IoIWj4" },
   { titulo: "Forever Liss", marca: "Forever Liss", nota: "", nicho: "beleza-saude", prov: "yt", id: "S1Z4bVlxLhE" },
   { titulo: "Infoproduto Ana Neves", marca: "Ana Neves", nota: "", nicho: "tech-infoprodutos", prov: "yt", id: "VLDEq3BO1lg" },
-  { titulo: "MilkMoo – Orgânico", marca: "Milky Moo", nota: "até 50x mais alcance", nicho: "gastronomia-assinaturas", id: null },
-  { titulo: "MilkMoo – Anúncio", marca: "Milky Moo", nota: "", nicho: "gastronomia-assinaturas", id: null },
-  { titulo: "Café", marca: "Café", nota: "", nicho: "gastronomia-assinaturas", id: null },
-  { titulo: "Block Carbo", marca: "Block Carbo", nota: "bem-estar e saúde", nicho: "beleza-saude", id: null },
-  { titulo: "Viagem: aniversário do meu pai", marca: "Aniversário do meu pai", nota: "", nicho: "viagem", id: null }
+  { titulo: "MilkMoo – Orgânico", marca: "Milky Moo", nota: "até 50x mais alcance", nicho: "gastronomia-assinaturas", prov: "yt", id: "f7GobRuUZLg" },
+  { titulo: "MilkMoo – Anúncio", marca: "Milky Moo", nota: "", nicho: "gastronomia-assinaturas", prov: "yt", id: "7Tvn9KKroxw" },
+  { titulo: "Café", marca: "Nosso Café", nota: "Goiânia", nicho: "gastronomia-assinaturas", id: null },
+  { titulo: "Block Carbo", marca: "Block Carbo", nota: "bem-estar e saúde", nicho: "beleza-saude", prov: "yt", id: "LFxDQs0DlIk" },
+  { titulo: "Viagem: aniversário do meu pai", marca: "Aniversário do meu pai", nota: "", nicho: "viagem", id: null },
+  { titulo: "Blant Cosméticos – Blindagem das unhas", marca: "Blant Cosméticos", nota: "", nicho: "beleza-saude", prov: "yt", id: "4wv-lsmlnJ4" }
 ];
 
 const NICHOS = [
@@ -1397,9 +1398,12 @@ function atualizarFocoResultados() {
   }
 })();
 
-/* Vídeo "Sobre mim" (ainda sem link — avisa que está em breve, sem travar a página) */
+/* Vídeo "Sobre mim" */
 $("#btnVideoSobre").addEventListener("click", () => {
-  alert(idioma === "en" ? "This video isn't published yet. As soon as it's ready, it'll play right here." : "Esse vídeo ainda não foi publicado. Assim que estiver pronto, ele toca aqui mesmo.");
+  abrirVideo(
+    { prov: "yt", id: "oQPWMJhXPJ0", titulo: idioma === "en" ? "How I shoot my UGC content" : "Como eu gravo meu conteúdo UGC", local: "" },
+    { texto: idioma === "en" ? "I want a video like this →" : "Quero um vídeo assim →", href: "#contato" }
+  );
 });
 
 /* Serviços */
@@ -1636,7 +1640,7 @@ const I18N_EN = {
   "hero.flut1": "<b>ROAS of 7.54</b><small>In a subscription e-commerce campaign</small>",
   "hero.flut2": "<b>+50x more reach</b><small>Organic result for Milkmoo</small>",
   "ticker.marcasRot": "Brands that trusted my work",
-  "sobre.videoSelo": "How I shoot your UGC content · coming soon",
+  "sobre.videoSelo": "How I shoot my UGC content",
   "sobre.etiqueta": "About me",
   "sobre.h2": "Hey, I'm <span class=\"serif\">Luana Caper</span>",
   "sobre.p1": "I'm 35, a UGC creator, content strategist and traffic manager. I've been in the market for over 10 years and have worked with more than 280 brands, between filmed videos and campaign management.",
@@ -1663,7 +1667,7 @@ const I18N_EN = {
 const I18N_EN_ARIA = {
   "ticker.entregaAria": "What I deliver",
   "ticker.marcasAria": "Brands that trusted my work",
-  "sobre.videoAria": "Video: How I shoot your UGC content (coming soon)",
+  "sobre.videoAria": "Video: How I shoot my UGC content",
   "resultados.ant": "Previous result",
   "resultados.prox": "Next result",
   "dep.ant": "Previous testimonial",
