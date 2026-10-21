@@ -298,16 +298,21 @@ section{scroll-margin-top:92px}
 .vm .btn{min-height:44px;padding:10px 20px;font-size:.95rem}
 .vm :focus-visible{outline-color:#fff}
 
-/* "O que podemos criar juntos": serviços em faixa + foto à direita */
+/* "O que podemos criar juntos": serviços em faixa + foto à direita, numa moldura que
+   usa o mesmo material (fundo gelo) dos cards pra foto não ficar solta no branco. */
 .criar-grade{display:flex;align-items:center;gap:clamp(20px,3vw,36px);flex-wrap:wrap}
-.criar-foto{display:flex;flex:none;width:clamp(200px,17vw,260px);border-radius:var(--raio-g);overflow:hidden}
-.criar-foto img{width:100%;height:auto;display:block}
+.criar-foto{display:flex;flex-direction:column;align-items:center;flex:none;width:clamp(230px,18vw,290px);background:var(--gelo);border:1px solid var(--linha);border-radius:var(--raio-g);padding:14px;box-shadow:var(--sombra)}
+.criar-foto img{width:100%;height:auto;display:block;border-radius:calc(var(--raio-g) - 14px)}
+.criar-foto .link-sutil{margin:12px 0 2px;text-align:center}
 
 /* Serviços */
 .serv-grade{display:flex;flex:1 1 560px;gap:16px;flex-wrap:wrap}
 .serv{flex:1 1 130px;min-width:130px;background:var(--gelo);border:1px solid var(--linha);border-radius:var(--raio);padding:20px 18px;transition:transform .25s,box-shadow .25s,background .25s}
 .serv:hover{transform:translateY(-4px);box-shadow:var(--sombra);background:#fff}
-.serv-n{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--laranja-claro);font-weight:800;font-size:.76rem}
+.serv.destaque{background:#fff;border-color:var(--laranja)}
+.serv-tag{display:inline-block;margin-bottom:10px;background:var(--laranja);color:#fff;font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;padding:3px 10px;border-radius:999px}
+.serv-n{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--laranja-claro);color:var(--verde-esc)}
+.serv-n svg{width:17px;height:17px}
 .serv h3{margin-top:14px;font-size:1.05rem;letter-spacing:-.01em}
 .serv p{margin-top:6px;color:var(--suave);font-size:.88rem;line-height:1.5}
 
@@ -563,6 +568,7 @@ body.trava{overflow:hidden}
       <div class="serv-grade" id="servGrade"></div>
       <div class="criar-foto">
         <img src="img/bora-criar.png" alt="Luana Caper segurando o celular e apontando pra tela, que mostra &quot;Vamos criar?&quot;" loading="lazy" width="985" height="1110">
+        <a class="link-sutil" href="#contato" data-i18n="criar.cta">Quero criar com a Luana →</a>
       </div>
     </div>
   </div>
@@ -1228,6 +1234,15 @@ renderizarNichos(true);
 /* Os melhores resultados */
 /* Carrossel "Os melhores resultados": cartões com fundo colorido (sem foto real ainda) que avançam sozinhos */
 /* Prova social (lado esquerdo de "Os melhores resultados"): troca conforme o vídeo em foco. */
+/* Ícones dos 4 serviços padrão (ordem: tráfego, gestão, e-commerce, fotos); serviço extra
+   criado no painel usa o 5º (estrela) por ciclo de índice. */
+const ICONES_SERVICOS = [
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a2 2 0 0 0 2 2h1l4 4V5L6 9H5a2 2 0 0 0-2 2z"/><path d="M15 8a4 4 0 0 1 0 8"/><path d="M19 5a9 9 0 0 1 0 14"/></svg>',
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>',
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>',
+  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></svg>'
+];
 const ICONES_PROVA = {
   views: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>',
   likes: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.35-9.5-8.5C1 9 2 5.5 5.5 4.5 8 3.8 10 5 12 7c2-2 4-3.2 6.5-2.5C22 5.5 23 9 21.5 12.5 19 16.65 12 21 12 21z"/></svg>',
@@ -1392,8 +1407,12 @@ function montarServicos(lista, animar) {
   const grade = $("#servGrade");
   grade.replaceChildren();
   lista.forEach((s, i) => {
-    grade.append(el("article", { class: "serv" + (animar === false ? "" : " revelar"), style: animar === false ? null : atraso(i) }, [
-      el("span", { class: "serv-n", "aria-hidden": "true", text: String(i + 1).padStart(2, "0") }),
+    const destaque = i === 0;
+    const icone = el("span", { class: "serv-n", "aria-hidden": "true" });
+    icone.innerHTML = ICONES_SERVICOS[i % ICONES_SERVICOS.length];
+    grade.append(el("article", { class: "serv" + (destaque ? " destaque" : "") + (animar === false ? "" : " revelar"), style: animar === false ? null : atraso(i) }, [
+      destaque ? el("span", { class: "serv-tag", text: idioma === "en" ? "Most requested" : "Mais pedido" }) : null,
+      icone,
       el("h3", { text: s.titulo }),
       el("p", { text: s.texto })
     ]));
@@ -1632,6 +1651,7 @@ const I18N_EN = {
   "criar.etiqueta": "Services",
   "criar.h2": "What can we <span class=\"serif\">create together?</span>",
   "criar.p": "Every format has a goal: sell, scale or build your brand. Tell me yours and we'll put together the perfect combo for it.",
+  "criar.cta": "Let's create something →",
   "dep.etiqueta": "Social proof",
   "dep.h2": "What people say about the <span class=\"serif\">work</span>",
   "contato.etiqueta": "Contact",
