@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://luanacaper.github.io/portifolio/sitemap.xml

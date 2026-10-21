@@ -4,23 +4,39 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Luana Caper | UGC Creative Strategist & Performance Media</title>
-<meta name="description" content="Luana Caper: UGC, estrategista de conteúdo e gestora de tráfego. Vídeos, roteiros e campanhas que convertem para marcas de todos os nichos.">
+<meta name="description" content="Criadora de conteúdo UGC e gestora de tráfego para marcas que precisam de vídeos, criativos e campanhas que convertem. Mais de 280 marcas atendidas, ROAS de até 7,54.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://luanacaper.github.io/portifolio/">
 <meta name="theme-color" content="#55613b">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Luana Caper | UGC Creative Strategist & Performance Media">
-<meta property="og:description" content="UGC, estrategista de conteúdo e gestora de tráfego. Vídeos, roteiros e campanhas que convertem para marcas de todos os nichos.">
+<meta property="og:description" content="Criadora de conteúdo UGC e gestora de tráfego para marcas que precisam de vídeos, criativos e campanhas que convertem. Mais de 280 marcas atendidas, ROAS de até 7,54.">
 <meta property="og:url" content="https://luanacaper.github.io/portifolio/">
 <meta property="og:image" content="https://luanacaper.github.io/portifolio/img/og-share.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Luana Caper | UGC Creative Strategist & Performance Media">
-<meta name="twitter:description" content="UGC, estrategista de conteúdo e gestora de tráfego. Vídeos, roteiros e campanhas que convertem para marcas de todos os nichos.">
+<meta name="twitter:description" content="Criadora de conteúdo UGC e gestora de tráfego para marcas que precisam de vídeos, criativos e campanhas que convertem. Mais de 280 marcas atendidas, ROAS de até 7,54.">
 <meta name="twitter:image" content="https://luanacaper.github.io/portifolio/img/og-share.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%233f4a2b'/%3E%3Ctext x='33' y='44' font-family='Georgia,serif' font-style='italic' font-weight='700' font-size='36' text-anchor='middle' fill='%23ffbf85'%3EL%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Luana Caper",
+  "jobTitle": "UGC Creative Strategist & Gestora de Tráfego",
+  "url": "https://luanacaper.github.io/portifolio/",
+  "image": "https://luanacaper.github.io/portifolio/foto-capa.jpg",
+  "description": "Criadora de conteúdo UGC e gestora de tráfego para marcas que precisam de vídeos, criativos e campanhas que convertem.",
+  "knowsAbout": ["UGC", "Criação de conteúdo para e-commerce", "Gestão de tráfego pago", "Criativos para Meta Ads", "Vídeos para TikTok e Instagram", "Fotos UGC"],
+  "address": { "@type": "PostalAddress", "addressLocality": "Goiânia", "addressRegion": "GO", "addressCountry": "BR" },
+  "sameAs": ["https://www.instagram.com/luhcaper", "https://www.tiktok.com/@luhcaper"]
+}
+</script>
 
 <style>
 :root{
@@ -76,6 +92,7 @@ ul,ol{padding:0;list-style:none}
 .nav{display:flex;align-items:center;gap:4px}
 .nav a{text-decoration:none;font-weight:600;font-size:.92rem;padding:8px 11px;border-radius:999px;color:var(--suave);transition:background .2s,color .2s}
 .nav a:hover{background:var(--gelo);color:var(--tinta)}
+.nav a.ativo:not(.cta){background:var(--gelo);color:var(--verde-esc);font-weight:800}
 .nav a.cta{background:var(--verde);color:#fff;margin-left:6px}
 .nav a.cta:hover{background:var(--verde-esc);color:#fff}
 .btn-menu{display:none;width:44px;height:44px;border:1px solid var(--linha);background:#fff;border-radius:14px;cursor:pointer;align-items:center;justify-content:center;padding:0}
@@ -219,7 +236,9 @@ section{scroll-margin-top:92px}
 .rc-card.ativo{filter:none}
 .rc-marca{display:block;text-align:center;font-size:clamp(1rem,2vw,1.2rem);font-weight:800;letter-spacing:-.01em;text-transform:uppercase;color:var(--tinta);margin-bottom:12px}
 .escuro .rc-marca{color:#fff}
-.rc-foto{position:relative;aspect-ratio:9/16;border-radius:var(--raio-g);overflow:hidden;box-shadow:var(--sombra)}
+.rc-foto{display:block;width:100%;position:relative;aspect-ratio:9/16;border-radius:var(--raio-g);overflow:hidden;box-shadow:var(--sombra);border:0;padding:0;background:none;font:inherit}
+button.rc-foto{cursor:pointer}
+.rc-foto img{width:100%;height:100%;object-fit:cover;display:block}
 .rc-stat{margin-top:14px;text-align:center}
 .rc-stat b{display:block;font-size:clamp(1.05rem,2vw,1.3rem);font-weight:800;letter-spacing:-.02em;color:var(--tinta);line-height:1.2}
 .escuro .rc-stat b{color:#fff}
@@ -305,6 +324,17 @@ section{scroll-margin-top:92px}
 .ilb{position:fixed;inset:0;z-index:260;display:grid;place-items:center;padding:14px;background:rgba(15,18,10,.92);overflow:auto}
 .ilb img{display:block;max-width:min(94vw,1100px);max-height:90vh;width:auto;height:auto;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
 .ampliavel{cursor:zoom-in}
+
+/* WhatsApp flutuante: sempre à mão, em qualquer seção */
+.wa-flutuante{position:fixed;right:20px;bottom:20px;z-index:150;width:58px;height:58px;border-radius:50%;border:0;background:#25d366;color:#fff;display:grid;place-items:center;box-shadow:0 10px 28px rgba(20,32,28,.3);cursor:pointer;transition:transform .25s,box-shadow .25s}
+.wa-flutuante:hover{transform:translateY(-3px) scale(1.06);box-shadow:0 14px 32px rgba(20,32,28,.38)}
+.wa-flutuante svg{width:30px;height:30px}
+.wa-modal{position:fixed;inset:0;z-index:260;display:grid;place-items:center;padding:14px;background:rgba(15,18,10,.72);overflow:auto}
+.wa-caixa{width:min(420px,100%);background:#fff;border-radius:var(--raio-g);padding:clamp(26px,4vw,36px);text-align:left}
+.wa-caixa h3{font-size:1.4rem;letter-spacing:-.02em}
+.wa-caixa p{margin-top:8px;color:var(--suave)}
+.wa-caixa form{margin-top:20px}
+@media (max-width:700px){.wa-flutuante{width:52px;height:52px;right:14px;bottom:14px}.wa-flutuante svg{width:26px;height:26px}}
 .vm-info{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 14px;color:#fff;text-align:center}
 .vm-info b{display:block;font-size:1.05rem;line-height:1.2}
 .vm-info span{display:block;font-size:.9rem;opacity:.85}
@@ -664,6 +694,31 @@ body.trava{overflow:hidden}
   <img id="ilbImg" src="" alt="">
 </div>
 
+<!-- WHATSAPP FLUTUANTE -->
+<button class="wa-flutuante" id="btnWaFlutuante" type="button" aria-haspopup="dialog" aria-label="Falar no WhatsApp" data-i18n-aria="wa.abrirAria">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.74.46 3.44 1.32 4.93L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.26.86 5.82 2.42a8.2 8.2 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.25 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.31a8.18 8.18 0 0 1-1.26-4.37c0-4.55 3.71-8.23 8.27-8.23zm-4.54 4.6c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.43 1.03 2.6.13.17 1.76 2.8 4.38 3.87 2.17.88 2.61.71 3.08.66.47-.04 1.52-.62 1.73-1.22.21-.6.21-1.11.15-1.22-.06-.11-.23-.17-.47-.3-.25-.12-1.46-.72-1.69-.8-.23-.09-.4-.13-.56.12-.17.25-.64.8-.78.97-.14.17-.29.18-.53.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.3.37-.44.12-.15.16-.25.24-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.37-.78-1.87-.2-.49-.41-.42-.56-.43l-.48-.01z"/></svg>
+</button>
+
+<div class="wa-modal" id="waModal" role="dialog" aria-modal="true" aria-label="Falar no WhatsApp" hidden>
+  <button class="lb-btn lb-fechar" id="waFechar" type="button" aria-label="Fechar" data-i18n-aria="wa.fecharAria" style="position:absolute;top:14px;right:14px;width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:1.8rem;line-height:1;cursor:pointer">&times;</button>
+  <div class="wa-caixa">
+    <h3 data-i18n="wa.titulo">Vamos conversar?</h3>
+    <p data-i18n="wa.subtitulo">Me conta rapidinho de qual marca você é e eu já te chamo no WhatsApp.</p>
+    <form id="formWa">
+      <div class="campo">
+        <label for="wa-marca" data-i18n="wa.marca">Nome da marca</label>
+        <input id="wa-marca" name="marca" type="text" autocomplete="organization" required>
+      </div>
+      <div class="campo">
+        <label for="wa-tel" data-i18n="wa.telefone">Seu telefone/WhatsApp</label>
+        <input id="wa-tel" name="telefone" type="tel" autocomplete="tel" required>
+      </div>
+      <button class="btn btn-primario btn-bloco" type="submit" data-i18n="wa.continuar">Continuar no WhatsApp</button>
+    </form>
+    <div class="conf" id="waConf" tabindex="-1" hidden></div>
+  </div>
+</div>
+
 <script>
 /* =====================================================================
    DADOS — edite aqui. Vídeos sem "id" aparecem como "em breve" no site;
@@ -771,8 +826,10 @@ const NICHOS = [
 
 const RESULTADOS_CARROSSEL = [
   { marca: "App Place", stat: "R$33,4 mil", ctx: "Vendas em 5 dias · orgânico + ROAS 5,6",
+    video: { prov: "yt", id: "aOpO3Kbo53Q", titulo: "App Place (versão original)" },
     prova: { tipo: "place", organico: 27383, trafego: 6082, roas: "5,6", likes: 218, comments: 579, shares: 79, saves: 43 } },
   { marca: "Viagem", stat: "♥ Favorito", ctx: "Aniversário do meu pai — um dos mais queridos do portfólio",
+    video: { prov: "yt", id: "b49WhEAw0Sc", titulo: "Casa Cachoeira Sonho Meu" },
     prova: { tipo: "direct", conta: "cachoeirasonhomeu", sub: "Conversa comercial",
       mensagens: [
         { de: "eu", texto: "Muito top, ficou muito bom.... Parabéns" },
@@ -788,11 +845,16 @@ const RESULTADOS_CARROSSEL = [
         { tipo: "saves", valor: 2653, extra: "+3.150 no TikTok" }
       ]
     } },
-  { marca: "Tekoá", stat: "ROAS 7,54", ctx: "E-commerce por assinatura · anúncio", prova: { tipo: "ads", linha: 0 } },
+  { marca: "Tekoá", stat: "ROAS 7,54", ctx: "E-commerce por assinatura · anúncio",
+    video: { prov: "yt", id: "DK6EsJaCXWo", titulo: "Tekoá – Anúncio (ROAS 7,54)" },
+    prova: { tipo: "ads", linha: 0 } },
   { marca: "Tekoá", stat: "ROAS 7,20", ctx: "E-commerce por assinatura · anúncio", prova: { tipo: "ads", linha: 2 } },
   { marca: "Milkmoo", stat: "+50x", ctx: "Alcance a mais só no orgânico",
+    video: { prov: "yt", id: "f7GobRuUZLg", titulo: "MilkMoo – Orgânico" },
     prova: { tipo: "milkmoo", imgs: ["img/provas/milkmoo-1.png", "img/provas/milkmoo-2.png"] } },
-  { marca: "Tekoá", stat: "ROAS 6,90", ctx: "E-commerce por assinatura · anúncio", prova: { tipo: "ads", linha: 1 } }
+  { marca: "Tekoá", stat: "ROAS 6,90", ctx: "E-commerce por assinatura · anúncio",
+    video: { prov: "yt", id: "-MRT1kAlS00", titulo: "Tekoá – Anúncio (ROAS 6,90)" },
+    prova: { tipo: "ads", linha: 1 } }
 ];
 
 const SERVICOS = [
@@ -827,8 +889,10 @@ const NICHOS_EN = {
 };
 const RESULTADOS_CARROSSEL_EN = [
   { marca: "App Place", stat: "R$33.4k", ctx: "Sales in 5 days · organic + ROAS 5.6",
+    video: { prov: "yt", id: "aOpO3Kbo53Q", titulo: "App Place (original version)" },
     prova: { tipo: "place", organico: 27383, trafego: 6082, roas: "5.6", likes: 218, comments: 579, shares: 79, saves: 43 } },
   { marca: "Travel", stat: "♥ Favorite", ctx: "My dad's birthday trip — one of the portfolio's favorites",
+    video: { prov: "yt", id: "b49WhEAw0Sc", titulo: "Casa Cachoeira Sonho Meu" },
     prova: { tipo: "direct", conta: "cachoeirasonhomeu", sub: "Business chat",
       mensagens: [
         { de: "eu", texto: "Looks amazing.... Congrats" },
@@ -844,11 +908,16 @@ const RESULTADOS_CARROSSEL_EN = [
         { tipo: "saves", valor: 2653, extra: "+3,150 on TikTok" }
       ]
     } },
-  { marca: "Tekoá", stat: "ROAS 7.54", ctx: "Subscription e-commerce · ad", prova: { tipo: "ads", linha: 0 } },
+  { marca: "Tekoá", stat: "ROAS 7.54", ctx: "Subscription e-commerce · ad",
+    video: { prov: "yt", id: "DK6EsJaCXWo", titulo: "Tekoá – Ad (ROAS 7.54)" },
+    prova: { tipo: "ads", linha: 0 } },
   { marca: "Tekoá", stat: "ROAS 7.20", ctx: "Subscription e-commerce · ad", prova: { tipo: "ads", linha: 2 } },
   { marca: "Milkmoo", stat: "+50x", ctx: "Extra reach, organic only",
+    video: { prov: "yt", id: "f7GobRuUZLg", titulo: "MilkMoo – Organic" },
     prova: { tipo: "milkmoo", imgs: ["img/provas/milkmoo-1.png", "img/provas/milkmoo-2.png"] } },
-  { marca: "Tekoá", stat: "ROAS 6.90", ctx: "Subscription e-commerce · ad", prova: { tipo: "ads", linha: 1 } }
+  { marca: "Tekoá", stat: "ROAS 6.90", ctx: "Subscription e-commerce · ad",
+    video: { prov: "yt", id: "-MRT1kAlS00", titulo: "Tekoá – Ad (ROAS 6.90)" },
+    prova: { tipo: "ads", linha: 1 } }
 ];
 const SERVICOS_EN = [
   { titulo: "Traffic creatives", texto: "Ads optimized for Meta, TikTok and YouTube, built to get the best result at the lowest cost." },
@@ -910,6 +979,22 @@ btnMenu.addEventListener("click", () => menuAbrir(!menu.classList.contains("aber
 menu.addEventListener("click", e => { if (e.target.closest("a")) menuAbrir(false); });
 document.addEventListener("keydown", e => { if (e.key === "Escape" && menu.classList.contains("aberto")) { menuAbrir(false); btnMenu.focus(); } });
 window.matchMedia("(min-width:981px)").addEventListener("change", e => { if (e.matches) menuAbrir(false); });
+
+/* Menu: destaca no menu a seção que está na tela conforme rola a página */
+const SECOES_NAV = ["sobre", "resultados", "conteudos", "criar-juntos", "depoimentos", "contato"];
+const linksNav = new Map(SECOES_NAV.map(id => [id, document.querySelector('.nav a[href="#' + id + '"]')]));
+if ("IntersectionObserver" in window) {
+  const ioNav = new IntersectionObserver(entradas => {
+    entradas.forEach(entrada => {
+      if (!entrada.isIntersecting) return;
+      const link = linksNav.get(entrada.target.id);
+      if (!link) return;
+      linksNav.forEach(l => l && l.classList.remove("ativo"));
+      link.classList.add("ativo");
+    });
+  }, { rootMargin: "-45% 0px -50% 0px" });
+  SECOES_NAV.forEach(id => { const sec = document.getElementById(id); if (sec) ioNav.observe(sec); });
+}
 
 /* Faixa do topo: contagem regressiva pra Black Friday (fixa, só a frase do meio alterna) */
 const FRASES_BF = ["vídeo de e-commerce que vende no dia", "reserve a sua agenda de novembro"];
@@ -1141,6 +1226,45 @@ $("#ilbFechar").addEventListener("click", ilbFechar);
 ilb.addEventListener("click", e => { if (e.target === ilb) ilbFechar(); });
 document.addEventListener("keydown", e => { if (!ilb.hidden && e.key === "Escape") ilbFechar(); });
 
+/* WhatsApp flutuante: pede marca + telefone (vira lead na mesma tabela "marcas" do painel
+   admin, igual ao formulário de contato) e só então leva pro WhatsApp. */
+const waModal = $("#waModal"), formWa = $("#formWa"), waConf = $("#waConf");
+let waFoco = null;
+function waAbrir() {
+  waFoco = document.activeElement;
+  formWa.hidden = false;
+  waConf.hidden = true;
+  waModal.hidden = false;
+  document.body.classList.add("trava");
+  $("#wa-marca").focus();
+}
+function waFecharModal() {
+  waModal.hidden = true;
+  document.body.classList.remove("trava");
+  if (waFoco && waFoco.focus) waFoco.focus();
+}
+$("#btnWaFlutuante").addEventListener("click", waAbrir);
+$("#waFechar").addEventListener("click", waFecharModal);
+waModal.addEventListener("click", e => { if (e.target === waModal) waFecharModal(); });
+document.addEventListener("keydown", e => { if (!waModal.hidden && e.key === "Escape") waFecharModal(); });
+formWa.addEventListener("submit", e => {
+  e.preventDefault();
+  const f = new FormData(formWa);
+  const marca = String(f.get("marca")).trim(), telefone = String(f.get("telefone")).trim();
+  enviar({ nome: marca, telefone, origem: "geral-whatsapp-flutuante" });
+  const texto = idioma === "en"
+    ? "Hi Luana! I'm from " + marca + ". My phone: " + telefone + ". I'd like to talk about a campaign."
+    : "Oi Luana! Sou da marca " + marca + ". Meu telefone: " + telefone + ". Quero conversar sobre uma campanha.";
+  formWa.hidden = true;
+  waConf.replaceChildren(
+    el("h3", { text: idioma === "en" ? "Almost there!" : "Quase lá!" }),
+    el("p", { text: idioma === "en" ? "Tap below to open WhatsApp with your message ready." : "Toque abaixo pra abrir o WhatsApp com a mensagem já pronta." }),
+    el("a", { class: "btn btn-primario btn-bloco", href: wa(texto), target: "_blank", rel: "noopener noreferrer", text: idioma === "en" ? "Open WhatsApp" : "Abrir WhatsApp" })
+  );
+  waConf.hidden = false;
+  waConf.focus();
+});
+
 /* Cartão de vídeo: se tiver id, toca no site; sem id, mostra "em breve". A marca aparece em
    destaque na própria miniatura (selo), sem legenda embaixo. */
 function cartaoVideo(v, i, animar) {
@@ -1360,9 +1484,19 @@ function montarResultadosCarrossel(lista, animar) {
   trilho.dataset.copias = copias;
   for (let c = 0; c < copias; c++) {
     lista.forEach((r, i) => {
+      let foto;
+      if (r.video) {
+        foto = el("button", { class: "rc-foto", type: "button", "aria-label": (idioma === "en" ? "Watch video: " : "Assistir vídeo: ") + r.marca }, [
+          el("img", { src: "https://i.ytimg.com/vi/" + r.video.id + "/hqdefault.jpg", alt: "", loading: "lazy", width: 300, height: 533 }),
+          el("span", { class: "play", "aria-hidden": "true" })
+        ]);
+        foto.addEventListener("click", () => abrirVideo(r.video, { texto: idioma === "en" ? "I want a video like this →" : "Quero um vídeo assim →", href: "#contato" }));
+      } else {
+        foto = el("div", { class: "rc-foto", style: "background:" + TONS[i % TONS.length] });
+      }
       trilho.append(el("div", { class: "rc-card" + (animar === false ? "" : " revelar"), style: animar === false ? null : atraso(i % 4), "data-idx": i }, [
         el("span", { class: "rc-marca", text: r.marca }),
-        el("div", { class: "rc-foto", style: "background:" + TONS[i % TONS.length] }),
+        foto,
         el("div", { class: "rc-stat" }, [el("b", { text: r.stat }), r.ctx ? el("small", { class: "rc-ctx", text: r.ctx }) : null])
       ]));
     });
@@ -1556,7 +1690,7 @@ async function enviar(dados) {
     const r = await fetch(sb.url + "/rest/v1/marcas", {
       method: "POST",
       headers: { apikey: sb.chave, "Content-Type": "application/json", Prefer: "return=minimal" },
-      body: JSON.stringify({ nome: dados.nome, email: dados.email || null, mensagem: dados.mensagem || null, origem: "geral-contato", status: "novo" })
+      body: JSON.stringify({ nome: dados.nome, email: dados.email || null, telefone: dados.telefone || null, mensagem: dados.mensagem || null, origem: dados.origem || "geral-contato", status: "novo" })
     });
     return r.ok;
   } catch (e) { return false; }
@@ -1674,7 +1808,12 @@ const I18N_EN = {
   "contato.h2": "Shall we create <span class=\"serif\">something together?</span>",
   "contato.p": "Tell me quickly what you have in mind and I'll get back to you with a proposal.",
   "contato.nome": "Name", "contato.email": "Email", "contato.msg": "Message", "contato.enviar": "Send message",
-  "rodape.direitos": "All rights reserved."
+  "rodape.direitos": "All rights reserved.",
+  "wa.titulo": "Let's talk?",
+  "wa.subtitulo": "Tell me quickly which brand you're from and I'll take you straight to WhatsApp.",
+  "wa.marca": "Brand name",
+  "wa.telefone": "Your phone/WhatsApp",
+  "wa.continuar": "Continue on WhatsApp"
 };
 const I18N_EN_ARIA = {
   "ticker.entregaAria": "What I deliver",
@@ -1685,7 +1824,9 @@ const I18N_EN_ARIA = {
   "dep.ant": "Previous testimonial",
   "dep.prox": "Next testimonial",
   "modal.fechar": "Close video",
-  "modal.fecharImg": "Close image"
+  "modal.fecharImg": "Close image",
+  "wa.abrirAria": "Talk on WhatsApp",
+  "wa.fecharAria": "Close"
 };
 const PT_HTML = new Map();
 document.querySelectorAll("[data-i18n]").forEach(n => PT_HTML.set(n, n.innerHTML));
