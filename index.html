@@ -114,7 +114,6 @@ section{scroll-margin-top:92px}
 .foto{position:relative;border-radius:var(--raio-g);overflow:hidden;background:linear-gradient(160deg,#55613b 0%,#8a9a63 55%,#d4691f 130%);box-shadow:var(--sombra-g)}
 .foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
 .foto.r45{aspect-ratio:4/5}
-.selo{position:absolute;top:16px;right:16px;z-index:3;background:var(--laranja-claro);color:var(--tinta);font-weight:800;font-size:.85rem;text-transform:uppercase;letter-spacing:.06em;padding:8px 16px;border-radius:999px;transform:rotate(6deg);box-shadow:0 6px 16px rgba(20,32,28,.2)}
 
 /* Cartões flutuantes com os destaques de resultado, sobre a foto da capa */
 .flutuante{position:absolute;z-index:3;display:block;max-width:250px;text-decoration:none;color:var(--tinta);transform:translate(var(--px,0px),var(--py,0px));transition:transform .3s ease-out,scale .25s ease}
@@ -368,7 +367,6 @@ body.trava{overflow:hidden}
   /* Capa: continua lado a lado no mobile (texto à esquerda, foto à direita), só reduzindo */
   .capa-hero{position:static;overflow:visible;min-height:0;display:flex;align-items:center;gap:16px;padding:18px var(--pad);background:var(--gelo)}
   .capa-hero-img{position:static;flex:none;width:38%;height:auto;aspect-ratio:3/4;border-radius:18px;object-position:28% 18%}
-  .selo{top:6px;right:6px;font-size:.56rem;padding:3px 8px}
   .flutuante{display:none}
   .capa-hero-texto{position:static;max-width:none;flex:1;min-width:0;margin-left:0;min-height:0;padding:0;text-align:left}
   .lead{margin-left:0;margin-right:0}
@@ -458,7 +456,6 @@ body.trava{overflow:hidden}
 <section class="capa" id="inicio" aria-label="Apresentação">
   <div class="capa-hero revelar">
     <img class="capa-hero-img" src="foto-capa.jpg" alt="Luana Caper sorrindo, de gola alta verde-oliva" width="1673" height="940" fetchpriority="high">
-    <span class="selo" data-i18n="hero.selo">Novo</span>
 
     <!-- FLUTUANTES: destaques de resultado deste portfólio. Pra trocar, edite o <b> e o <small>. -->
     <a class="flutuante f1" href="#resultados">
@@ -1561,7 +1558,6 @@ const I18N_EN = {
   "nav.criar": "Let's create", "nav.depoimentos": "Testimonials", "nav.contato": "Contact",
   "skip": "Skip to content",
   "bf.selo": "Black Friday", "bf.cta": "book your slot →",
-  "hero.selo": "New",
   "hero.etiqueta": "UGC Creator · Strategist · Goiânia, GO · Brazil",
   "hero.h1": "Your content <span class=\"serif\">converts more!</span>",
   "hero.lead": "I analyze your audience and build every creative from hook to CTA, made to sell.",
