@@ -784,7 +784,6 @@ const VIDEOS_VIAGEM = [
   { titulo: "Chalé Lua", marca: "Chalé Lua", nicho: "viagem", prov: "yt", id: "ARMfs907Fbw" },
   { titulo: "Flutuante Serra da Mesa", marca: "Flutuante Serra da Mesa", nicho: "viagem", prov: "yt", id: "nmZHI9Psc44" },
   { titulo: "Lajinha", marca: "Lajinha", nicho: "viagem", prov: "yt", id: "OAcfpc5pOr4" },
-  { titulo: "Pousada Aimê", marca: "Pousada Aimê", nicho: "viagem", prov: "yt", id: "CnLIGnGYo_s" },
   { titulo: "Casa Cachoeira Sonho Meu", marca: "Casa Cachoeira Sonho Meu", nicho: "viagem", prov: "yt", id: "b49WhEAw0Sc" },
   { titulo: "Mirante do Ipê", marca: "Mirante do Ipê", nicho: "viagem", prov: "yt", id: "5bYZJZyPr2g" }
 ];
@@ -812,7 +811,6 @@ const VIDEOS_NOVOS = [
   { titulo: "MilkMoo – Orgânico 2", marca: "Milky Moo", nota: "", nicho: "gastronomia-assinaturas", prov: "yt", id: "7Tvn9KKroxw" },
   { titulo: "Café", marca: "Nosso Café", nota: "Goiânia", nicho: "gastronomia-assinaturas", id: null },
   { titulo: "Block Carbo", marca: "Block Carbo", nota: "bem-estar e saúde", nicho: "beleza-saude", prov: "yt", id: "LFxDQs0DlIk" },
-  { titulo: "Viagem: aniversário do meu pai", marca: "Aniversário do meu pai", nota: "", nicho: "viagem", id: null },
   { titulo: "Blant Cosméticos – Blindagem das unhas", marca: "Blant Cosméticos", nota: "", nicho: "beleza-saude", prov: "yt", id: "4wv-lsmlnJ4" }
 ];
 
@@ -828,7 +826,7 @@ const RESULTADOS_CARROSSEL = [
   { marca: "App Place", stat: "R$33,4 mil", ctx: "Vendas em 5 dias · orgânico + ROAS 5,6",
     video: { prov: "yt", id: "aOpO3Kbo53Q", titulo: "App Place (versão original)" },
     prova: { tipo: "place", organico: 27383, trafego: 6082, roas: "5,6", likes: 218, comments: 579, shares: 79, saves: 43 } },
-  { marca: "Viagem", stat: "♥ Favorito", ctx: "Aniversário do meu pai — um dos mais queridos do portfólio",
+  { marca: "Airbnb – Cachoeira Sonho Meu", stat: "", ctx: "Aniversário do meu pai — um dos mais queridos do portfólio",
     video: { prov: "yt", id: "b49WhEAw0Sc", titulo: "Casa Cachoeira Sonho Meu" },
     prova: { tipo: "direct", conta: "cachoeirasonhomeu", sub: "Conversa comercial",
       mensagens: [
@@ -891,7 +889,7 @@ const RESULTADOS_CARROSSEL_EN = [
   { marca: "App Place", stat: "R$33.4k", ctx: "Sales in 5 days · organic + ROAS 5.6",
     video: { prov: "yt", id: "aOpO3Kbo53Q", titulo: "App Place (original version)" },
     prova: { tipo: "place", organico: 27383, trafego: 6082, roas: "5.6", likes: 218, comments: 579, shares: 79, saves: 43 } },
-  { marca: "Travel", stat: "♥ Favorite", ctx: "My dad's birthday trip — one of the portfolio's favorites",
+  { marca: "Airbnb – Cachoeira Sonho Meu", stat: "", ctx: "My dad's birthday trip — one of the portfolio's favorites",
     video: { prov: "yt", id: "b49WhEAw0Sc", titulo: "Casa Cachoeira Sonho Meu" },
     prova: { tipo: "direct", conta: "cachoeirasonhomeu", sub: "Business chat",
       mensagens: [
@@ -1497,7 +1495,7 @@ function montarResultadosCarrossel(lista, animar) {
       trilho.append(el("div", { class: "rc-card" + (animar === false ? "" : " revelar"), style: animar === false ? null : atraso(i % 4), "data-idx": i }, [
         el("span", { class: "rc-marca", text: r.marca }),
         foto,
-        el("div", { class: "rc-stat" }, [el("b", { text: r.stat }), r.ctx ? el("small", { class: "rc-ctx", text: r.ctx }) : null])
+        el("div", { class: "rc-stat" }, [r.stat ? el("b", { text: r.stat }) : null, r.ctx ? el("small", { class: "rc-ctx", text: r.ctx }) : null])
       ]));
     });
   }
