@@ -246,6 +246,7 @@ section{scroll-margin-top:92px}
 .prova-milkmoo-grades{display:flex;gap:10px}
 .prova-milkmoo-grades img{width:50%;border-radius:14px;box-shadow:var(--sombra);display:block}
 .prova-milkmoo b{color:#fff;font-size:1.05rem;font-weight:800}
+.prova-dica{display:block;margin-top:2px;font-size:.68rem;color:rgba(255,255,255,.5)}
 @media (max-width:640px){.prova-ads-realce{box-shadow:0 0 0 999px rgba(20,25,16,.5)}}
 .rc-seta{position:absolute;top:42%;width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid var(--linha);box-shadow:var(--sombra);display:grid;place-items:center;font-size:1.3rem;cursor:pointer;z-index:2;color:var(--tinta);padding:0;line-height:1}
 .rc-seta:hover{background:var(--gelo)}
@@ -288,6 +289,9 @@ section{scroll-margin-top:92px}
 .vm-caixa{display:flex;flex-direction:column;align-items:center;gap:12px;max-width:100%}
 .vm-player{width:min(88vw,calc(68vh * .5625));aspect-ratio:9/16;background:#000;border-radius:18px;overflow:hidden}
 .vm-player iframe{display:block;width:100%;height:100%;border:0}
+.ilb{position:fixed;inset:0;z-index:260;display:grid;place-items:center;padding:14px;background:rgba(15,18,10,.92);overflow:auto}
+.ilb img{display:block;max-width:min(94vw,1100px);max-height:90vh;width:auto;height:auto;border-radius:14px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.ampliavel{cursor:zoom-in}
 .vm-info{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 14px;color:#fff;text-align:center}
 .vm-info b{display:block;font-size:1.05rem;line-height:1.2}
 .vm-info span{display:block;font-size:.9rem;opacity:.85}
@@ -632,6 +636,12 @@ body.trava{overflow:hidden}
       <a class="btn btn-primario" id="vmCta" href="#contato"></a>
     </div>
   </div>
+</div>
+
+<!-- PRINT AMPLIADO (prova social em tamanho real) -->
+<div class="ilb" id="ilb" role="dialog" aria-modal="true" aria-label="Imagem ampliada" hidden>
+  <button class="lb-btn lb-fechar" id="ilbFechar" type="button" aria-label="Fechar imagem" data-i18n-aria="modal.fecharImg" style="position:absolute;top:14px;right:14px;width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:1.8rem;line-height:1;cursor:pointer">&times;</button>
+  <img id="ilbImg" src="" alt="">
 </div>
 
 <script>
@@ -1091,6 +1101,27 @@ $("#vmFechar").addEventListener("click", vmFechar);
 vm.addEventListener("click", e => { if (e.target === vm) vmFechar(); });
 document.addEventListener("keydown", e => { if (!vm.hidden && e.key === "Escape") vmFechar(); });
 
+/* Print da prova social ampliado: abre a imagem em tamanho real (até caber na tela) */
+const ilb = $("#ilb"), ilbImg = $("#ilbImg");
+let ilbFoco = null;
+function abrirImagem(src, alt) {
+  ilbFoco = document.activeElement;
+  ilbImg.src = src;
+  ilbImg.alt = alt || "";
+  ilb.hidden = false;
+  document.body.classList.add("trava");
+  $("#ilbFechar").focus();
+}
+function ilbFechar() {
+  ilb.hidden = true;
+  ilbImg.src = "";
+  document.body.classList.remove("trava");
+  if (ilbFoco && ilbFoco.focus) ilbFoco.focus();
+}
+$("#ilbFechar").addEventListener("click", ilbFechar);
+ilb.addEventListener("click", e => { if (e.target === ilb) ilbFechar(); });
+document.addEventListener("keydown", e => { if (!ilb.hidden && e.key === "Escape") ilbFechar(); });
+
 /* Cartão de vídeo: se tiver id, toca no site; sem id, mostra "em breve". A marca aparece em
    destaque na própria miniatura (selo), sem legenda embaixo. */
 function cartaoVideo(v, i, animar) {
@@ -1249,11 +1280,16 @@ function montarProva(item) {
     const faixas = [[50.6, 32.6], [67.4, 16.0], [84.0, 0.74]];
     const [topPct, botPct] = faixas[p.linha];
     const src = "img/provas/tekoa-ads.png";
-    painel.append(el("div", { class: "prova prova-ads" }, [
+    const srcCompleto = "img/provas/tekoa-ads-full.png";
+    const altTxt = idioma === "en" ? "Tekoá ads table screenshot" : "Print da tabela de anúncios da Tekoá";
+    const bloco = el("div", { class: "prova-ads ampliavel", tabindex: "0", role: "button", "aria-label": idioma === "en" ? "Enlarge screenshot" : "Ampliar print" }, [
       el("img", { class: "prova-ads-base", src, alt: "", loading: "lazy" }),
       el("div", { class: "prova-ads-foco", style: "clip-path:inset(" + topPct + "% 0 " + botPct + "% 0)" }, [el("img", { src, alt: "" })]),
       el("div", { class: "prova-ads-realce", style: "top:" + topPct + "%;bottom:" + botPct + "%" })
-    ]));
+    ]);
+    bloco.addEventListener("click", () => abrirImagem(srcCompleto, altTxt));
+    bloco.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); abrirImagem(srcCompleto, altTxt); } });
+    painel.append(el("div", { class: "prova" }, [bloco, el("small", { class: "prova-dica", text: idioma === "en" ? "Tap to see full size" : "Toque pra ver em tamanho real" })]));
   } else if (p.tipo === "place") {
     const chips = el("div", { class: "prova-place-chips" }, [
       el("div", { class: "prova-chip" }, [el("b", { text: p.organico }), el("small", { text: idioma === "en" ? "Organic sales" : "Vendas no orgânico" })]),
@@ -1264,9 +1300,17 @@ function montarProva(item) {
     ])));
     painel.append(el("div", { class: "prova prova-place" }, [chips, stats]));
   } else if (p.tipo === "milkmoo") {
+    const altTxt = idioma === "en" ? "Milkmoo content performance screenshot" : "Print do desempenho do conteúdo da Milkmoo";
+    const grade = el("div", { class: "prova-milkmoo-grades" }, p.imgs.map(src => {
+      const img = el("img", { class: "ampliavel", src, alt: altTxt, loading: "lazy", tabindex: "0", role: "button", "aria-label": idioma === "en" ? "Enlarge screenshot" : "Ampliar print" });
+      img.addEventListener("click", () => abrirImagem(src, altTxt));
+      img.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); abrirImagem(src, altTxt); } });
+      return img;
+    }));
     painel.append(el("div", { class: "prova prova-milkmoo" }, [
-      el("div", { class: "prova-milkmoo-grades" }, p.imgs.map(src => el("img", { src, alt: "", loading: "lazy" }))),
-      el("b", { text: idioma === "en" ? "+5x organic results after the video" : "+5x de resultado orgânico depois do vídeo" })
+      grade,
+      el("b", { text: idioma === "en" ? "+5x organic results after the video" : "+5x de resultado orgânico depois do vídeo" }),
+      el("small", { class: "prova-dica", text: idioma === "en" ? "Tap to see full size" : "Toque pra ver em tamanho real" })
     ]));
   }
 }
@@ -1597,7 +1641,8 @@ const I18N_EN_ARIA = {
   "resultados.prox": "Next result",
   "dep.ant": "Previous testimonial",
   "dep.prox": "Next testimonial",
-  "modal.fechar": "Close video"
+  "modal.fechar": "Close video",
+  "modal.fecharImg": "Close image"
 };
 const PT_HTML = new Map();
 document.querySelectorAll("[data-i18n]").forEach(n => PT_HTML.set(n, n.innerHTML));
