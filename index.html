@@ -796,8 +796,7 @@ const VIDEOS_NOVOS = [
   { titulo: "Tekoá 02 – Anúncio", marca: "Tekoá", nota: "ROAS 6,90", nicho: "gastronomia-assinaturas", prov: "yt", id: "-MRT1kAlS00" },
   { titulo: "Tekoá 03 – Orgânico", marca: "Tekoá", nota: "", nicho: "gastronomia-assinaturas", prov: "yt", id: "H73cFN3u548" },
   { titulo: "Tekoá 03 – Anúncio", marca: "Tekoá", nota: "ROAS 7,54", nicho: "gastronomia-assinaturas", prov: "yt", id: "DK6EsJaCXWo" },
-  { titulo: "Tekoá 03 – Anúncio", marca: "Tekoá", nota: "ROAS 7,20", nicho: "gastronomia-assinaturas", id: null },
-  { titulo: "Tekoá 05 – Anúncio", marca: "Tekoá", nota: "", nicho: "gastronomia-assinaturas", prov: "yt", id: "_p9r453wBb4" },
+  { titulo: "Tekoá 05 – Anúncio", marca: "Tekoá", nota: "ROAS 7,20", nicho: "gastronomia-assinaturas", prov: "yt", id: "_p9r453wBb4" },
   { titulo: "App Place (versão original)", marca: "App Place", nota: "R$27.383 orgânico + R$6.082, ROAS 5,6", nicho: "tech-infoprodutos", prov: "yt", id: "aOpO3Kbo53Q" },
   { titulo: "Cinta Press Fitness", marca: "Pressfit", nota: "", nicho: "beleza-saude", prov: "yt", id: "5oyfMuKEP-A" },
   { titulo: "Casa da Gê – Orgânico", marca: "Casa de Gê", nota: "", nicho: "casa-decoracao", prov: "yt", id: "Zimf7dAbZcw" },
@@ -846,7 +845,9 @@ const RESULTADOS_CARROSSEL = [
   { marca: "Tekoá", stat: "ROAS 7,54", ctx: "E-commerce por assinatura · anúncio",
     video: { prov: "yt", id: "DK6EsJaCXWo", titulo: "Tekoá – Anúncio (ROAS 7,54)" },
     prova: { tipo: "ads", linha: 0 } },
-  { marca: "Tekoá", stat: "ROAS 7,20", ctx: "E-commerce por assinatura · anúncio", prova: { tipo: "ads", linha: 2 } },
+  { marca: "Tekoá", stat: "ROAS 7,20", ctx: "E-commerce por assinatura · anúncio",
+    video: { prov: "yt", id: "_p9r453wBb4", titulo: "Tekoá 05 – Anúncio (ROAS 7,20)" },
+    prova: { tipo: "ads", linha: 2 } },
   { marca: "Milkmoo", stat: "+50x", ctx: "Alcance a mais só no orgânico",
     video: { prov: "yt", id: "f7GobRuUZLg", titulo: "MilkMoo – Orgânico" },
     prova: { tipo: "milkmoo", imgs: ["img/provas/milkmoo-1.png", "img/provas/milkmoo-2.png"] } },
@@ -909,7 +910,9 @@ const RESULTADOS_CARROSSEL_EN = [
   { marca: "Tekoá", stat: "ROAS 7.54", ctx: "Subscription e-commerce · ad",
     video: { prov: "yt", id: "DK6EsJaCXWo", titulo: "Tekoá – Ad (ROAS 7.54)" },
     prova: { tipo: "ads", linha: 0 } },
-  { marca: "Tekoá", stat: "ROAS 7.20", ctx: "Subscription e-commerce · ad", prova: { tipo: "ads", linha: 2 } },
+  { marca: "Tekoá", stat: "ROAS 7.20", ctx: "Subscription e-commerce · ad",
+    video: { prov: "yt", id: "_p9r453wBb4", titulo: "Tekoá 05 – Ad (ROAS 7.20)" },
+    prova: { tipo: "ads", linha: 2 } },
   { marca: "Milkmoo", stat: "+50x", ctx: "Extra reach, organic only",
     video: { prov: "yt", id: "f7GobRuUZLg", titulo: "MilkMoo – Organic" },
     prova: { tipo: "milkmoo", imgs: ["img/provas/milkmoo-1.png", "img/provas/milkmoo-2.png"] } },
@@ -1134,14 +1137,12 @@ function iconeSacola() {
   return span;
 }
 const DESTAQUES_SOBRE = [
-  { titulo: "Roteiro aprovado antes de gravar" },
   { titulo: "Estratégia pensada por etapa do funil" },
   { titulo: "+280 marcas atendidas" },
   { titulo: "ROAS de 7,54", sub: "Em campanha de e-commerce por assinatura" },
   { titulo: "+50x mais alcance", sub: "Resultado orgânico pra Milkmoo" }
 ];
 const DESTAQUES_SOBRE_EN = [
-  { titulo: "Script approved before filming" },
   { titulo: "Strategy built for every funnel stage" },
   { titulo: "+280 brands served" },
   { titulo: "ROAS of 7.54", sub: "In a subscription e-commerce campaign" },
