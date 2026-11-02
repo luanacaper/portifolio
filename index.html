@@ -951,6 +951,9 @@ document.documentElement.classList.add("js");
 const reduzido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 let idioma = "pt";
 try { if (localStorage.getItem("idioma") === "en") idioma = "en"; } catch (e) {}
+// ?lang=en ou ?lang=pt no link (ex.: propostas da Upwork) vale mais que a escolha salva.
+const LANG_URL = new URLSearchParams(location.search).get("lang");
+if (LANG_URL === "en" || LANG_URL === "pt") idioma = LANG_URL;
 const $ = (s, r = document) => r.querySelector(s);
 function el(tag, attrs, filhos) {
   const n = document.createElement(tag);
@@ -1767,7 +1770,10 @@ formContato.addEventListener("submit", async e => {
       });
     } catch (e) {}
   };
-  registrarMetrica("visita");
+  // Guarda o resto dos UTMs (ex.: utm_content=UP-002 diz de qual proposta veio a visita).
+  const pUtm = new URLSearchParams(location.search);
+  const utm = ["utm_medium", "utm_campaign", "utm_content"].map(k => pUtm.get(k) ? k.slice(4) + "=" + pUtm.get(k).slice(0, 60) : "").filter(Boolean).join(" · ");
+  registrarMetrica("visita", utm || null);
 })();
 
 /* Idioma: PT/EN. Textos estáticos trocam via data-i18n/data-i18n-aria (o original em PT fica
