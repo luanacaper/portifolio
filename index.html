@@ -529,7 +529,7 @@ body.trava{overflow:hidden}
       <h1 class="revelar" style="--d:.05s" data-i18n="hero.h1">Seu conteúdo <span class="serif">converte mais!</span></h1>
       <p class="lead revelar" style="--d:.1s" data-i18n="hero.lead">Analiso seu público e crio do hook ao CTA o criativo que é pensado para vender.</p>
       <div class="acoes revelar" style="--d:.15s">
-        <a class="btn btn-primario" href="#contato" data-i18n="hero.btn">Quero criar com a Luana</a>
+        <a class="btn btn-primario" href="#contato" data-i18n="hero.btn" data-rastreio="hero-cta">Quero criar com a Luana</a>
       </div>
     </div>
   </div>
@@ -655,7 +655,7 @@ body.trava{overflow:hidden}
             <label for="c-msg" data-i18n="contato.msg">Mensagem</label>
             <textarea id="c-msg" name="mensagem" required></textarea>
           </div>
-          <button class="btn btn-primario btn-bloco" type="submit" data-i18n="contato.enviar">Enviar mensagem</button>
+          <button class="btn btn-primario btn-bloco" type="submit" data-i18n="contato.enviar" data-rastreio="contato-enviar">Enviar mensagem</button>
         </form>
         <div class="conf" id="confContato" tabindex="-1" hidden></div>
       </div>
@@ -694,7 +694,7 @@ body.trava{overflow:hidden}
 </div>
 
 <!-- WHATSAPP FLUTUANTE -->
-<button class="wa-flutuante" id="btnWaFlutuante" type="button" aria-haspopup="dialog" aria-label="Falar no WhatsApp" data-i18n-aria="wa.abrirAria">
+<button class="wa-flutuante" id="btnWaFlutuante" type="button" aria-haspopup="dialog" aria-label="Falar no WhatsApp" data-i18n-aria="wa.abrirAria" data-rastreio="whatsapp-flutuante">
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.74.46 3.44 1.32 4.93L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.2 0 4.26.86 5.82 2.42a8.2 8.2 0 0 1 2.41 5.82c0 4.54-3.7 8.24-8.25 8.24a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.14.82.84-3.06-.2-.31a8.18 8.18 0 0 1-1.26-4.37c0-4.55 3.71-8.23 8.27-8.23zm-4.54 4.6c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.43 1.03 2.6.13.17 1.76 2.8 4.38 3.87 2.17.88 2.61.71 3.08.66.47-.04 1.52-.62 1.73-1.22.21-.6.21-1.11.15-1.22-.06-.11-.23-.17-.47-.3-.25-.12-1.46-.72-1.69-.8-.23-.09-.4-.13-.56.12-.17.25-.64.8-.78.97-.14.17-.29.18-.53.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.3.37-.44.12-.15.16-.25.24-.42.08-.17.04-.31-.02-.44-.06-.12-.56-1.37-.78-1.87-.2-.49-.41-.42-.56-.43l-.48-.01z"/></svg>
 </button>
 
@@ -712,7 +712,7 @@ body.trava{overflow:hidden}
         <label for="wa-tel" data-i18n="wa.telefone">Seu telefone/WhatsApp</label>
         <input id="wa-tel" name="telefone" type="tel" autocomplete="tel" required>
       </div>
-      <button class="btn btn-primario btn-bloco" type="submit" data-i18n="wa.continuar">Continuar no WhatsApp</button>
+      <button class="btn btn-primario btn-bloco" type="submit" data-i18n="wa.continuar" data-rastreio="whatsapp-continuar">Continuar no WhatsApp</button>
     </form>
     <div class="conf" id="waConf" tabindex="-1" hidden></div>
   </div>
@@ -1263,7 +1263,7 @@ formWa.addEventListener("submit", e => {
   waConf.replaceChildren(
     el("h3", { text: idioma === "en" ? "Almost there!" : "Quase lá!" }),
     el("p", { text: idioma === "en" ? "Tap below to open WhatsApp with your message ready." : "Toque abaixo pra abrir o WhatsApp com a mensagem já pronta." }),
-    el("a", { class: "btn btn-primario btn-bloco", href: wa(texto), target: "_blank", rel: "noopener noreferrer", text: idioma === "en" ? "Open WhatsApp" : "Abrir WhatsApp" })
+    el("a", { class: "btn btn-primario btn-bloco", href: wa(texto), target: "_blank", rel: "noopener noreferrer", "data-rastreio": "whatsapp-abrir", text: idioma === "en" ? "Open WhatsApp" : "Abrir WhatsApp" })
   );
   waConf.hidden = false;
   waConf.focus();
@@ -1350,7 +1350,7 @@ function montarNichos(todosVideos, animar) {
   nichosAtuais().forEach(n => {
     const itens = misturarMarcas(todosVideos.filter(v => v.nicho === n.slug));
     if (!itens.length) return;
-    $("#filtroPills").append(el("a", { href: "#nicho-" + n.slug, text: n.nome }));
+    $("#filtroPills").append(el("a", { href: "#nicho-" + n.slug, "data-rastreio": "pill-" + n.slug, text: n.nome }));
     const trilho = el("div", { class: "nicho-trilho" });
     const copias = Math.max(2, Math.ceil(12 / itens.length));
     trilho.dataset.copias = copias;
@@ -1711,7 +1711,7 @@ function mostrarConfirmacao(caixa, enviado, nome, assunto, texto) {
       el("h3", { text: (idioma === "en" ? "Almost there, " : "Quase lá, ") + nome + "!" }),
       el("p", { text: idioma === "en" ? "Choose where to send it. The message is already written." : "Escolha por onde quer enviar. A mensagem já vai pronta." }),
       el("div", { class: "acoes" }, [
-        el("a", { class: "btn btn-primario", href: wa(texto), target: "_blank", rel: "noopener noreferrer", text: idioma === "en" ? "Send via WhatsApp" : "Enviar por WhatsApp" }),
+        el("a", { class: "btn btn-primario", href: wa(texto), target: "_blank", rel: "noopener noreferrer", "data-rastreio": "whatsapp-abrir", text: idioma === "en" ? "Send via WhatsApp" : "Enviar por WhatsApp" }),
         el("a", { class: "btn btn-contorno", href: mail(assunto, texto), text: idioma === "en" ? "Send via email" : "Enviar por e-mail" })
       ])
     );
@@ -1775,6 +1775,44 @@ formContato.addEventListener("submit", async e => {
   const pUtm = new URLSearchParams(location.search);
   const utm = ["utm_medium", "utm_campaign", "utm_content"].map(k => pUtm.get(k) ? k.slice(4) + "=" + pUtm.get(k).slice(0, 60) : "").filter(Boolean).join(" · ");
   registrarMetrica("visita", utm || null);
+})();
+
+/* Engajamento: clique nos pontos-chave de conversão, até onde a pessoa rola a página,
+   e quanto tempo ela fica (enquanto a aba está visível). Tudo pela mesma tabela "metricas". */
+(function () {
+  if (!window.registrarMetrica) return;
+
+  document.addEventListener("click", e => {
+    const alvo = e.target.closest("[data-rastreio]");
+    if (alvo) registrarMetrica("clique", alvo.dataset.rastreio);
+  });
+
+  const marcos = [25, 50, 75, 100];
+  const vistos = new Set();
+  function checarProfundidade() {
+    const alt = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = alt > 0 ? Math.min(100, Math.round((window.scrollY / alt) * 100)) : 100;
+    marcos.forEach(m => {
+      if (pct >= m && !vistos.has(m)) { vistos.add(m); registrarMetrica("profundidade", String(m)); }
+    });
+    if (vistos.size === marcos.length) window.removeEventListener("scroll", aoRolar);
+  }
+  let tProfundidade = null;
+  function aoRolar() {
+    clearTimeout(tProfundidade);
+    tProfundidade = setTimeout(checarProfundidade, 300);
+  }
+  window.addEventListener("scroll", aoRolar, { passive: true });
+  checarProfundidade();
+
+  let pings = 0;
+  const MAX_PINGS = 40; // ~20 minutos (30s cada) — evita ping infinito em aba esquecida aberta
+  const intervaloPing = setInterval(() => {
+    if (document.visibilityState !== "visible") return;
+    pings++;
+    registrarMetrica("ping", String(pings * 30));
+    if (pings >= MAX_PINGS) clearInterval(intervaloPing);
+  }, 30000);
 })();
 
 /* Idioma: PT/EN. Textos estáticos trocam via data-i18n/data-i18n-aria (o original em PT fica
