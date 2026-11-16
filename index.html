@@ -1634,16 +1634,16 @@ renderizarDepoimentos(true);
 (async function () {
   const sb = CONFIG.supabase;
   if (!sb || !sb.url) return;
-  async function buscar(tabela, campos, ordem) {
+  async function buscar(tabela, campos, ordem, extra) {
     try {
-      const r = await fetch(sb.url + "/rest/v1/" + tabela + "?select=" + campos + "&publicado=eq.true&order=" + ordem, { headers: { apikey: sb.chave } });
+      const r = await fetch(sb.url + "/rest/v1/" + tabela + "?select=" + campos + "&publicado=eq.true" + (extra || "") + "&order=" + ordem, { headers: { apikey: sb.chave } });
       if (!r.ok) return null;
       const lista = await r.json();
       return Array.isArray(lista) && lista.length ? lista : null;
     } catch (e) { return null; }
   }
   const [videos, marcas, depo, serv] = await Promise.all([
-    buscar("videos_geral", "titulo,marca,nicho,plataforma,video_id,ordem", "ordem.asc,created_at.asc"),
+    buscar("videos_geral", "titulo,marca,nicho,plataforma,video_id,ordem", "ordem.asc,created_at.asc", "&portfolio=in.(todos,geral)"),
     buscar("marcas_logos", "nome,arquivo,fundo,tamanho,ordem", "ordem.asc,created_at.asc"),
     buscar("depoimentos_geral", "marca,texto,ctx,ordem", "ordem.asc,created_at.asc"),
     buscar("servicos_geral", "titulo,texto,ordem", "ordem.asc,created_at.asc")
