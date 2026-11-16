@@ -1694,7 +1694,7 @@ async function enviar(dados) {
     const r = await fetch(sb.url + "/rest/v1/marcas", {
       method: "POST",
       headers: { apikey: sb.chave, "Content-Type": "application/json", Prefer: "return=minimal" },
-      body: JSON.stringify({ nome: dados.nome, email: dados.email || null, telefone: dados.telefone || null, mensagem: dados.mensagem || null, origem: dados.origem || "geral-contato", status: "novo" })
+      body: JSON.stringify({ nome: dados.nome, email: dados.email || null, telefone: dados.telefone || null, mensagem: dados.mensagem || null, origem: dados.origem || "geral-contato", canal: window.origemVisita || null, status: "novo" })
     });
     return r.ok;
   } catch (e) { return false; }
@@ -1760,6 +1760,7 @@ formContato.addEventListener("submit", async e => {
     return host;
   }
   const origem = origemAtual();
+  window.origemVisita = origem;
 
   window.registrarMetrica = function (tipo, detalhe) {
     try {
